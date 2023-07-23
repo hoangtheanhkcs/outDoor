@@ -24,9 +24,14 @@ enum Constants {
         static let onboard5Image = "Mask Group (4)"
         
         static let onboardBottomButton = "Group 7"
+        static let welcomeVCLogo = "logo-png@4x 2"
+        static let welcomeVCYellowCart = "Group 3 (2)"
+        static let welcomeVCRedCart = "Group 4 (1)"
+        static let welcomeVCGreenCart = "Group 5 (1)"
     }
    
     enum Strings {
+        // NSLocalizedString("", comment: "")
         static let loginHello = NSLocalizedString("Xin chào!", comment: "")
         static let loginWelcome = NSLocalizedString("     Chào mừng bạn đến với Outdoor ứng dụng tìm kiếm và chia sẻ kinh nghiệm dã ngoại cho gia đình, khuyến khích trẻ khám phá thiên nhiên.", comment: "")
         static let logginFacebook = NSLocalizedString("    Đăng nhập với Facebook", comment: "")
@@ -42,18 +47,41 @@ enum Constants {
         static let onboard4TextView = NSLocalizedString("Bạn có thể Lưu bài viết , giao lưu kết bạn bằng cách bấm Follow các Phụ huynh khác cũng như Thả tim hoặc Comment bài viết ", comment: "")
         static let onboard5Lable = NSLocalizedString("Let’s GO!", comment: "")
         static let onboard5TextView = NSLocalizedString("Với mong muốn con phát triển toàn diện về Thể Chất và Tinh thần - các bậc phụ huynh hãy cùng chúng tôi chia sẻ và trải nghiệm", comment: "")
+        
+        static let welcomeVCYellowCartLable = NSLocalizedString("Cùng con khám phá", comment: "")
+        static let welcomeVCYellowCartText = NSLocalizedString("Tìm kiếm các điểm vui chơi tăng sự phát triển cho con", comment: "")
+        static let welcomeVCRedCartLable = NSLocalizedString("Chia sẻ", comment: "")
+        static let welcomeVCRedCartText = NSLocalizedString("khoảnh khắc bên nhau", comment: "")
+        static let welcomeVCGreenCartLable = NSLocalizedString("Giao lưu", comment: "")
+        static let welcomeVCGreenCartText = NSLocalizedString("kinh nghiệm dã ngoại", comment: "")
+        
+        static let welcomeVCButton = NSLocalizedString("Khám phá", comment: "")
+        
     }
     enum Fonts {
+        
+        static let SFBold34 = UIFont(name: "SanFranciscoText-Bold", size: 34)
+        
+        static let SFBold24 = UIFont(name: "SanFranciscoText-Bold", size: 24)
+        static let SFSemibold24 = UIFont(name: "SanFranciscoText-Semibold", size: 24)
+        
+        static let SFBold20 = UIFont(name: "SanFranciscoText-Bold", size: 20)
+        
         static let SFThin17 = UIFont(name: "SanFranciscoText-Thin", size: 17)
         static let SFLight17 = UIFont(name: "SanFranciscoText-Light", size: 17)
         static let SFReguler17 = UIFont(name: "SanFranciscoText-Regular", size: 17)
         static let SFMedium17 = UIFont(name: "SanFranciscoText-Medium", size: 17)
         static let SFSemibold17 = UIFont(name: "SanFranciscoText-Semibold", size: 17)
-        static let SFBold34 = UIFont(name: "SanFranciscoText-Bold", size: 34)
+        static let SFBold17 = UIFont(name: "SanFranciscoText-Bold", size: 17)
         static let SFHeavy17 = UIFont(name: "SanFranciscoText-Heavy", size: 17)
         
         static let SFReguler16 = UIFont(name: "SanFranciscoText-Regular", size: 16)
+        static let SFLight16 = UIFont(name: "SanFranciscoText-Light", size: 16)
         
+        static let SFReguler15 = UIFont(name: "SanFranciscoText-Regular", size: 15)
+        static let SFLight15 = UIFont(name: "SanFranciscoText-Light", size: 15)
+        
+        static let SFLight13 = UIFont(name: "SanFranciscoText-Light", size: 13)
         
     }
     enum Colors {

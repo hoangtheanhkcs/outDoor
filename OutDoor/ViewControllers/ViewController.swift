@@ -47,7 +47,7 @@ class ViewController: UIViewController {
         if values > 500 {
             timer?.invalidate()
             slider.isHidden = true
-            let vc = storyboard?.instantiateViewController(withIdentifier: "OnboardViewController") as? OnboardViewController
+            let vc = storyboard?.instantiateViewController(withIdentifier: "WelcomeViewController") as? WelcomeViewController
             vc?.modalPresentationStyle = .fullScreen
             present(vc!, animated: true)
         }

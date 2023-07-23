@@ -13,8 +13,14 @@ class OnboardViewController: UIPageViewController, UIPageViewControllerDelegate,
     var percentComplete:CGFloat = 0
     var currentPageIndex = 0 {
         didSet {
+          
             if currentPageIndex <= pageViewControllers.count - 1 {
-                resetPage(index: currentPageIndex, direction: .forward)
+                if currentPageIndex < oldValue {
+                    resetPage(index: currentPageIndex, direction: .reverse)
+                    
+                }else {
+                    resetPage(index: currentPageIndex, direction: .forward)
+                }
                 pageControl?.currentPage = currentPageIndex
             }else {return}
         }
@@ -71,17 +77,9 @@ class OnboardViewController: UIPageViewController, UIPageViewControllerDelegate,
     }
     
     @objc private func didTapPageControll() {
-        let oldIndex = currentPageIndex
+       
         currentPageIndex = pageControl!.currentPage
         
-        guard currentPageIndex != oldIndex else {return}
-        if currentPageIndex > oldIndex {
-            self.setViewControllers([pageViewControllers[currentPageIndex]], direction: .forward, animated: true)
-            
-        }else {
-            resetPage(index: currentPageIndex, direction: .reverse)
-        }
-       
     }
     
     func configureButton() {
@@ -97,7 +95,7 @@ class OnboardViewController: UIPageViewController, UIPageViewControllerDelegate,
         currentPageIndex = currentPageIndex + 1
         if currentPageIndex > pageViewControllers.count - 1 {
             
-            let vc = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+            let vc = storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
             vc?.modalPresentationStyle = .fullScreen
             present(vc!, animated: true)
         }
