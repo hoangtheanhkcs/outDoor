@@ -43,6 +43,9 @@ class OnboardViewController: UIPageViewController, UIPageViewControllerDelegate,
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if currentPageIndex > pageViewControllers.count - 1 {
+            currentPageIndex = pageViewControllers.count - 1
+        }
         resetPage(index: currentPageIndex, direction: .forward)
     }
     
@@ -95,9 +98,33 @@ class OnboardViewController: UIPageViewController, UIPageViewControllerDelegate,
         currentPageIndex = currentPageIndex + 1
         if currentPageIndex > pageViewControllers.count - 1 {
             
-            let vc = storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
-            vc?.modalPresentationStyle = .fullScreen
-            present(vc!, animated: true)
+            let userInfo = UserDefaults.standard.value(forKey: "userInfo") as? String ?? ""
+            
+            print("userInfo \(userInfo)")
+            
+            if userInfo.count == 0 {
+                let vc = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+                vc?.modalPresentationStyle = .fullScreen
+                present(vc!, animated: true)
+            }else {
+                DatabaseManager.shared.checkUserExists(with: userInfo) { [weak self] exist in
+                    guard let self = self else {return}
+                    if exist {
+                        let vc = storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
+                        vc?.modalPresentationStyle = .fullScreen
+                        present(vc!, animated: true)
+                    }else {
+                        let vc = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+                        vc?.modalPresentationStyle = .fullScreen
+                        vc?.delegate = self
+                        present(vc!, animated: true)
+                    }
+                }
+            }
+            
+            
+            
+          
         }
      
     }
@@ -145,6 +172,17 @@ class OnboardViewController: UIPageViewController, UIPageViewControllerDelegate,
         }
     
     
+    
+    
+}
+
+extension OnboardViewController:LoginViewControllerDelegate {
+    func presentHomeVC() {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
+        
+        vc?.modalPresentationStyle = .fullScreen
+        present(vc!, animated: true)
+    }
     
     
 }

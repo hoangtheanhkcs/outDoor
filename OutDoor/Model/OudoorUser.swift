@@ -9,14 +9,21 @@ import Foundation
 
 
 struct OutDoorUser {
-    var firstName:String
-    var lastName:String
-    var emailAddress:String
-    var avatar:String
-    var numberOfFollowers:Int
-    var numberOfShares: Int
-    var numberOfLikes:Int
-    var userPosts: [UserPost]
+    var firstName:String?
+    var lastName:String?
+    var emailAddress:String?
+    var avatar:String?
+    var numberOfFollowers:Int = 0
+    var numberOfShares: Int = 0
+    var numberOfLikes:Int = 0
+    var userPosts: [UserPost]?
+    
+    
+    var safeEmail:String? {
+        let email = emailAddress?.replacingOccurrences(of: ".", with: "-")
+        return email
+    }
+    
 }
 
 struct UserPost {

@@ -376,6 +376,15 @@
                                     <action selector="logoutAction:" destination="y33-bk-hNC" eventType="touchUpInside" id="STb-8B-agr"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6E2-Xv-1ki">
+                                <rect key="frame" x="159" y="218" width="75" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="loginVC:" destination="y33-bk-hNC" eventType="touchUpInside" id="S2l-8z-nxB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kTe-cI-t6E"/>
                         <color key="backgroundColor" systemColor="systemMintColor"/>
