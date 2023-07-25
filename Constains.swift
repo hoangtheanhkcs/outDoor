@@ -57,6 +57,10 @@ enum Constants {
         
         static let welcomeVCButton = NSLocalizedString("Khám phá", comment: "")
         
+        static let homeContainerTopbarTitleSpotlight = NSLocalizedString("Tiêu điểm", comment: "")
+        static let homeContainerTopbarTitleBreakingNews = NSLocalizedString("Tin mới", comment: "")
+        static let homeContainerTopbarTitleFollowing = NSLocalizedString("Theo dõi", comment: "")
+        
     }
     enum Fonts {
         
@@ -75,6 +79,7 @@ enum Constants {
         static let SFBold17 = UIFont(name: "SanFranciscoText-Bold", size: 17)
         static let SFHeavy17 = UIFont(name: "SanFranciscoText-Heavy", size: 17)
         
+        static let SFSemibold16 = UIFont(name: "SanFranciscoText-Semibold", size: 16)
         static let SFReguler16 = UIFont(name: "SanFranciscoText-Regular", size: 16)
         static let SFLight16 = UIFont(name: "SanFranciscoText-Light", size: 16)
         

@@ -36,11 +36,6 @@ class LoginViewController: UIViewController {
     
     weak var delegate: LoginViewControllerDelegate?
     
-    var authResult: AuthDataResult? {
-        didSet {
-            
-        }
-    }
     
     
     private let fbLoginButton : FBLoginButton = {
@@ -120,9 +115,11 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func logginGoogleButton(_ sender: Any) {
+        spinner.show(in: view)
         if GIDSignIn.sharedInstance.currentUser  == nil {
             GIDSignIn.sharedInstance.signIn(withPresenting: self) { [weak self] (result, error) in
                 guard let strongSelf = self else {return}
+                
                 guard error == nil else {
                     if let error = error {
                         print("Failed to sign in google server \(error) ")
@@ -161,6 +158,10 @@ class LoginViewController: UIViewController {
                     guard let result = authResult, error == nil else {
                         print("Failed to log in user with credential :\(credential)")
                         return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        strongSelf.spinner.dismiss()
                     }
                     let user = result.user
                     print("Loggeg In User: \(user.uid)")

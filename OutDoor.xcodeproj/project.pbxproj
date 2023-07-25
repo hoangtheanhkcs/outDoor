@@ -7,10 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A10A2422A6C17E40081160D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A10A2412A6C17E40081160D /* HomeViewController.swift */; };
 		5A10A2442A6CBF060081160D /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A10A2432A6CBF060081160D /* DatabaseManager.swift */; };
 		5A10A2472A6CFB9D0081160D /* OudoorUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A10A2462A6CFB9D0081160D /* OudoorUser.swift */; };
 		5A10A2492A6D400C0081160D /* UIButtonEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A10A2482A6D400C0081160D /* UIButtonEX.swift */; };
+		5A45266A2A6F564F001E2028 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4526692A6F564F001E2028 /* TabBarViewController.swift */; };
+		5A4526702A6F5C3F001E2028 /* HomeContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45266F2A6F5C3F001E2028 /* HomeContainerViewController.swift */; };
+		5A4526722A6F5CA3001E2028 /* SpotlightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4526712A6F5CA3001E2028 /* SpotlightViewController.swift */; };
+		5A4526742A6F5CBF001E2028 /* BreakingNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4526732A6F5CBF001E2028 /* BreakingNewsViewController.swift */; };
+		5A4526762A6F5CE3001E2028 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4526752A6F5CE3001E2028 /* FollowingViewController.swift */; };
+		5A4526782A6F5D8C001E2028 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4526772A6F5D8C001E2028 /* HomeViewController.swift */; };
 		5AD42AA72A68DE7400D51C6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD42AA62A68DE7400D51C6F /* AppDelegate.swift */; };
 		5AD42AA92A68DE7400D51C6F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD42AA82A68DE7400D51C6F /* SceneDelegate.swift */; };
 		5AD42AAB2A68DE7400D51C6F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD42AAA2A68DE7400D51C6F /* ViewController.swift */; };
@@ -75,10 +80,15 @@
 
 /* Begin PBXFileReference section */
 		3E3EA8A07981477575C9210C /* Pods-OutDoor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutDoor.debug.xcconfig"; path = "Target Support Files/Pods-OutDoor/Pods-OutDoor.debug.xcconfig"; sourceTree = "<group>"; };
-		5A10A2412A6C17E40081160D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5A10A2432A6CBF060081160D /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		5A10A2462A6CFB9D0081160D /* OudoorUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OudoorUser.swift; sourceTree = "<group>"; };
 		5A10A2482A6D400C0081160D /* UIButtonEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonEX.swift; sourceTree = "<group>"; };
+		5A4526692A6F564F001E2028 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		5A45266F2A6F5C3F001E2028 /* HomeContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContainerViewController.swift; sourceTree = "<group>"; };
+		5A4526712A6F5CA3001E2028 /* SpotlightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightViewController.swift; sourceTree = "<group>"; };
+		5A4526732A6F5CBF001E2028 /* BreakingNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakingNewsViewController.swift; sourceTree = "<group>"; };
+		5A4526752A6F5CE3001E2028 /* FollowingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; };
+		5A4526772A6F5D8C001E2028 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5AD42AA32A68DE7400D51C6F /* OutDoor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OutDoor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD42AA62A68DE7400D51C6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5AD42AA82A68DE7400D51C6F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -172,10 +182,52 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		5A45266B2A6F5A41001E2028 /* Homes */ = {
+			isa = PBXGroup;
+			children = (
+				5A4526772A6F5D8C001E2028 /* HomeViewController.swift */,
+				5A45266F2A6F5C3F001E2028 /* HomeContainerViewController.swift */,
+				5A4526712A6F5CA3001E2028 /* SpotlightViewController.swift */,
+				5A4526732A6F5CBF001E2028 /* BreakingNewsViewController.swift */,
+				5A4526752A6F5CE3001E2028 /* FollowingViewController.swift */,
+			);
+			path = Homes;
+			sourceTree = "<group>";
+		};
+		5A45266C2A6F5A54001E2028 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		5A45266D2A6F5A64001E2028 /* Notifics */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Notifics;
+			sourceTree = "<group>";
+		};
+		5A45266E2A6F5A6F001E2028 /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
+		5A4526792A6F5F54001E2028 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		5AD42A9A2A68DE7400D51C6F = {
 			isa = PBXGroup;
 			children = (
 				5AD42ABE2A6929BB00D51C6F /* Constains.swift */,
+				5AD42AAF2A68DE7600D51C6F /* Assets.xcassets */,
+				5AD42AAC2A68DE7400D51C6F /* Main.storyboard */,
 				5AD42AA52A68DE7400D51C6F /* OutDoor */,
 				5AD42AA42A68DE7400D51C6F /* Products */,
 				FDA203BAD204800112EB8E67 /* Pods */,
@@ -196,7 +248,7 @@
 			children = (
 				5AD42ABC2A6926D300D51C6F /* System */,
 				5AD42ABD2A6926E300D51C6F /* ViewControllers */,
-				5AD42AAF2A68DE7600D51C6F /* Assets.xcassets */,
+				5A4526792A6F5F54001E2028 /* Cells */,
 				5A10A2452A6CFB340081160D /* Model */,
 				5AD42B4B2A6A711B00D51C6F /* Database */,
 				5AD42ACF2A6955E300D51C6F /* Fonts */,
@@ -221,12 +273,15 @@
 			isa = PBXGroup;
 			children = (
 				5AD42AAA2A68DE7400D51C6F /* ViewController.swift */,
+				5AD42B492A6A605900D51C6F /* WelcomeViewController.swift */,
 				5AD42B1A2A69859B00D51C6F /* OnboardViewController.swift */,
 				5AD42ACD2A69416700D51C6F /* LoginViewController.swift */,
-				5AD42B492A6A605900D51C6F /* WelcomeViewController.swift */,
-				5A10A2412A6C17E40081160D /* HomeViewController.swift */,
+				5A4526692A6F564F001E2028 /* TabBarViewController.swift */,
 				5AD42B1C2A6989B000D51C6F /* Onboards */,
-				5AD42AAC2A68DE7400D51C6F /* Main.storyboard */,
+				5A45266B2A6F5A41001E2028 /* Homes */,
+				5A45266C2A6F5A54001E2028 /* Search */,
+				5A45266D2A6F5A64001E2028 /* Notifics */,
+				5A45266E2A6F5A6F001E2028 /* UserInfo */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -469,21 +524,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A4526702A6F5C3F001E2028 /* HomeContainerViewController.swift in Sources */,
 				5AD42B172A69700100D51C6F /* UITextViewEX+UILableEX.swift in Sources */,
 				5AD42B4A2A6A605900D51C6F /* WelcomeViewController.swift in Sources */,
 				5AD42B222A6989F700D51C6F /* Onboard3.swift in Sources */,
+				5A4526762A6F5CE3001E2028 /* FollowingViewController.swift in Sources */,
 				5AD42AC82A69314A00D51C6F /* Observable.swift in Sources */,
 				5AD42ACC2A693F6500D51C6F /* CustomSlider.swift in Sources */,
-				5A10A2422A6C17E40081160D /* HomeViewController.swift in Sources */,
 				5AD42ABF2A6929BB00D51C6F /* Constains.swift in Sources */,
 				5AD42B202A6989E700D51C6F /* Onboard2.swift in Sources */,
 				5AD42ACA2A69316900D51C6F /* ScaleImage.swift in Sources */,
+				5A4526742A6F5CBF001E2028 /* BreakingNewsViewController.swift in Sources */,
 				5AD42AAB2A68DE7400D51C6F /* ViewController.swift in Sources */,
 				5AD42B242A698A0200D51C6F /* Onboard4.swift in Sources */,
 				5AD42AC22A6930BE00D51C6F /* UIColor+EX.swift in Sources */,
+				5A45266A2A6F564F001E2028 /* TabBarViewController.swift in Sources */,
 				5A10A2442A6CBF060081160D /* DatabaseManager.swift in Sources */,
 				5A10A2472A6CFB9D0081160D /* OudoorUser.swift in Sources */,
+				5A4526722A6F5CA3001E2028 /* SpotlightViewController.swift in Sources */,
 				5AD42B282A6A1A6600D51C6F /* UIView+EX.swift in Sources */,
+				5A4526782A6F5D8C001E2028 /* HomeViewController.swift in Sources */,
 				5AD42B1B2A69859B00D51C6F /* OnboardViewController.swift in Sources */,
 				5AD42AC62A69312E00D51C6F /* Objc+AssociatedValue.swift in Sources */,
 				5AD42AA72A68DE7400D51C6F /* AppDelegate.swift in Sources */,

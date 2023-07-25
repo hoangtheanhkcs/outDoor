@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class OnboardViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource, UIScrollViewDelegate {
    
+    private let spinner = JGProgressHUD(style: .dark)
     private var pageViewControllers :[UIViewController] = []
     var percentComplete:CGFloat = 0
     var currentPageIndex = 0 {
@@ -97,7 +99,7 @@ class OnboardViewController: UIPageViewController, UIPageViewControllerDelegate,
        
         currentPageIndex = currentPageIndex + 1
         if currentPageIndex > pageViewControllers.count - 1 {
-            
+            spinner.show(in: view)
             let userInfo = UserDefaults.standard.value(forKey: "userInfo") as? String ?? ""
             
             print("userInfo \(userInfo)")
@@ -109,8 +111,12 @@ class OnboardViewController: UIPageViewController, UIPageViewControllerDelegate,
             }else {
                 DatabaseManager.shared.checkUserExists(with: userInfo) { [weak self] exist in
                     guard let self = self else {return}
+                    
+                    DispatchQueue.main.async {
+                        self.spinner.dismiss()
+                    }
                     if exist {
-                        let vc = storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
+                        let vc = storyboard?.instantiateViewController(withIdentifier: "TabBarViewController") as? TabBarViewController
                         vc?.modalPresentationStyle = .fullScreen
                         present(vc!, animated: true)
                     }else {
@@ -178,7 +184,7 @@ class OnboardViewController: UIPageViewController, UIPageViewControllerDelegate,
 
 extension OnboardViewController:LoginViewControllerDelegate {
     func presentHomeVC() {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
+        let vc = storyboard?.instantiateViewController(withIdentifier: "TabBarViewController") as? TabBarViewController
         
         vc?.modalPresentationStyle = .fullScreen
         present(vc!, animated: true)
