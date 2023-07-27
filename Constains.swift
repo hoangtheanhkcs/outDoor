@@ -28,6 +28,10 @@ enum Constants {
         static let welcomeVCYellowCart = "Group 3 (2)"
         static let welcomeVCRedCart = "Group 4 (1)"
         static let welcomeVCGreenCart = "Group 5 (1)"
+        
+        static let userAvatarDefault = "Person-icon-reversed-500x500-300x300"
+        static let userBackgrounDefault = "Rectangle 37"
+        static let userEditAvatar = "edit-2"
     }
    
     enum Strings {
@@ -65,6 +69,9 @@ enum Constants {
     enum Fonts {
         
         static let SFBold34 = UIFont(name: "SanFranciscoText-Bold", size: 34)
+        
+        static let SFBold28 = UIFont(name: "SanFranciscoText-Bold", size: 28)
+        static let SFSemibold28 = UIFont(name: "SanFranciscoText-Semibold", size: 28)
         
         static let SFBold24 = UIFont(name: "SanFranciscoText-Bold", size: 24)
         static let SFSemibold24 = UIFont(name: "SanFranciscoText-Semibold", size: 24)

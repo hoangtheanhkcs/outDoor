@@ -11,8 +11,13 @@ import Foundation
 struct OutDoorUser {
     var firstName:String?
     var lastName:String?
+    var gender:String?
+    var dateOfBirth:String?
     var emailAddress:String?
     var avatar:String?
+    var backgroundImage:String?
+    var description: String?
+    var userPhoneNumbers:Int = 0
     var numberOfFollowers:Int = 0
     var numberOfShares: Int = 0
     var numberOfLikes:Int = 0

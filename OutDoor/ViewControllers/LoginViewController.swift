@@ -119,7 +119,7 @@ class LoginViewController: UIViewController {
         if GIDSignIn.sharedInstance.currentUser  == nil {
             GIDSignIn.sharedInstance.signIn(withPresenting: self) { [weak self] (result, error) in
                 guard let strongSelf = self else {return}
-                
+               
                 guard error == nil else {
                     if let error = error {
                         print("Failed to sign in google server \(error) ")
@@ -134,13 +134,18 @@ class LoginViewController: UIViewController {
                     return
                   }
                 
+
+                let avartaURL: URL? = (user.profile?.imageURL(withDimension: 100))
+               
+                
                 if let email = user.profile?.email, let firstName = user.profile?.givenName, let lastName = user.profile?.familyName {
                     let userInfo = "\(firstName)\(lastName)\(email.replacingOccurrences(of: ".", with: "-"))"
                     UserDefaults.standard.set(userInfo, forKey: "userInfo")
                     
                     DatabaseManager.shared.checkUserExists(with: userInfo) { exist in
                         if !exist {
-                            let user = OutDoorUser(firstName: firstName, lastName: lastName, emailAddress: email)
+                            let avartarURL = user.profile?.imageURL(withDimension: 100)
+                            let user = OutDoorUser(firstName: firstName, lastName: lastName, gender: "Nam", dateOfBirth: "10/10/1990", emailAddress: email,avatar: avartaURL?.absoluteString,  description: "Hello im \(lastName)")
                             DatabaseManager.shared.addNewUser(user: user) { success in
                                 if success {
                                     print("34343434343434343434343")
@@ -165,7 +170,7 @@ class LoginViewController: UIViewController {
                     }
                     let user = result.user
                     print("Loggeg In User: \(user.uid)")
-                    
+                    print(user)
                    
                     strongSelf.dismiss(animated: true)
                     strongSelf.delegate?.presentHomeVC()

@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 
 
-extension UIImage {
 
-    func imageWithColor(color: UIColor) -> UIImage {
+extension UIImage {
+    func imageWithColor(color:UIColor) -> UIImage {
         var image = withRenderingMode(.alwaysTemplate)
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         color.set()
@@ -20,5 +20,34 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return image
     }
-
 }
+
+
+extension UIImageView {
+    func load(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
+    }
+    
+    func load(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
+    }
+}
+

@@ -27,15 +27,22 @@ class HomeViewController: UIViewController, TopbarButtonDelegate, HomeContainerV
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubvies()
+        selectedIndex = 0
+        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        selectedIndex = 0
+       
+       
+
     }
     
    private func setupSubvies() {
+       
+       
+       
         homeVC = storyboard?.instantiateViewController(withIdentifier: "HomeContainerViewController") as? HomeContainerViewController
         homeVC?.delegateHome = self
         let vcView = homeVC?.view
@@ -46,6 +53,8 @@ class HomeViewController: UIViewController, TopbarButtonDelegate, HomeContainerV
         
        topView.backgroundColor = Constants.Colors.buttonBackgroundColor.color
        topBarStackView.backgroundColor = .clear
+       
+       
        
         let topBarButton1 = TopbarButton(title: Constants.Strings.homeContainerTopbarTitleSpotlight)
         let topBarButton2 = TopbarButton(title: Constants.Strings.homeContainerTopbarTitleBreakingNews)

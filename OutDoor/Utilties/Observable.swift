@@ -93,6 +93,7 @@ extension Observable {
     }
 
     func addObserver(_ observer: Observer) {
+        
         observers.append(WeakReference(observer))
     }
 

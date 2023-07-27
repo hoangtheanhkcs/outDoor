@@ -41,6 +41,8 @@ class OnboardViewController: UIPageViewController, UIPageViewControllerDelegate,
         setViewControllers()
         configurePageControl()
         configureButton()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,6 +52,8 @@ class OnboardViewController: UIPageViewController, UIPageViewControllerDelegate,
         }
         resetPage(index: currentPageIndex, direction: .forward)
     }
+    
+   
     
     func setViewControllers() {
         let onboard1 = storyboard?.instantiateViewController(withIdentifier: "Onboard1") as? Onboard1
@@ -96,13 +100,14 @@ class OnboardViewController: UIPageViewController, UIPageViewControllerDelegate,
     }
     
     @objc private func didTapButton() {
+        
+      
        
         currentPageIndex = currentPageIndex + 1
         if currentPageIndex > pageViewControllers.count - 1 {
             spinner.show(in: view)
             let userInfo = UserDefaults.standard.value(forKey: "userInfo") as? String ?? ""
             
-            print("userInfo \(userInfo)")
             
             if userInfo.count == 0 {
                 let vc = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
