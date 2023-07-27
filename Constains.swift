@@ -65,6 +65,20 @@ enum Constants {
         static let homeContainerTopbarTitleBreakingNews = NSLocalizedString("Tin mới", comment: "")
         static let homeContainerTopbarTitleFollowing = NSLocalizedString("Theo dõi", comment: "")
         
+       
+        static let settingVCInfomation = NSLocalizedString("Thông tin", comment: "")
+        static let updateAvatar = NSLocalizedString("Cập nhật ảnh đại diện", comment: "")
+        static let updateBackground = NSLocalizedString("Cập nhật ảnh bìa", comment: "")
+        static let updateDescription = NSLocalizedString("Cập nhật giới thiệu bản thân", comment: "")
+        static let setting = NSLocalizedString("Cài đặt", comment: "")
+        static let receiveNotification = NSLocalizedString("Nhận thông báo", comment: "")
+        static let policy = NSLocalizedString("Chính sách", comment: "")
+        static let provision = NSLocalizedString("Điều khoản", comment: "")
+        static let reports = NSLocalizedString("Báo cáo vi phạm", comment: "")
+        static let language = NSLocalizedString("Ngôn ngữ", comment: "")
+        static let instruct = NSLocalizedString("Hướng dẫn", comment: "")
+        static let loggout = NSLocalizedString("Đăng xuất", comment: "")
+        
     }
     enum Fonts {
         

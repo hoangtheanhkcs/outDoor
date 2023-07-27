@@ -749,6 +749,36 @@
             </objects>
             <point key="canvasLocation" x="7536.6412213740459" y="2997.8873239436621"/>
         </scene>
+        <!--Setting View Controller-->
+        <scene sceneID="7ah-H7-2Zb">
+            <objects>
+                <viewController storyboardIdentifier="SettingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kEO-Ec-MTB" customClass="SettingViewController" customModule="OutDoor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zji-IC-fE9">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ADX-bk-EPR">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="sGe-Ps-csR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ADX-bk-EPR" firstAttribute="trailing" secondItem="sGe-Ps-csR" secondAttribute="trailing" id="gQi-IF-CWf"/>
+                            <constraint firstItem="ADX-bk-EPR" firstAttribute="leading" secondItem="sGe-Ps-csR" secondAttribute="leading" id="x8E-6d-yUr"/>
+                            <constraint firstItem="ADX-bk-EPR" firstAttribute="top" secondItem="Zji-IC-fE9" secondAttribute="top" id="yLG-Ca-C7W"/>
+                            <constraint firstAttribute="bottom" secondItem="ADX-bk-EPR" secondAttribute="bottom" id="yTr-m1-PuR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="ADX-bk-EPR" id="4W3-m2-0L1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rjz-VO-DaK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8362.5954198473282" y="2997.8873239436621"/>
+        </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="bjo-Re-HRX">
             <objects>

@@ -66,7 +66,7 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         scrollView?.delegate = self
         
         setupSubviews()
-
+        setUpNavigation() 
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,6 +74,8 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         userPostBTAction(1)
         tableView.setContentOffset(.zero, animated: true)
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        
         
         
     }
@@ -85,8 +87,31 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         
         
     }
+   private func setUpNavigation() {
+        navigationItem.rightBarButtonItem  = UIBarButtonItem(image: UIImage(named: "ic_arrow_left_white"), style: .plain, target: self, action: #selector(didTapSettingButton))
+        
+        let backImage = UIImage(named: "Group 40")
+        self.navigationController?.navigationBar.backIndicatorImage = backImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .done, target: nil, action: nil)
+        navigationController?.navigationBar.tintColor = .white
+       
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
+    }
     
-    func setupSubviews() {
+    @objc func didTapSettingButton() {
+       
+        let vc = storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as? SettingViewController
+        vc?.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(vc!, animated: false)
+        tableView.setContentOffset(.zero, animated: false)
+    }
+    
+   private func setupSubviews() {
         guard let userInfo = UserDefaults.standard.value(forKey: "userValue") as? [String:Any] else {return}
         updateSubviews(userInfo: userInfo)
         containerView.backgroundColor = .white
