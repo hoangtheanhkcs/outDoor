@@ -53,6 +53,13 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
     var tt :[String] = ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
     
     
+    
+    @IBOutlet weak var shadowAvatarView: UIView!
+    
+    
+    @IBOutlet weak var shadowButtonView: UIView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,6 +71,18 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         
         let scrollView = view.subviews.first(where: { $0 is UIScrollView }) as? UIScrollView
         scrollView?.delegate = self
+        
+        shadowAvatarView.layer.cornerRadius = 75
+        shadowAvatarView.layer.shadowRadius = 10
+        shadowAvatarView.layer.shadowOffset = CGSize(width: 0, height: 10)
+        shadowAvatarView.layer.shadowColor = Constants.Colors.buttonBackgroundColor.color.cgColor
+        shadowAvatarView.layer.shadowOpacity = 0.2
+        
+        shadowButtonView.layer.cornerRadius = 10
+        shadowButtonView.layer.shadowRadius = 2
+        shadowButtonView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        shadowButtonView.layer.shadowColor = Constants.Colors.buttonBackgroundColor.color.cgColor
+        shadowButtonView.layer.shadowOpacity = 0.2
         
         setupSubviews()
         setUpNavigation() 
@@ -104,16 +123,18 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @objc func didTapSettingButton() {
-       
+        tableView.setContentOffset(.zero, animated: false)
         let vc = storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as? SettingViewController
         vc?.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc!, animated: false)
-        tableView.setContentOffset(.zero, animated: false)
+        
     }
     
    private func setupSubviews() {
-        guard let userInfo = UserDefaults.standard.value(forKey: "userValue") as? [String:Any] else {return}
-        updateSubviews(userInfo: userInfo)
+    
+       guard let userIFValue =  UserDefaults.standard.value(forKey: "userIFValue") as? [String:Any], let userIMValue = UserDefaults.standard.value(forKey: "userIMValue") as? [String:Any], let userLPValue = UserDefaults.standard.value(forKey: "userLPValue") as? [String:Any] else {return}
+      
+        updateSubviews(userInfo: userIFValue, userImage: userIMValue, userLikePost: userLPValue)
         containerView.backgroundColor = .white
         userAvartarIMV.layer.cornerRadius = 75
         editAvatarBT.setImage(UIImage(named: Constants.Images.userEditAvatar), for: .normal)
@@ -150,15 +171,18 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
     
     }
     
-    func updateSubviews(userInfo: [String:Any]) {
+    func updateSubviews(userInfo: [String:Any], userImage: [String:Any], userLikePost: [String:Any]) {
         let firstName = userInfo["first_name"] as? String ?? ""
         let lastName = userInfo["last_name"] as? String ?? ""
-        let backgroundImage = userInfo["backgroundImage"] as? String ?? ""
-        let avatar = userInfo["avatar"] as? String ?? ""
-        let numberOfFollowers = userInfo["numberOfFollowers"] as? Int
-        let numberOfShares = userInfo["numberOfShares"] as? Int
-        let numberOfLikes = userInfo["numberOfLikes"] as? Int
         let description = userInfo["description"] as? String
+        
+        let backgroundImage = userImage["backgroundImage"] as? String ?? ""
+        let avatar = userImage["avatar"] as? String ?? ""
+        
+        let numberOfFollowers = userLikePost["numberOfFollowers"] as? Int
+        let numberOfShares = userLikePost["numberOfShares"] as? Int
+        let numberOfLikes = userLikePost["numberOfLikes"] as? Int
+        
         
         userNameLB.text = firstName.capitalized  + " " + lastName.capitalized
         if backgroundImage.count != 0 {
@@ -172,9 +196,9 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
             userAvartarIMV.image = UIImage(named: Constants.Images.userAvatarDefault)
         }
         
-        followersLB.text = numberOfFollowers?.description
-        sharesLB.text = numberOfShares?.description
-        likesLB.text = numberOfLikes?.description
+        followersLB.text = numberOfFollowers?.description ?? "0"
+        sharesLB.text = numberOfShares?.description ?? "0"
+        likesLB.text = numberOfLikes?.description ?? "0"
         
 //        userDesLB.text = description?.capitalized
         userDesLB.text = "25% off camping and outdoors equipment (Kelty, Alpine, Dakine, Coleman)..."
@@ -283,6 +307,7 @@ extension UserInfoViewController {
             navigationView.frame.size = CGSize(width: view.bounds.width, height: 100)
             navigationView.frame.origin = CGPoint(x: 0, y: (navigationController?.navigationBar.frame.maxY)!)
             navigationView.backgroundColor = .white
+            navigationView.isHidden = false
             
             stackview.frame.size = stackButtonPost.frame.size
             stackview.frame.origin = CGPoint(x: (navigationView.bounds.width - stackview.frame.width)/2, y: 33)
@@ -323,6 +348,7 @@ extension UserInfoViewController {
             navigationController?.view.addSubview(navigationView)
         }else if scrollView.contentOffset.y < 380 {
             navigationView.backgroundColor = .clear
+            navigationView.isHidden = true
             stackview.isHidden = true
             postBT.isHidden = true
             saveBT.isHidden = true

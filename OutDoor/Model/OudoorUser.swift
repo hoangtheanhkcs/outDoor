@@ -17,7 +17,7 @@ struct OutDoorUser {
     var avatar:String?
     var backgroundImage:String?
     var description: String?
-    var userPhoneNumbers:Int = 0
+    var userPhoneNumbers:String? 
     var numberOfFollowers:Int = 0
     var numberOfShares: Int = 0
     var numberOfLikes:Int = 0

@@ -139,7 +139,7 @@ class LoginViewController: UIViewController {
                
                 
                 if let email = user.profile?.email, let firstName = user.profile?.givenName, let lastName = user.profile?.familyName {
-                    let userInfo = "\(firstName)\(lastName)\(email.replacingOccurrences(of: ".", with: "-"))"
+                    let userInfo = email.replacingOccurrences(of: ".", with: "-")
                     UserDefaults.standard.set(userInfo, forKey: "userInfo")
                     
                     DatabaseManager.shared.checkUserExists(with: userInfo) { exist in

@@ -25,6 +25,14 @@
 		5AAE1FFA2A72B8A1000EA78D /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AAE1FF82A72B8A1000EA78D /* SettingCell.xib */; };
 		5AAE1FFB2A72B8A1000EA78D /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE1FF92A72B8A1000EA78D /* SettingCell.swift */; };
 		5AAE1FFD2A72B98E000EA78D /* UIAlertEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE1FFC2A72B98E000EA78D /* UIAlertEX.swift */; };
+		5AAE20012A72C973000EA78D /* ChangeUserDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE1FFE2A72C973000EA78D /* ChangeUserDescriptionViewController.swift */; };
+		5AAE20022A72C973000EA78D /* UpdateUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE1FFF2A72C973000EA78D /* UpdateUserInfoViewController.swift */; };
+		5AAE20032A72C973000EA78D /* UserInfoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE20002A72C973000EA78D /* UserInfoDetailViewController.swift */; };
+		5AAE20082A72CAC3000EA78D /* UpDateUserInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE20042A72CAC2000EA78D /* UpDateUserInfoCell.swift */; };
+		5AAE20092A72CAC3000EA78D /* UpDateUserInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AAE20052A72CAC2000EA78D /* UpDateUserInfoCell.xib */; };
+		5AAE200A2A72CAC3000EA78D /* EditUserInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AAE20062A72CAC3000EA78D /* EditUserInfoCell.xib */; };
+		5AAE200B2A72CAC3000EA78D /* EditUserInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE20072A72CAC3000EA78D /* EditUserInfoCell.swift */; };
+		5AAE200D2A73A254000EA78D /* String+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE200C2A73A254000EA78D /* String+EX.swift */; };
 		5AD42AA72A68DE7400D51C6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD42AA62A68DE7400D51C6F /* AppDelegate.swift */; };
 		5AD42AA92A68DE7400D51C6F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD42AA82A68DE7400D51C6F /* SceneDelegate.swift */; };
 		5AD42AAB2A68DE7400D51C6F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD42AAA2A68DE7400D51C6F /* ViewController.swift */; };
@@ -107,6 +115,14 @@
 		5AAE1FF82A72B8A1000EA78D /* SettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
 		5AAE1FF92A72B8A1000EA78D /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		5AAE1FFC2A72B98E000EA78D /* UIAlertEX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertEX.swift; sourceTree = "<group>"; };
+		5AAE1FFE2A72C973000EA78D /* ChangeUserDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeUserDescriptionViewController.swift; sourceTree = "<group>"; };
+		5AAE1FFF2A72C973000EA78D /* UpdateUserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateUserInfoViewController.swift; sourceTree = "<group>"; };
+		5AAE20002A72C973000EA78D /* UserInfoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserInfoDetailViewController.swift; path = "../../../../../IOS/OutDoor01 2/OutDoor01/ViewControllers/UserInfoDetailViewController.swift"; sourceTree = "<group>"; };
+		5AAE20042A72CAC2000EA78D /* UpDateUserInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpDateUserInfoCell.swift; sourceTree = "<group>"; };
+		5AAE20052A72CAC2000EA78D /* UpDateUserInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpDateUserInfoCell.xib; sourceTree = "<group>"; };
+		5AAE20062A72CAC3000EA78D /* EditUserInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditUserInfoCell.xib; sourceTree = "<group>"; };
+		5AAE20072A72CAC3000EA78D /* EditUserInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUserInfoCell.swift; sourceTree = "<group>"; };
+		5AAE200C2A73A254000EA78D /* String+EX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+EX.swift"; sourceTree = "<group>"; };
 		5AD42AA32A68DE7400D51C6F /* OutDoor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OutDoor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD42AA62A68DE7400D51C6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5AD42AA82A68DE7400D51C6F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -234,6 +250,9 @@
 			children = (
 				5A45267E2A6FDB09001E2028 /* UserInfoViewController.swift */,
 				5AAE1FF42A72A970000EA78D /* SettingViewController.swift */,
+				5AAE20002A72C973000EA78D /* UserInfoDetailViewController.swift */,
+				5AAE1FFF2A72C973000EA78D /* UpdateUserInfoViewController.swift */,
+				5AAE1FFE2A72C973000EA78D /* ChangeUserDescriptionViewController.swift */,
 			);
 			path = UserInfo;
 			sourceTree = "<group>";
@@ -243,6 +262,10 @@
 			children = (
 				5AAE1FF92A72B8A1000EA78D /* SettingCell.swift */,
 				5AAE1FF82A72B8A1000EA78D /* SettingCell.xib */,
+				5AAE20072A72CAC3000EA78D /* EditUserInfoCell.swift */,
+				5AAE20062A72CAC3000EA78D /* EditUserInfoCell.xib */,
+				5AAE20042A72CAC2000EA78D /* UpDateUserInfoCell.swift */,
+				5AAE20052A72CAC2000EA78D /* UpDateUserInfoCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -324,6 +347,7 @@
 				5AD42B272A6A1A6600D51C6F /* UIView+EX.swift */,
 				5A10A2482A6D400C0081160D /* UIButtonEX.swift */,
 				5AAE1FFC2A72B98E000EA78D /* UIAlertEX.swift */,
+				5AAE200C2A73A254000EA78D /* String+EX.swift */,
 			);
 			path = Utilties;
 			sourceTree = "<group>";
@@ -460,6 +484,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AAE200A2A72CAC3000EA78D /* EditUserInfoCell.xib in Resources */,
 				5AD42AF62A69565D00D51C6F /* SanFranciscoText-ItalicG3.otf in Resources */,
 				5AD42B152A69565D00D51C6F /* SanFranciscoDisplay-Light.otf in Resources */,
 				5AD42B012A69565D00D51C6F /* SanFranciscoText-ItalicG2.otf in Resources */,
@@ -483,6 +508,7 @@
 				5AD42AF32A69565D00D51C6F /* SanFranciscoText-BoldItalicG2.otf in Resources */,
 				5AD42B122A69565D00D51C6F /* SanFranciscoText-SemiboldItalic.otf in Resources */,
 				5AD42B0B2A69565D00D51C6F /* SanFranciscoDisplay-Thin.otf in Resources */,
+				5AAE20092A72CAC3000EA78D /* UpDateUserInfoCell.xib in Resources */,
 				5AD42AFD2A69565D00D51C6F /* SanFranciscoText-BoldItalicG1.otf in Resources */,
 				5AD42AF92A69565D00D51C6F /* SanFranciscoDisplay-Bold.otf in Resources */,
 				5AD42AF52A69565D00D51C6F /* SanFranciscoDisplay-Black.otf in Resources */,
@@ -569,15 +595,18 @@
 				5AD42AAB2A68DE7400D51C6F /* ViewController.swift in Sources */,
 				5AD42B242A698A0200D51C6F /* Onboard4.swift in Sources */,
 				5AD42AC22A6930BE00D51C6F /* UIColor+EX.swift in Sources */,
+				5AAE20032A72C973000EA78D /* UserInfoDetailViewController.swift in Sources */,
 				5A45266A2A6F564F001E2028 /* TabBarViewController.swift in Sources */,
 				5A10A2442A6CBF060081160D /* DatabaseManager.swift in Sources */,
 				5A45267D2A6FDAF8001E2028 /* NotificViewController.swift in Sources */,
 				5A10A2472A6CFB9D0081160D /* OudoorUser.swift in Sources */,
 				5A4526722A6F5CA3001E2028 /* SpotlightViewController.swift in Sources */,
 				5AD42B282A6A1A6600D51C6F /* UIView+EX.swift in Sources */,
+				5AAE200B2A72CAC3000EA78D /* EditUserInfoCell.swift in Sources */,
 				5A4526782A6F5D8C001E2028 /* HomeViewController.swift in Sources */,
 				5AD42B1B2A69859B00D51C6F /* OnboardViewController.swift in Sources */,
 				5AAE1FF72A72B529000EA78D /* Setting.swift in Sources */,
+				5AAE20012A72C973000EA78D /* ChangeUserDescriptionViewController.swift in Sources */,
 				5AAE1FFB2A72B8A1000EA78D /* SettingCell.swift in Sources */,
 				5A4526E12A70FECE001E2028 /* StorageManager.swift in Sources */,
 				5AD42AC62A69312E00D51C6F /* Objc+AssociatedValue.swift in Sources */,
@@ -585,10 +614,13 @@
 				5A10A2492A6D400C0081160D /* UIButtonEX.swift in Sources */,
 				5AD42B262A698A0D00D51C6F /* Onboard5.swift in Sources */,
 				5AD42AC42A69310800D51C6F /* UIImage+EX.swift in Sources */,
+				5AAE20022A72C973000EA78D /* UpdateUserInfoViewController.swift in Sources */,
 				5AD42AA92A68DE7400D51C6F /* SceneDelegate.swift in Sources */,
 				5AD42ACE2A69416700D51C6F /* LoginViewController.swift in Sources */,
+				5AAE200D2A73A254000EA78D /* String+EX.swift in Sources */,
 				5AAE1FFD2A72B98E000EA78D /* UIAlertEX.swift in Sources */,
 				5AD42B1E2A6989D300D51C6F /* Onboard1.swift in Sources */,
+				5AAE20082A72CAC3000EA78D /* UpDateUserInfoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -133,8 +133,10 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let userInforSettingTitle = settings[indexPath.section][indexPath.row].title
-        if userInforSettingTitle == "Thông tin" {
-            
+        if userInforSettingTitle == Constants.Strings.settingVCInfomation {
+            let vc = storyboard?.instantiateViewController(withIdentifier: "UserInfoDetailViewController") as? UserInfoDetailViewController
+            vc?.modalPresentationStyle = .fullScreen
+            navigationController?.pushViewController(vc!, animated: true)
         }
         
         if userInforSettingTitle == "Cập nhật ảnh đại diện" {
@@ -205,7 +207,9 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         if userInforSettingTitle == "Cập nhật giới thiệu bản thân" {
-            
+            let vc = storyboard?.instantiateViewController(withIdentifier: "ChangeUserDescriptionViewController") as? ChangeUserDescriptionViewController
+            self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Đóng", style: .done, target: nil, action: nil)
+            navigationController?.pushViewController(vc!, animated: true)
         }
         
        

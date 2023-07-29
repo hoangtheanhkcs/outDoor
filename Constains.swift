@@ -32,6 +32,8 @@ enum Constants {
         static let userAvatarDefault = "Person-icon-reversed-500x500-300x300"
         static let userBackgrounDefault = "Rectangle 37"
         static let userEditAvatar = "edit-2"
+        
+        static let updateCelliconCheck = "icons8-check-50"
     }
    
     enum Strings {
@@ -78,6 +80,10 @@ enum Constants {
         static let language = NSLocalizedString("Ngôn ngữ", comment: "")
         static let instruct = NSLocalizedString("Hướng dẫn", comment: "")
         static let loggout = NSLocalizedString("Đăng xuất", comment: "")
+        
+        static let userInfoDetailGender = NSLocalizedString("Giới tính", comment: "")
+        static let userInfoDetailBirth = NSLocalizedString("Ngày sinh", comment: "")
+        static let userInfoDetailPhoneNumber = NSLocalizedString("Điện thoại", comment: "")
         
     }
     enum Fonts {

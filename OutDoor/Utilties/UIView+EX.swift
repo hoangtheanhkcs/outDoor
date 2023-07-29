@@ -23,3 +23,13 @@ extension UIView {
    }
 
    }
+
+extension UIView {
+    func dropShadow(radius: CGFloat) {
+        layer.masksToBounds = false
+        layer.shadowColor = UIColor.lightGray.cgColor
+        layer.shadowOffset = .zero
+        layer.shadowRadius = radius
+        layer.shadowOpacity = 0.5
+    }
+}
