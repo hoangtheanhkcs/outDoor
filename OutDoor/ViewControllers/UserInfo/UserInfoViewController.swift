@@ -84,7 +84,7 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         shadowButtonView.layer.shadowColor = Constants.Colors.buttonBackgroundColor.color.cgColor
         shadowButtonView.layer.shadowOpacity = 0.2
         
-        setupSubviews()
+        
         setUpNavigation() 
     }
     
@@ -95,14 +95,16 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         UIApplication.shared.statusBarStyle = .lightContent
         
         
-        
+        setupSubviews()
         
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-       
+        containerView.frame.size.height = 550
+        containerView.layer.borderWidth = 0.2
+        containerView.layer.borderColor = UIColor.lightGray.cgColor
         
         
     }
@@ -136,6 +138,8 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
       
         updateSubviews(userInfo: userIFValue, userImage: userIMValue, userLikePost: userLPValue)
         containerView.backgroundColor = .white
+     
+       
         userAvartarIMV.layer.cornerRadius = 75
         editAvatarBT.setImage(UIImage(named: Constants.Images.userEditAvatar), for: .normal)
         editAvatarBT.backgroundColor = .white
@@ -166,7 +170,7 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         savePostBT.layer.borderWidth = 1
         savePostBT.layer.borderColor = Constants.Colors.buttonBackgroundColor.color.cgColor
         
-        stackButtonPost.frame.origin = CGPoint(x: (view.bounds.width - stackButtonPost.frame.width)/2, y: userDesLB.frame.maxY + 40)
+
         
     
     }
@@ -174,7 +178,12 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
     func updateSubviews(userInfo: [String:Any], userImage: [String:Any], userLikePost: [String:Any]) {
         let firstName = userInfo["first_name"] as? String ?? ""
         let lastName = userInfo["last_name"] as? String ?? ""
-        let description = userInfo["description"] as? String
+        var description = ""
+        if let updateDS = UserDefaults.standard.value(forKey: "userDSValue") as? String {
+            description = updateDS
+        }else {
+            description = userInfo["description"] as? String ?? ""
+        }
         
         let backgroundImage = userImage["backgroundImage"] as? String ?? ""
         let avatar = userImage["avatar"] as? String ?? ""
@@ -200,8 +209,8 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         sharesLB.text = numberOfShares?.description ?? "0"
         likesLB.text = numberOfLikes?.description ?? "0"
         
-//        userDesLB.text = description?.capitalized
-        userDesLB.text = "25% off camping and outdoors equipment (Kelty, Alpine, Dakine, Coleman)..."
+        userDesLB.text = description.capitalized
+
         
     }
     
@@ -303,7 +312,7 @@ extension UserInfoViewController {
         }
         
         
-        if scrollView.contentOffset.y > 380 {
+        if scrollView.contentOffset.y > 360 {
             navigationView.frame.size = CGSize(width: view.bounds.width, height: 100)
             navigationView.frame.origin = CGPoint(x: 0, y: (navigationController?.navigationBar.frame.maxY)!)
             navigationView.backgroundColor = .white
@@ -346,7 +355,7 @@ extension UserInfoViewController {
             navigationView.addSubview(stackview)
             
             navigationController?.view.addSubview(navigationView)
-        }else if scrollView.contentOffset.y < 380 {
+        }else if scrollView.contentOffset.y < 360 {
             navigationView.backgroundColor = .clear
             navigationView.isHidden = true
             stackview.isHidden = true

@@ -113,6 +113,7 @@ enum Constants {
         static let SFReguler15 = UIFont(name: "SanFranciscoText-Regular", size: 15)
         static let SFLight15 = UIFont(name: "SanFranciscoText-Light", size: 15)
         
+        static let SFReguler13 = UIFont(name: "SanFranciscoText-Regular", size: 13)
         static let SFLight13 = UIFont(name: "SanFranciscoText-Light", size: 13)
         
     }

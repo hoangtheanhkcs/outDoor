@@ -102,6 +102,27 @@ extension DatabaseManager {
                 completion(false)
                 return
             }
+            UserDefaults.standard.set(userInfomation, forKey: "userIFValue")
+           
+            print("success to write databse")
+            completion(true)
+        }
+    }
+    
+    func updateUserDescription(user: OutDoorUser, completion: @escaping (Bool)->Void) {
+        let userInfo = UserDefaults.standard.value(forKey: "userInfo") as? String ?? ""
+        let userInfomation = user.description ?? ""
+        
+        database.child("Users/\(userInfo)/UserInfomation/description").setValue(userInfomation) { error, _ in
+            guard error == nil else {
+                print("failed to write to database")
+                completion(false)
+                return
+            }
+         
+            UserDefaults.standard.set(userInfomation, forKey: "userDSValue")
+            
+            
             print("success to write databse")
             completion(true)
         }
@@ -117,6 +138,9 @@ extension DatabaseManager {
                 completion(false)
                 return
             }
+            
+            UserDefaults.standard.set(userImage, forKey: "userIMValue")
+            
             print("success to write databse")
             completion(true)
         }
@@ -132,6 +156,8 @@ extension DatabaseManager {
                 completion(false)
                 return
             }
+            
+            UserDefaults.standard.set(userLikePost, forKey: "userLPValue")
             print("success to write databse")
             completion(true)
         }

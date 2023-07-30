@@ -30,6 +30,27 @@ class UpDateUserInfoCell: UITableViewCell {
     
     var userInfo: [AnyHashable : Any]?
     
+    var edittingCell:Bool = false {
+        didSet {
+            if edittingCell {
+                self.isEditing = true
+               
+                textField.isHidden = false
+                textField.becomeFirstResponder()
+                userInfoLable.isHidden = true
+                trailingButton.setImage(UIImage(named: "icons8-check-50"), for: .normal)
+                
+            }else {
+                self.isEditing = false
+                
+                textField.isHidden = true
+                userInfoLable.isHidden = false
+                trailingButton.setImage(UIImage(named: "Group 77"), for: .normal)
+             
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         textField.isHidden = true
@@ -42,6 +63,8 @@ class UpDateUserInfoCell: UITableViewCell {
         textField.font = Constants.Fonts.SFReguler17
         textField.textColor = Constants.Colors.textColorType1.color
         textField.borderStyle = .none
+        
+       
         
     }
 
@@ -75,22 +98,16 @@ class UpDateUserInfoCell: UITableViewCell {
     
     @IBAction func trailingBTAction(_ sender: Any) {
         
-        userInfoLable.text = textField.text
+        userInfoLable.text = textField.text?.trimmingCharacters(in: .whitespaces)
         
         userInfo = ["userInfoLable": userInfoLable.text! as String]
         delegate?.receiveTraillingButtonTap(self)
-        if !self.isEditing {
-            self.isEditing = true
-            textField.isHidden = false
-            textField.becomeFirstResponder()
-            userInfoLable.isHidden = true
-            trailingButton.setImage(UIImage(named: "icons8-check-50"), for: .normal)
-        }else {
-            self.isEditing = false
-            textField.isHidden = true
-            userInfoLable.isHidden = false
-            trailingButton.setImage(UIImage(named: "Group 77"), for: .normal)
+        delegate?.didTapTraillingCellButton()
+        if self.isEditing {
+            edittingCell = false
             NotificationCenter.default.post(name: NSNotification.Name("cellValue"), object: nil, userInfo: userInfo)
+        }else {
+            edittingCell = true
             
         }
     }

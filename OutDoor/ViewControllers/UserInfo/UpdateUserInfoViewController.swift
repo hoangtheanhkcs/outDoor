@@ -9,6 +9,7 @@ import UIKit
 
 protocol UpdateUserInfoViewControllerDeleage :class {
     func receiveTraillingButtonTap(_ sender: UpDateUserInfoCell)
+    func didTapTraillingCellButton()
 }
 
 class UpdateUserInfoViewController: UIViewController,  UpdateUserInfoViewControllerDeleage {
@@ -26,9 +27,23 @@ class UpdateUserInfoViewController: UIViewController,  UpdateUserInfoViewControl
     var newUserInfo: OutDoorUser?
     
     var index:Int = 0
+    var allIndex:[Int] = []
+    var isCellEditting:Bool = false {
+        didSet {
+            if isCellEditting == true {
+                updateButton.isEnabled = false
+            }else {
+                updateButton.isEnabled = true
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        for index in 0..<userEdit.count {
+            allIndex.append(index)
+        }
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -41,6 +56,8 @@ class UpdateUserInfoViewController: UIViewController,  UpdateUserInfoViewControl
         updateButton.backgroundColor = Constants.Colors.buttonBackgroundColor.color
         updateButton.setTitle("Cập nhật", for: .normal)
         updateButton.setTitleColor(.white, for: .normal)
+        
+        
         
         setupSubviews()
         
@@ -103,34 +120,37 @@ class UpdateUserInfoViewController: UIViewController,  UpdateUserInfoViewControl
          userInfos = [userName, gender, birthday, phoneNumber]
         
      }
+    
+    
+    
   
     
     @IBAction func updateButtonAction(_ sender: Any) {
-        print(userInfos)
         let oldUserInfo =  UserDefaults.standard.value(forKey: "userIFValue") as? [String:Any]
         let fullName = userInfos[0]
         let gender = userInfos[1]
         let birth = userInfos[2]
         let phone = userInfos[3]
         
-        let firstName = fullName.firstName()
-        let lastName = fullName.lastName()
+        let firstName = fullName.firstName().trimmingCharacters(in: .whitespaces)
+        let lastName = fullName.lastName().trimmingCharacters(in: .whitespaces)
         let email = oldUserInfo?["email"] as? String ?? ""
         let description = oldUserInfo?["description"] as? String ?? ""
         
         
         newUserInfo = OutDoorUser(firstName: firstName, lastName: lastName, gender: gender, dateOfBirth: birth, emailAddress: email, description: description, userPhoneNumbers: phone)
         guard let newUserInfo = newUserInfo else {return}
-        DatabaseManager.shared.updateUserInfomation(user: newUserInfo) { success in
+        DatabaseManager.shared.updateUserInfomation(user: newUserInfo) { [weak self] success in
+            guard let self = self else {return}
             switch success {
                 
             case true:
                 print("success")
+                self.navigationController?.popViewController(animated: true)
             case false:
                 print("not success")
             }
         }
-        
         
     }
     
@@ -150,9 +170,36 @@ class UpdateUserInfoViewController: UIViewController,  UpdateUserInfoViewControl
     func receiveTraillingButtonTap(_ sender: UpDateUserInfoCell) {
         let indexPath = tableView.indexPath(for: sender)
         index = indexPath!.row
+      
+        if index != 1 {
+            if sender.edittingCell == true {
+                isCellEditting = false
+            }else {
+                isCellEditting = true
+            }
+        }
         
-        print(index)
     }
+    
+    func didTapTraillingCellButton() {
+        let restIndex = allIndex.filter({!($0 == index)})
+       let currentCell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? UpDateUserInfoCell
+        if currentCell?.edittingCell == true {
+            restIndex.forEach { index in
+                guard index != 1 else {return}
+                let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? UpDateUserInfoCell
+                cell?.trailingButton.isEnabled = true
+            }
+        }else {
+            restIndex.forEach { index in
+                guard index != 1 else {return}
+                let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? UpDateUserInfoCell
+                cell?.trailingButton.isEnabled = false
+            }
+        }
+    }
+    
+   
     
 }
 
@@ -165,6 +212,7 @@ extension UpdateUserInfoViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UpDateUserInfoCell", for: indexPath) as? UpDateUserInfoCell
         cell?.delegate = self
+        cell?.selectionStyle = .none
         cell?.updateLable.text = userEdit[indexPath.row]
         cell?.updateLable.textColor = Constants.Colors.textColorType1.color
         cell?.updateLable.font = UIFont(name: "SanFranciscoText-Regular", size: 17)
@@ -185,6 +233,9 @@ extension UpdateUserInfoViewController: UITableViewDelegate, UITableViewDataSour
         cell?.genderButtonForWomen.setTitleColor(Constants.Colors.textColorType1.color, for: .normal)
         
         cell?.textField.text = cell?.userInfoLable.text
+        
+     
+        
         if userEdit[indexPath.row] != "Giới tính" {
             cell?.genderButtonForMan.isHidden = true
             cell?.genderButtonForWomen.isHidden = true

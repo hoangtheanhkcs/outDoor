@@ -24,15 +24,16 @@ class ChangeUserDescriptionViewController: UIViewController {
         title = "Chỉnh sửa giới thiệu"
         textView.becomeFirstResponder()
         textView.delegate = self
-        textView.text = "Thêm giới thiệu bản thân"
-        textView.selectedRange = NSMakeRange(0, 0)
-        textView.textColor = Constants.Colors.textColorType6.color
+       
+        textView.font = Constants.Fonts.SFReguler13
+        textView.textColor = Constants.Colors.textColorType1.color
         textView.layer.borderColor = UIColor.lightGray.cgColor
         textView.layer.borderWidth = 0.1
         textView.layer.cornerRadius = 5
         
+        
         textCountNumber.textColor = Constants.Colors.textColorType6.color
-        updateCharacterCount()
+        
        
         updateButton.layer.cornerRadius = 21
         updateButton.backgroundColor = Constants.Colors.buttonBackgroundColor.color
@@ -45,6 +46,8 @@ class ChangeUserDescriptionViewController: UIViewController {
         self.navigationController?.navigationBar.backIndicatorImage = yourBackImage
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = yourBackImage
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +57,8 @@ class ChangeUserDescriptionViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         topview.backgroundColor = Constants.Colors.buttonBackgroundColor.color
         setUpNavigation()
+        setupSubviews()
+        updateCharacterCount()
     }
     
     func setUpNavigation() {
@@ -72,22 +77,73 @@ class ChangeUserDescriptionViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
     }
+    
+    func setupSubviews() {
+        guard let userIFValue =  UserDefaults.standard.value(forKey: "userIFValue") as? [String:Any] else {return}
+        updateSubviews(userInfo: userIFValue)
+    }
+    
+    func updateSubviews(userInfo: [String:Any]) {
+       
+        
+        var description = ""
+        if let updateDS = UserDefaults.standard.value(forKey: "userDSValue") as? String {
+            description = updateDS
+        }else {
+            description = userInfo["description"] as? String ?? ""
+        }
+        textView.text = description
+    }
+    
 
     @IBAction func updateAction(_ sender: Any) {
+        
+        let updateDescription = textView.text
+        let userDescription = OutDoorUser(description: updateDescription)
+        DatabaseManager.shared.updateUserDescription(user: userDescription) {[weak self] success in
+            guard let self = self else {return}
+            switch success {
+                
+            case true:
+                print("success to update description")
+                self.navigationController?.popViewController(animated: true)
+            case false:
+                print("faile to update description")
+                return
+            }
+        }
+        
+        
+        
+        
+        
         
     }
     
     @objc func saveDidTap() {
+        let updateDescription = textView.text
+        let userDescription = OutDoorUser(description: updateDescription)
+        DatabaseManager.shared.updateUserDescription(user: userDescription) { success in
+            switch success {
+                
+            case true:
+                print("success to update description")
+            case false:
+                print("faile to update description")
+            }
+        }
+        
         
     }
     func updateCharacterCount() {
-        var textCount = self.textView.text.count
-        if textView.text == "Thêm giới thiệu bản thân" {
-            textCount = 0
+        
+        if textView.text.count == 0 {
+            self.textCountNumber.text = "0/100"
+           
+        }else {
+            self.textCountNumber.text = "\(textView.text.count)/100"
+            
         }
-
-        self.textCountNumber.text = "\((0) + textCount)/100"
-
         
      }
 
@@ -95,22 +151,14 @@ class ChangeUserDescriptionViewController: UIViewController {
 
 extension ChangeUserDescriptionViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if textView.text == "Thêm giới thiệu bản thân" {
-            textView.text = ""
-            textView.textColor = Constants.Colors.textColorType1.color
-        }
+      
         return textView.text.count < 100
     }
 
   
     
     func textViewDidChange(_ textView: UITextView) {
-        if textView.text.isEmpty {
-           
-            textView.text = "Thêm giới thiệu bản thân"
-            textView.selectedRange = NSMakeRange(0, 0)
-            textView.textColor = Constants.Colors.textColorType6.color
-        }
+       
         updateCharacterCount()
         
     }
