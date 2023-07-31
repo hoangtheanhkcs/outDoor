@@ -128,11 +128,16 @@ extension DatabaseManager {
         }
     }
     
-    func updateUserImage(user: OutDoorUser, completion: @escaping (Bool)->Void) {
+    func updateUserImageAvatar(user: OutDoorUser?, urlUpdate:String?, completion: @escaping (Bool)->Void) {
         let userInfo = UserDefaults.standard.value(forKey: "userInfo") as? String ?? ""
-        let userImage = ["avatar": user.avatar ?? "", "backgroundImage": user.backgroundImage ?? ""] as [String : Any]
-        
-        database.child("Users/\(userInfo)/userImage").setValue(userImage) { error, _ in
+        let userImageFromAccount = ["avatar": user?.avatar ?? ""] as [String:Any]
+        var userImage = ""
+        if urlUpdate == nil {
+            userImage = userImageFromAccount["avatar"] as? String ?? ""
+        }else {
+            userImage = urlUpdate ?? ""
+        }
+        database.child("Users/\(userInfo)/userImage/avatar").setValue(userImage) { error, _ in
             guard error == nil else {
                 print("failed to write to database")
                 completion(false)
@@ -145,6 +150,27 @@ extension DatabaseManager {
             completion(true)
         }
     }
+    
+    func updateUserImageBackground(urlUpdate:String?, completion: @escaping (Bool)->Void) {
+        let userInfo = UserDefaults.standard.value(forKey: "userInfo") as? String ?? ""
+        
+        let userBackgroundImage = urlUpdate ?? ""
+       
+        database.child("Users/\(userInfo)/userImage/backgroundImage").setValue(userBackgroundImage) { error, _ in
+            guard error == nil else {
+                print("failed to write to database")
+                completion(false)
+                return
+            }
+            
+            UserDefaults.standard.set(userBackgroundImage, forKey: "userIMBackgroundValue")
+            
+            print("success to write databse")
+            completion(true)
+        }
+    }
+    
+    
     
     func updateUserLikePost(user: OutDoorUser, completion: @escaping (Bool)->Void) {
         let userInfo = UserDefaults.standard.value(forKey: "userInfo") as? String ?? ""

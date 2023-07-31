@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 protocol UpdateUserInfoViewControllerDeleage :class {
     func receiveTraillingButtonTap(_ sender: UpDateUserInfoCell)
@@ -20,11 +21,12 @@ class UpdateUserInfoViewController: UIViewController,  UpdateUserInfoViewControl
     
     @IBOutlet weak var topView: UIView!
     
-
+    private let spinner = JGProgressHUD(style: .dark)
     
     var userEdit :[String] = ["Tên", "Giới tính", "Ngày sinh", "Điện thoại"]
     var userInfos :[String] = []
-    var newUserInfo: OutDoorUser?
+    var newUserInfo: [String: Any]?
+    var oldUserInfo: OutDoorUser?
     
     var index:Int = 0
     var allIndex:[Int] = []
@@ -45,6 +47,12 @@ class UpdateUserInfoViewController: UIViewController,  UpdateUserInfoViewControl
             allIndex.append(index)
         }
         
+        let firstName = oldUserInfo?.firstName ?? ""
+        let lastName = oldUserInfo?.lastName ?? ""
+        let fullName = firstName.capitalized  + " " + lastName.capitalized
+        
+        userInfos = [fullName, oldUserInfo?.gender ?? "", oldUserInfo?.dateOfBirth ?? "", oldUserInfo?.userPhoneNumbers ?? ""]
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isScrollEnabled = false
@@ -57,9 +65,6 @@ class UpdateUserInfoViewController: UIViewController,  UpdateUserInfoViewControl
         updateButton.setTitle("Cập nhật", for: .normal)
         updateButton.setTitleColor(.white, for: .normal)
         
-        
-        
-        setupSubviews()
         
         NotificationCenter.default.addObserver(self, selector: #selector(didTapCellButton), name: NSNotification.Name("cellValue"), object: nil)
         
@@ -99,34 +104,9 @@ class UpdateUserInfoViewController: UIViewController,  UpdateUserInfoViewControl
 
     
     
-    private func setupSubviews() {
-         guard let userInfo = UserDefaults.standard.value(forKey: "userIFValue") as? [String:Any] else {return}
-         updateSubviews(userInfo: userInfo)
-         
-        
-         
-     }
-     
-     func updateSubviews(userInfo: [String:Any]) {
-         let firstName = userInfo["first_name"] as? String ?? ""
-         let lastName = userInfo["last_name"] as? String ?? ""
-         let description = userInfo["description"] as? String ?? ""
-         let gender = userInfo["gender"] as? String ?? ""
-         let birthday = userInfo["dateOfBirth"] as? String ?? ""
-         let phoneNumber = userInfo["phoneNumber"] as? String ?? ""
-          
-         let userName = firstName.capitalized  + " " + lastName.capitalized
-         
-         userInfos = [userName, gender, birthday, phoneNumber]
-        
-     }
-    
-    
-    
-  
-    
     @IBAction func updateButtonAction(_ sender: Any) {
-        let oldUserInfo =  UserDefaults.standard.value(forKey: "userIFValue") as? [String:Any]
+        
+        spinner.show(in: view)
         let fullName = userInfos[0]
         let gender = userInfos[1]
         let birth = userInfos[2]
@@ -134,19 +114,31 @@ class UpdateUserInfoViewController: UIViewController,  UpdateUserInfoViewControl
         
         let firstName = fullName.firstName().trimmingCharacters(in: .whitespaces)
         let lastName = fullName.lastName().trimmingCharacters(in: .whitespaces)
-        let email = oldUserInfo?["email"] as? String ?? ""
-        let description = oldUserInfo?["description"] as? String ?? ""
+        let email = oldUserInfo?.safeEmail ?? ""
+        let description = oldUserInfo?.description ?? ""
+        let avatar = oldUserInfo?.avatar ?? ""
+        let background = oldUserInfo?.backgroundImage ?? ""
+        let numberOfFollow = oldUserInfo?.numberOfFollowers ?? 0
+        let numberOfShares = oldUserInfo?.numberOfShares ?? 0
+        let numberOfLikes = oldUserInfo?.numberOfLikes ?? 0
         
+       
         
-        newUserInfo = OutDoorUser(firstName: firstName, lastName: lastName, gender: gender, dateOfBirth: birth, emailAddress: email, description: description, userPhoneNumbers: phone)
-        guard let newUserInfo = newUserInfo else {return}
-        DatabaseManager.shared.updateUserInfomation(user: newUserInfo) { [weak self] success in
+        newUserInfo = ["firstName": firstName, "lastName": lastName, "gender": gender, "dateOfBirth": birth, "emailAddress": email, "avatar": avatar, "backgroundImage": background, "description": description, "userPhoneNumbers": phone, "numberOfFollowers": numberOfFollow, "numberOfShares": numberOfShares, "numberOfLikes": numberOfLikes]
+        let user = OutDoorUser(firstName: firstName, lastName: lastName, gender: gender, dateOfBirth: birth, emailAddress: email, avatar: avatar, backgroundImage: background, description: description, userPhoneNumbers: phone, numberOfFollowers: numberOfFollow, numberOfShares: numberOfShares, numberOfLikes: numberOfLikes)
+        
+        DatabaseManager.shared.updateUserInfomation(user: user) { [weak self] success in
             guard let self = self else {return}
             switch success {
                 
             case true:
                 print("success")
+                DispatchQueue.main.async {
+                    self.spinner.dismiss()
+                }
+                UserDefaults.standard.set(newUserInfo, forKey: "newUserInfo")
                 self.navigationController?.popViewController(animated: true)
+                
             case false:
                 print("not success")
             }

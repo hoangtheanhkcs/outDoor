@@ -6,11 +6,26 @@
 //
 
 import UIKit
+import JGProgressHUD
+
+protocol SettingViewControllerDelegate: class {
+    func updateAvatar(avatarImage: String?)
+    func updateBackground(backgroundImage: String?)
+}
+
+extension SettingViewControllerDelegate {
+    func updateAvatar(avatarImage: String?) {}
+    func updateBackground(backgroundImage: String?) {}
+}
 
 class SettingViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    
+    private let spinner = JGProgressHUD(style: .dark)
     var sections: [SectionSetting] = []
     var settings: [[Setting]] = []
     var user: OutDoorUser?
+    weak var delegate : SettingViewControllerDelegate?
+    var typeOfImage = ""
 
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -136,6 +151,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         if userInforSettingTitle == Constants.Strings.settingVCInfomation {
             let vc = storyboard?.instantiateViewController(withIdentifier: "UserInfoDetailViewController") as? UserInfoDetailViewController
             vc?.modalPresentationStyle = .fullScreen
+            vc?.user = user
             navigationController?.pushViewController(vc!, animated: true)
         }
         
@@ -147,21 +163,24 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             actionSheet.setTitle(font: .boldSystemFont(ofSize: 17), color: Constants.Colors.textColorType3.color)
             actionSheet.setTint(color: Constants.Colors.textColorType7.color)
             
-            let takeNewPhoto = UIAlertAction(title: "Chụp ảnh mới", style: .default) { _ in
-                
+            let takeNewPhoto = UIAlertAction(title: "Chụp ảnh mới", style: .default) {[weak self] _ in
+                guard let self = self else {return}
                 let picker = UIImagePickerController()
                 picker.sourceType = .camera
                 picker.delegate = self
                 picker.allowsEditing = true
+                self.typeOfImage = "avatar"
                 self.present(picker, animated: true)
             }
             
-            let getPhotoInYourDevice = UIAlertAction(title: "Chọn ảnh từ thiết bị", style: .default) { _ in
+            let getPhotoInYourDevice = UIAlertAction(title: "Chọn ảnh từ thiết bị", style: .default) {[weak self] _ in
+                guard let self = self else {return}
                 print("Chọn ảnh từ thiết bị")
                 let picker = UIImagePickerController()
                 picker.sourceType = .photoLibrary
                 picker.delegate = self
                 picker.allowsEditing = true
+                self.typeOfImage = "avatar"
                 self.present(picker, animated: true)
             }
             
@@ -180,20 +199,24 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             actionSheet.setTitle(font: .boldSystemFont(ofSize: 17), color: Constants.Colors.textColorType3.color)
             actionSheet.setTint(color: Constants.Colors.textColorType7.color)
             
-            let takeNewPhoto = UIAlertAction(title: "Chụp ảnh mới", style: .default) { _ in
+            let takeNewPhoto = UIAlertAction(title: "Chụp ảnh mới", style: .default) { [weak self] _ in
+                guard let self = self else {return}
                 print("chụp ảnh mới")
                 let picker = UIImagePickerController()
                 picker.sourceType = .camera
                 picker.delegate = self
                 picker.allowsEditing = true
+                self.typeOfImage = "background"
                 self.present(picker, animated: true)
             }
-            let getPhotoInYourDevice = UIAlertAction(title: "Chọn ảnh từ thiết bị", style: .default) { _ in
+            let getPhotoInYourDevice = UIAlertAction(title: "Chọn ảnh từ thiết bị", style: .default) {[weak self] _ in
+                guard let self = self else {return}
                 print("Chọn ảnh từ thiết bị")
                 let picker = UIImagePickerController()
                 picker.sourceType = .photoLibrary
                 picker.delegate = self
                 picker.allowsEditing = true
+                self.typeOfImage = "background"
                 self.present(picker, animated: true)
             }
             
@@ -222,6 +245,67 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
+extension SettingViewController {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage, let data = selectedImage.pngData(), let fileName = user?.profilePictureFileName  else {
+            return
+        }
+        
+        spinner.show(in: view)
+        StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName) {[weak self] (result: Result<String, Error>) in
+            guard let self = self else {return}
+            switch result {
+            case .success(let downloadUrl):
+                if self.typeOfImage == "avatar" {
+                    DatabaseManager.shared.updateUserImageAvatar(user: self.user, urlUpdate: downloadUrl) { succsess in
+                        
+                        switch succsess {
+                        case true:
+                            DispatchQueue.main.async {
+                                    self.delegate?.updateAvatar(avatarImage: downloadUrl)
+                                self.spinner.dismiss()
+                                self.navigationController?.popViewController(animated: true)
+                            }
+                            
+                        case false:
+                            print("faile to upload new photo to database RealmTime")
+                        }
+                    }
+                }else if self.typeOfImage == "background" {
+                    DatabaseManager.shared.updateUserImageBackground(urlUpdate: downloadUrl) { succsess in
+                        
+                        switch succsess {
+                        case true:
+                            DispatchQueue.main.async {
+                                    self.delegate?.updateBackground(backgroundImage: downloadUrl)
+                                self.spinner.dismiss()
+                                self.navigationController?.popViewController(animated: true)
+                            }
+                            
+                        case false:
+                            print("faile to upload new photo to database RealmTime")
+                        }
+                    }
+                    
+                    
+                }
+                case .failure(let error):
+                    print("StorageManager error: \(error)")
+                }
+            
+        }
+        
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+}
+
+
+
 
 
 class SettingData {

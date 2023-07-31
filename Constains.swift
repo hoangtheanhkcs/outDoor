@@ -85,6 +85,11 @@ enum Constants {
         static let userInfoDetailBirth = NSLocalizedString("Ngày sinh", comment: "")
         static let userInfoDetailPhoneNumber = NSLocalizedString("Điện thoại", comment: "")
         
+        static let titleAlertChangeAvatar = NSLocalizedString("Ảnh đại diện", comment: "")
+        static let previewAvatar = NSLocalizedString("Xem ảnh đại diện", comment: "")
+        static let alertChangeAvatarChoosePhotoFromLibrary = NSLocalizedString("Chọn ảnh từ thiết bị", comment: "")
+        static let alertChangeAvatarTakeNewPhoto = NSLocalizedString("Chụp ảnh mới", comment: "")
+        
     }
     enum Fonts {
         
@@ -131,6 +136,8 @@ enum Constants {
         
         static let logginFacebook = "#1877F2"
         static let logginGoogleBorder = "#E0E0E0"
+        
+        static let alertAvatar = "#759E50"
         
        
 

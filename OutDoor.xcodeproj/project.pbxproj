@@ -33,6 +33,7 @@
 		5AAE200A2A72CAC3000EA78D /* EditUserInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AAE20062A72CAC3000EA78D /* EditUserInfoCell.xib */; };
 		5AAE200B2A72CAC3000EA78D /* EditUserInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE20072A72CAC3000EA78D /* EditUserInfoCell.swift */; };
 		5AAE200D2A73A254000EA78D /* String+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE200C2A73A254000EA78D /* String+EX.swift */; };
+		5AAE20372A76D684000EA78D /* PreviewAvatarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE20362A76D684000EA78D /* PreviewAvatarViewController.swift */; };
 		5AD42AA72A68DE7400D51C6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD42AA62A68DE7400D51C6F /* AppDelegate.swift */; };
 		5AD42AA92A68DE7400D51C6F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD42AA82A68DE7400D51C6F /* SceneDelegate.swift */; };
 		5AD42AAB2A68DE7400D51C6F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD42AAA2A68DE7400D51C6F /* ViewController.swift */; };
@@ -123,6 +124,7 @@
 		5AAE20062A72CAC3000EA78D /* EditUserInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditUserInfoCell.xib; sourceTree = "<group>"; };
 		5AAE20072A72CAC3000EA78D /* EditUserInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUserInfoCell.swift; sourceTree = "<group>"; };
 		5AAE200C2A73A254000EA78D /* String+EX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+EX.swift"; sourceTree = "<group>"; };
+		5AAE20362A76D684000EA78D /* PreviewAvatarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewAvatarViewController.swift; sourceTree = "<group>"; };
 		5AD42AA32A68DE7400D51C6F /* OutDoor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OutDoor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD42AA62A68DE7400D51C6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5AD42AA82A68DE7400D51C6F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				5AAE20002A72C973000EA78D /* UserInfoDetailViewController.swift */,
 				5AAE1FFF2A72C973000EA78D /* UpdateUserInfoViewController.swift */,
 				5AAE1FFE2A72C973000EA78D /* ChangeUserDescriptionViewController.swift */,
+				5AAE20362A76D684000EA78D /* PreviewAvatarViewController.swift */,
 			);
 			path = UserInfo;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				5AAE20032A72C973000EA78D /* UserInfoDetailViewController.swift in Sources */,
 				5A45266A2A6F564F001E2028 /* TabBarViewController.swift in Sources */,
 				5A10A2442A6CBF060081160D /* DatabaseManager.swift in Sources */,
+				5AAE20372A76D684000EA78D /* PreviewAvatarViewController.swift in Sources */,
 				5A45267D2A6FDAF8001E2028 /* NotificViewController.swift in Sources */,
 				5A10A2472A6CFB9D0081160D /* OudoorUser.swift in Sources */,
 				5A4526722A6F5CA3001E2028 /* SpotlightViewController.swift in Sources */,

@@ -7,10 +7,11 @@
 
 import UIKit
 import SDWebImage
+import JGProgressHUD
 
-class UserInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+class UserInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate , PreviewAvatarViewControllerDelegate {
     
-    
+    private let spinner = JGProgressHUD(style: .dark)
     @IBOutlet weak var userBackgroundIMV: UIImageView!
     
     @IBOutlet weak var userAvartarIMV: UIImageView!
@@ -50,7 +51,7 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
     
     var user : OutDoorUser?
     
-    var tt :[String] = ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
+    var tt :[String] = []
     
     
     
@@ -59,6 +60,11 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var shadowButtonView: UIView!
     
+    
+    let previewAvatarController = PreviewAvatarViewController()
+    var viewPreview : UIView? {
+        return previewAvatarController.view
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +90,13 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         shadowButtonView.layer.shadowColor = Constants.Colors.buttonBackgroundColor.color.cgColor
         shadowButtonView.layer.shadowOpacity = 0.2
         
+        addChild(previewAvatarController)
+        previewAvatarController.delegete = self
+        
+        viewPreview?.frame = view.bounds
+        viewPreview?.isHidden  = true
+        view.addSubview(viewPreview!)
+        didMove(toParent: self)
         
         setUpNavigation() 
     }
@@ -94,7 +107,7 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.setContentOffset(.zero, animated: true)
         UIApplication.shared.statusBarStyle = .lightContent
         
-        
+      
         setupSubviews()
         
     }
@@ -127,6 +140,8 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
     @objc func didTapSettingButton() {
         tableView.setContentOffset(.zero, animated: false)
         let vc = storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as? SettingViewController
+        vc?.user = user
+        vc?.delegate = self
         vc?.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc!, animated: false)
         
@@ -184,14 +199,20 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         }else {
             description = userInfo["description"] as? String ?? ""
         }
+        let email = userInfo["email"] as? String ?? ""
+        let gender = userInfo["gender"] as? String ?? ""
+        let birth = userInfo["dateOfBirth"] as? String ?? ""
+        let phone = userInfo["phoneNumber"] as? String ?? ""
+        
         
         let backgroundImage = userImage["backgroundImage"] as? String ?? ""
         let avatar = userImage["avatar"] as? String ?? ""
         
-        let numberOfFollowers = userLikePost["numberOfFollowers"] as? Int
-        let numberOfShares = userLikePost["numberOfShares"] as? Int
-        let numberOfLikes = userLikePost["numberOfLikes"] as? Int
+        let numberOfFollowers = userLikePost["numberOfFollowers"] as? Int ?? 0
+        let numberOfShares = userLikePost["numberOfShares"] as? Int ?? 0
+        let numberOfLikes = userLikePost["numberOfLikes"] as? Int ?? 0
         
+        user = OutDoorUser(firstName: firstName, lastName: lastName, gender: gender, dateOfBirth: birth , emailAddress: email, avatar: avatar, backgroundImage: backgroundImage, description: description, userPhoneNumbers: phone , numberOfFollowers: numberOfFollowers, numberOfShares: numberOfShares, numberOfLikes: numberOfLikes)
         
         userNameLB.text = firstName.capitalized  + " " + lastName.capitalized
         if backgroundImage.count != 0 {
@@ -205,9 +226,9 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
             userAvartarIMV.image = UIImage(named: Constants.Images.userAvatarDefault)
         }
         
-        followersLB.text = numberOfFollowers?.description ?? "0"
-        sharesLB.text = numberOfShares?.description ?? "0"
-        likesLB.text = numberOfLikes?.description ?? "0"
+        followersLB.text = numberOfFollowers.description
+        sharesLB.text = numberOfShares.description
+        likesLB.text = numberOfLikes.description
         
         userDesLB.text = description.capitalized
 
@@ -266,6 +287,56 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         saveBT.backgroundColor = Constants.Colors.buttonBackgroundColor.color
     }
     
+    
+    @IBAction func changeAvatarButton(_ sender: Any) {
+        
+        let alert = UIAlertController(title: Constants.Strings.titleAlertChangeAvatar, message: nil, preferredStyle: .alert)
+//        alert.view.tintColor = Constants.Colors.alertAvatar.color
+        alert.view.subviews.first?.backgroundColor = .clear
+        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .clear
+        alert.view.subviews.first?.subviews.first?.subviews.first?.subviews.first?.subviews.first?.backgroundColor = Constants.Colors.textColorType8.color
+        alert.view.subviews.first?.subviews.first?.subviews.first?.subviews[1].backgroundColor = .white
+        
+        alert.setTitle(font: Constants.Fonts.SFBold17, color: Constants.Colors.textColorType1.color)
+        alert.setTint(color: Constants.Colors.alertAvatar.color)
+        let previewAvatarAction = UIAlertAction(title: Constants.Strings.previewAvatar, style: .default) {[weak self] _ in
+            guard let self = self else {return}
+            viewPreview?.isHidden  = false
+           
+        }
+        previewAvatarAction.setValue(UIImage(named: "eye"), forKey: "image")
+    
+        
+        let choosePhotoFromLibrary = UIAlertAction(title: Constants.Strings.alertChangeAvatarChoosePhotoFromLibrary, style: .default) { _ in
+            print("Chọn ảnh từ thiết bị")
+            let picker = UIImagePickerController()
+            picker.sourceType = .photoLibrary
+            picker.delegate = self
+            picker.allowsEditing = true
+            self.present(picker, animated: true)
+        }
+        choosePhotoFromLibrary.setValue(UIImage(named: "image"), forKey: "image")
+        let takeNewPhoto = UIAlertAction(title: Constants.Strings.alertChangeAvatarTakeNewPhoto, style: .default) { _ in
+            let picker = UIImagePickerController()
+            picker.sourceType = .camera
+            picker.delegate = self
+            picker.allowsEditing = true
+            self.present(picker, animated: true)
+        }
+        takeNewPhoto.setValue(UIImage(named: "camera"), forKey: "image")
+        
+        alert.addAction(previewAvatarAction)
+        alert.addAction(choosePhotoFromLibrary)
+        alert.addAction(takeNewPhoto)
+        
+        present(alert, animated: true)
+        
+    }
+    
+    func didTapCloseBT() {
+        viewPreview?.isHidden = true
+        
+    }
 
 }
 
@@ -292,7 +363,7 @@ extension UserInfoViewController {
             smallUserAvatarIMV.clipsToBounds = true
             smallUserAvatarIMV.image = userAvartarIMV.image
             
-            smallUserNameLB.frame.size = CGSize(width: 120, height: 24)
+            smallUserNameLB.frame.size = CGSize(width: 200, height: 24)
             smallUserNameLB.frame.origin = CGPoint(x: smallUserAvatarIMV.frame.maxX + 20, y: smallUserAvatarIMV.frame.minY + 6)
             smallUserNameLB.text = userNameLB.text
             smallUserNameLB.font = Constants.Fonts.SFSemibold17
@@ -377,3 +448,63 @@ extension UserInfoViewController {
     
     
 }
+
+
+extension UserInfoViewController {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage, let data = selectedImage.pngData(), let fileName = user?.profilePictureFileName  else {
+            return
+        }
+        
+        spinner.show(in: view)
+        StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName) {[weak self] (result: Result<String, Error>) in
+            guard let self = self else {return}
+            switch result {
+            case .success(let downloadUrl):
+                UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_avatar_url")
+                print("downloadUrl is \(downloadUrl)")
+                DatabaseManager.shared.updateUserImageAvatar(user: self.user, urlUpdate: downloadUrl) { succsess in
+                    switch succsess {
+                        
+                    case true:
+                        DispatchQueue.main.async {
+                            self.userAvartarIMV.sd_setImage(with: URL(string: downloadUrl))
+                            self.user?.avatar = downloadUrl
+                            self.spinner.dismiss()
+                        }
+                        
+                    case false:
+                        print("faile to upload new photo to database RealmTime")
+                    }
+                }
+            case .failure(let error):
+                print("StorageManager error: \(error)")
+            }
+        }
+        
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+}
+
+
+extension UserInfoViewController: SettingViewControllerDelegate {
+    func updateAvatar(avatarImage: String?) {
+        
+        DispatchQueue.main.async {
+            self.userAvartarIMV.sd_setImage(with: URL(string: avatarImage ?? ""))
+            self.user?.avatar = avatarImage
+        }
+    }
+    func updateBackground(backgroundImage: String?) {
+      
+        DispatchQueue.main.async {
+            self.userBackgroundIMV.sd_setImage(with: URL(string: backgroundImage ?? ""))
+            self.user?.backgroundImage = backgroundImage
+        }
+    }
+}
+
