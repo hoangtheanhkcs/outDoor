@@ -32,7 +32,9 @@ struct OutDoorUser {
     var profilePictureFileName:String {
         return "\(safeEmail!)_profile_picture.png"
     }
-    
+    var profilePictureBackgoundFileName:String {
+        return "\(safeEmail!)_profile_background_picture.png"
+    }
 }
 
 struct UserPost {

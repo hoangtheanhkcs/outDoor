@@ -52,6 +52,9 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
     var user : OutDoorUser?
     
     var tt :[String] = []
+    private var languague:String? {
+        return  UserDefaults.standard.value(forKey: "language") as? String
+    }
     
     
     
@@ -215,6 +218,7 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         user = OutDoorUser(firstName: firstName, lastName: lastName, gender: gender, dateOfBirth: birth , emailAddress: email, avatar: avatar, backgroundImage: backgroundImage, description: description, userPhoneNumbers: phone , numberOfFollowers: numberOfFollowers, numberOfShares: numberOfShares, numberOfLikes: numberOfLikes)
         
         userNameLB.text = firstName.capitalized  + " " + lastName.capitalized
+       
         if backgroundImage.count != 0 {
             userBackgroundIMV.sd_setImage(with: URL(string: backgroundImage))
         }else {
@@ -230,7 +234,8 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         sharesLB.text = numberOfShares.description
         likesLB.text = numberOfLikes.description
         
-        userDesLB.text = description.capitalized
+//        userDesLB.text = description.capitalized
+        userDesLB.setupAutolocalization(withKey: description.capitalized, keyPath: "text")
 
         
     }
@@ -250,19 +255,19 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         tt = ["post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1", "post1"]
         tableView.reloadData()
         
-        userPostBT.setTitle("Bài viết của bạn", for: .normal)
+        userPostBT.setupAutolocalization(withKey: Constants.Strings.yourPost, keyPath: "autolocalizationTitle")
         userPostBT.setTitleColor(.white, for: .normal)
         userPostBT.backgroundColor = Constants.Colors.buttonBackgroundColor.color
         
-        savePostBT.setTitle("Bài viết đã lưu", for: .normal)
+        savePostBT.setupAutolocalization(withKey: Constants.Strings.savedPost, keyPath: "autolocalizationTitle")
         savePostBT.setTitleColor(Constants.Colors.buttonBackgroundColor.color, for: .normal)
         savePostBT.backgroundColor = .clear
         
-        postBT.setTitle("Bài viết của bạn", for: .normal)
+        postBT.setupAutolocalization(withKey: Constants.Strings.yourPost, keyPath: "autolocalizationTitle")
         postBT.setTitleColor(.white, for: .normal)
         postBT.backgroundColor = Constants.Colors.buttonBackgroundColor.color
         
-        saveBT.setTitle("Bài viết đã lưu", for: .normal)
+        saveBT.setupAutolocalization(withKey: Constants.Strings.savedPost, keyPath: "autolocalizationTitle")
         saveBT.setTitleColor(Constants.Colors.buttonBackgroundColor.color, for: .normal)
         saveBT.backgroundColor = .clear
     }
@@ -270,27 +275,27 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func savePostBTAction(_ sender: Any) {
         tt = ["post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2", "post2"]
         tableView.reloadData()
-        userPostBT.setTitle("Bài viết của bạn", for: .normal)
+        userPostBT.setupAutolocalization(withKey: Constants.Strings.yourPost, keyPath: "autolocalizationTitle")
         userPostBT.setTitleColor(Constants.Colors.buttonBackgroundColor.color, for: .normal)
         userPostBT.backgroundColor = .clear
         
-        savePostBT.setTitle("Bài viết đã lưu", for: .normal)
+        savePostBT.setupAutolocalization(withKey: Constants.Strings.savedPost, keyPath: "autolocalizationTitle")
         savePostBT.setTitleColor(.white, for: .normal)
         savePostBT.backgroundColor = Constants.Colors.buttonBackgroundColor.color
         
-        postBT.setTitle("Bài viết của bạn", for: .normal)
+        postBT.setupAutolocalization(withKey: Constants.Strings.yourPost, keyPath: "autolocalizationTitle")
         postBT.setTitleColor(Constants.Colors.buttonBackgroundColor.color, for: .normal)
         postBT.backgroundColor = .clear
         
-        saveBT.setTitle("Bài viết đã lưu", for: .normal)
+        saveBT.setupAutolocalization(withKey: Constants.Strings.savedPost, keyPath: "autolocalizationTitle")
         saveBT.setTitleColor(.white, for: .normal)
         saveBT.backgroundColor = Constants.Colors.buttonBackgroundColor.color
     }
     
     
     @IBAction func changeAvatarButton(_ sender: Any) {
-        
-        let alert = UIAlertController(title: Constants.Strings.titleAlertChangeAvatar, message: nil, preferredStyle: .alert)
+        let titleAlert = Constants.Strings.titleAlertChangeAvatar.addLocalization(str: languague ?? "vi")
+        let alert = UIAlertController(title: titleAlert, message: nil, preferredStyle: .alert)
 //        alert.view.tintColor = Constants.Colors.alertAvatar.color
         alert.view.subviews.first?.backgroundColor = .clear
         alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .clear
@@ -299,15 +304,17 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         
         alert.setTitle(font: Constants.Fonts.SFBold17, color: Constants.Colors.textColorType1.color)
         alert.setTint(color: Constants.Colors.alertAvatar.color)
-        let previewAvatarAction = UIAlertAction(title: Constants.Strings.previewAvatar, style: .default) {[weak self] _ in
+        
+        let previewA = Constants.Strings.previewAvatar.addLocalization(str: languague ?? "vi")
+        let previewAvatarAction = UIAlertAction(title: previewA, style: .default) {[weak self] _ in
             guard let self = self else {return}
             viewPreview?.isHidden  = false
            
         }
         previewAvatarAction.setValue(UIImage(named: "eye"), forKey: "image")
     
-        
-        let choosePhotoFromLibrary = UIAlertAction(title: Constants.Strings.alertChangeAvatarChoosePhotoFromLibrary, style: .default) { _ in
+        let choosePhoto = Constants.Strings.alertChangeAvatarChoosePhotoFromLibrary.addLocalization(str: languague ?? "vi")
+        let choosePhotoFromLibrary = UIAlertAction(title: choosePhoto, style: .default) { _ in
             print("Chọn ảnh từ thiết bị")
             let picker = UIImagePickerController()
             picker.sourceType = .photoLibrary
@@ -316,7 +323,9 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
             self.present(picker, animated: true)
         }
         choosePhotoFromLibrary.setValue(UIImage(named: "image"), forKey: "image")
-        let takeNewPhoto = UIAlertAction(title: Constants.Strings.alertChangeAvatarTakeNewPhoto, style: .default) { _ in
+        
+        let takeNPT = Constants.Strings.alertChangeAvatarTakeNewPhoto.addLocalization(str: languague ?? "vi")
+        let takeNewPhoto = UIAlertAction(title: takeNPT, style: .default) { _ in
             let picker = UIImagePickerController()
             picker.sourceType = .camera
             picker.delegate = self
@@ -329,8 +338,16 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         alert.addAction(choosePhotoFromLibrary)
         alert.addAction(takeNewPhoto)
         
-        present(alert, animated: true)
+        present(alert, animated: true) {
+            alert.view.superview?.isUserInteractionEnabled = true
+            alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+        }
         
+    }
+    
+    @objc private func alertControllerBackgroundTapped()
+    {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func didTapCloseBT() {
@@ -349,7 +366,7 @@ extension UserInfoViewController {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        cell.textLabel?.text = tt[indexPath.row]
+        cell.textLabel?.text = tt[indexPath.row].addLocalization(str: languague ?? "vi")
         
         return cell
     }
@@ -397,7 +414,8 @@ extension UserInfoViewController {
             stackview.backgroundColor = .white
             stackview.isHidden = false
             
-            postBT.setTitle("Bài viết của bạn", for: .normal)
+           
+            postBT.setupAutolocalization(withKey: Constants.Strings.yourPost, keyPath: "autolocalizationTitle")
             postBT.titleLabel?.font = Constants.Fonts.SFReguler17
             postBT.layer.cornerRadius = 21
             postBT.layer.masksToBounds = true
@@ -406,7 +424,7 @@ extension UserInfoViewController {
             postBT.addTarget(self, action: #selector(postBTAction) , for: .touchUpInside)
             postBT.isHidden = false
             
-            saveBT.setTitle("Bài viết đã lưu", for: .normal)
+            saveBT.setupAutolocalization(withKey: Constants.Strings.savedPost, keyPath: "autolocalizationTitle")
             saveBT.titleLabel?.font = Constants.Fonts.SFReguler17
             saveBT.layer.cornerRadius = 21
             saveBT.layer.masksToBounds = true
@@ -416,13 +434,6 @@ extension UserInfoViewController {
             saveBT.isHidden = false
             stackview.addArrangedSubview(postBT)
             stackview.addArrangedSubview(saveBT)
-            
-            
-            
-            
-            
-            
-            
             navigationView.addSubview(stackview)
             
             navigationController?.view.addSubview(navigationView)

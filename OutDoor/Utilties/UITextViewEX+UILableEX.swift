@@ -10,9 +10,9 @@ import UIKit
 
 extension UITextView {
     
-    func settingTextView(text: String, textColor:UIColor?, font: UIFont?, lineSpacing: CGFloat) {
-        
-        let attributedString = NSMutableAttributedString(string: text)
+    func settingTextView(text: String, textColor:UIColor?, font: UIFont?, lineSpacing: CGFloat, str:String?) {
+        let string = text.addLocalization(str: str ?? "vi")
+        let attributedString = NSMutableAttributedString(string: string)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineSpacing
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
@@ -27,9 +27,9 @@ extension UITextView {
 
 extension UILabel {
     
-    func settingLableText(text: String, textColor:UIColor?, font: UIFont?, lineSpacing: CGFloat) {
-        
-        let attributedString = NSMutableAttributedString(string: text)
+    func settingLableText(text: String, textColor:UIColor?, font: UIFont?, lineSpacing: CGFloat, str:String?) {
+        let string = text.addLocalization(str: str ?? "vi")
+        let attributedString = NSMutableAttributedString(string: string)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineSpacing
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
@@ -38,6 +38,7 @@ extension UILabel {
         self.textAlignment = .center
         self.font = font
         self.textColor = textColor
+       
         
     }
 }

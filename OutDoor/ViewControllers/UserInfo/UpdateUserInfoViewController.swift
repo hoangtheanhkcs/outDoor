@@ -23,7 +23,7 @@ class UpdateUserInfoViewController: UIViewController,  UpdateUserInfoViewControl
     
     private let spinner = JGProgressHUD(style: .dark)
     
-    var userEdit :[String] = ["Tên", "Giới tính", "Ngày sinh", "Điện thoại"]
+    var userEdit :[String] = [Constants.Strings.name, Constants.Strings.gender, Constants.Strings.birth, Constants.Strings.phone]
     var userInfos :[String] = []
     var newUserInfo: [String: Any]?
     var oldUserInfo: OutDoorUser?
@@ -62,7 +62,8 @@ class UpdateUserInfoViewController: UIViewController,  UpdateUserInfoViewControl
         
         updateButton.layer.cornerRadius = 21
         updateButton.backgroundColor = Constants.Colors.buttonBackgroundColor.color
-        updateButton.setTitle("Cập nhật", for: .normal)
+        
+        updateButton.setupAutolocalization(withKey: Constants.Strings.update, keyPath: "autolocalizationTitle")
         updateButton.setTitleColor(.white, for: .normal)
         
         
@@ -72,7 +73,8 @@ class UpdateUserInfoViewController: UIViewController,  UpdateUserInfoViewControl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        title = "Thông Tin"
+//        title = "Thông Tin"
+        self.setupAutolocalization(withKey: Constants.Strings.settingVCInfomation, keyPath: "title")
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         setUpNavigation()
     }
@@ -205,7 +207,8 @@ extension UpdateUserInfoViewController: UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "UpDateUserInfoCell", for: indexPath) as? UpDateUserInfoCell
         cell?.delegate = self
         cell?.selectionStyle = .none
-        cell?.updateLable.text = userEdit[indexPath.row]
+        let userEditText = userEdit[indexPath.row]
+        cell?.updateLable.setupAutolocalization(withKey: userEditText, keyPath: "text")
         cell?.updateLable.textColor = Constants.Colors.textColorType1.color
         cell?.updateLable.font = UIFont(name: "SanFranciscoText-Regular", size: 17)
         cell?.userInfoLable.text = userInfos[indexPath.row]
@@ -215,20 +218,18 @@ extension UpdateUserInfoViewController: UITableViewDelegate, UITableViewDataSour
         
         cell?.trailingButton.setImage(UIImage(named: "Group 77"), for: .normal)
         cell?.genderButtonForMan.semanticContentAttribute = .forceRightToLeft
-        cell?.genderButtonForMan.setTitle("Nam   ", for: .normal)
         cell?.genderButtonForMan.setTitleColor(Constants.Colors.textColorType1.color, for: .normal)
         
         
         
         cell?.genderButtonForWomen.semanticContentAttribute = .forceRightToLeft
-        cell?.genderButtonForWomen.setTitle("Nữ   ", for: .normal)
         cell?.genderButtonForWomen.setTitleColor(Constants.Colors.textColorType1.color, for: .normal)
         
-        cell?.textField.text = cell?.userInfoLable.text
-        
+//        cell?.textField.text = cell?.userInfoLable.text
+        cell?.textField.setupAutolocalization(withKey: cell?.userInfoLable.text, keyPath: "text")
      
         
-        if userEdit[indexPath.row] != "Giới tính" {
+        if userEdit[indexPath.row] != Constants.Strings.gender{
             cell?.genderButtonForMan.isHidden = true
             cell?.genderButtonForWomen.isHidden = true
         }else {
@@ -238,7 +239,7 @@ extension UpdateUserInfoViewController: UITableViewDelegate, UITableViewDataSour
             cell?.trailingButton.isHidden = true
             cell?.xImage.isHidden = true
             
-            if userInfos[1] == "Nữ" {
+            if userInfos[1] == Constants.Strings.women {
                 cell?.genderButtonForMan.setImage(UIImage(named: "Group 126"), for: .normal)
                 cell?.genderButtonForWomen.setImage(UIImage(named: "Group 125"), for: .normal)
             }else {

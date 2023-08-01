@@ -49,9 +49,9 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0kb-zh-TAA">
-                        <rect key="frame" x="107" y="2" width="100" height="40"/>
+                        <rect key="frame" x="115" y="2" width="90" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="Qtc-Wg-A2Q"/>
+                            <constraint firstAttribute="width" constant="90" id="Qtc-Wg-A2Q"/>
                             <constraint firstAttribute="height" constant="40" id="wCk-JX-cRt"/>
                         </constraints>
                         <state key="normal" title="Button"/>
@@ -61,10 +61,10 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aN2-nB-nG1">
-                        <rect key="frame" x="207" y="2" width="100" height="40"/>
+                        <rect key="frame" x="205" y="2" width="130" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="CeL-EM-in9"/>
-                            <constraint firstAttribute="width" constant="100" id="xTK-Rt-Ufy"/>
+                            <constraint firstAttribute="width" constant="130" id="xTK-Rt-Ufy"/>
                         </constraints>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" title="Nữ"/>
@@ -91,7 +91,7 @@
                     <constraint firstItem="54O-Op-0gp" firstAttribute="leading" secondItem="94k-7f-GOQ" secondAttribute="trailing" id="dON-pQ-Gsc"/>
                     <constraint firstItem="TV4-mz-QrA" firstAttribute="leading" secondItem="54O-Op-0gp" secondAttribute="trailing" constant="8" symbolic="YES" id="eAP-bv-GUm"/>
                     <constraint firstItem="0kb-zh-TAA" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="fxN-sW-W6X"/>
-                    <constraint firstItem="0kb-zh-TAA" firstAttribute="leading" secondItem="dlc-16-tou" secondAttribute="trailing" constant="-23" id="i1K-IW-gHr"/>
+                    <constraint firstItem="0kb-zh-TAA" firstAttribute="leading" secondItem="dlc-16-tou" secondAttribute="trailing" constant="-15" id="i1K-IW-gHr"/>
                     <constraint firstItem="XBm-YI-wEb" firstAttribute="trailing" secondItem="94k-7f-GOQ" secondAttribute="trailing" id="ieP-Gv-Fja"/>
                     <constraint firstAttribute="bottom" secondItem="94k-7f-GOQ" secondAttribute="bottom" id="jd9-RC-hqc"/>
                     <constraint firstItem="XBm-YI-wEb" firstAttribute="top" secondItem="94k-7f-GOQ" secondAttribute="top" id="owl-29-vOH"/>

@@ -64,6 +64,9 @@ class UpDateUserInfoCell: UITableViewCell {
         textField.textColor = Constants.Colors.textColorType1.color
         textField.borderStyle = .none
         
+        genderButtonForMan.setupAutolocalization(withKey: Constants.Strings.man, keyPath: "autolocalizationTitle")
+        genderButtonForWomen.setupAutolocalization(withKey: Constants.Strings.women, keyPath: "autolocalizationTitle")
+        
        
         
     }

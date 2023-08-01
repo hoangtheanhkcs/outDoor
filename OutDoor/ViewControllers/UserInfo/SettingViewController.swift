@@ -19,19 +19,25 @@ extension SettingViewControllerDelegate {
 }
 
 class SettingViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
-    
+    private var languague:String? {
+        return  UserDefaults.standard.value(forKey: "language") as? String
+    }
     private let spinner = JGProgressHUD(style: .dark)
-    var sections: [SectionSetting] = []
+    var sections :[String] {
+        return [Constants.Strings.settingVCInfomation, Constants.Strings.setting]
+    }
     var settings: [[Setting]] = []
     var user: OutDoorUser?
     weak var delegate : SettingViewControllerDelegate?
     var typeOfImage = ""
+    
 
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = Constants.Strings.setting
-        sections = SettingData.shared.getAllSectionSetting()
+//        title = Constants.Strings.setting
+        self.setupAutolocalization(withKey: Constants.Strings.setting, keyPath: "title")
+//        sections = SettingData.shared.getAllSectionSetting()
         settings = SettingData.shared.getAllSetting()
         
         tableView.delegate = self
@@ -75,30 +81,37 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let section = sections[indexPath.section].title
+        let section = sections[indexPath.section]
        
-        if section == sections[0].title {
+        if section == sections[0] {
 
             tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            cell.textLabel?.text = settings[indexPath.section][indexPath.row].title
+//            cell.textLabel?.text = settings[indexPath.section][indexPath.row].title
+            let title = settings[indexPath.section][indexPath.row].title
+            cell.textLabel?.setupAutolocalization(withKey: title, keyPath: "text")
             print(settings[indexPath.section][indexPath.row].title)
             cell.textLabel?.font = UIFont(name: "SanFranciscoText-Light", size: 17)
 
             return cell
         }
-        if section == sections[1].title  {
+        if section == sections[1]  {
             
             let nib = UINib(nibName: "SettingCell", bundle: nil)
 
             tableView.register(nib.self, forCellReuseIdentifier: "SettingCell")
            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath) as! SettingCell
-            cell.settingLable.text = settings[indexPath.section][indexPath.row].title
+            let title = settings[indexPath.section][indexPath.row].title
+            cell.settingLable.setupAutolocalization(withKey: title, keyPath: "text")
+            
+            
             cell.settingLable.font = UIFont(name: "SanFranciscoText-Light", size: 17)
-            cell.firstButton.setTitle("  Vie", for: .normal)
+
+            cell.firstButton.setupAutolocalization(withKey: "   Vie", keyPath: "autolocalizationTitle")
             cell.firstButton.setTitleColor(Constants.Colors.textColorType1.color, for: .normal)
             
-            cell.secondButton.setTitle("  Eng", for: .normal)
+
+            cell.secondButton.setupAutolocalization(withKey: "   Eng", keyPath: "autolocalizationTitle")
             cell.secondButton.setTitleColor(Constants.Colors.textColorType1.color, for: .normal)
             if settings[indexPath.section][indexPath.row].button != nil {
                 cell.firstButton.isHidden = false
@@ -121,7 +134,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             let userInforSettingTitle = settings[indexPath.section][indexPath.row].title
-            if userInforSettingTitle == "Đăng xuất" {
+            if userInforSettingTitle == Constants.Strings.loggout {
                 cell.settingLable.textColor = Constants.Colors.textColorType4.color
             }
             let image = UIImage(named: settings[indexPath.section][indexPath.row].image!)
@@ -133,17 +146,22 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        return sections[section].title
-    }
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header = view as! UITableViewHeaderFooterView
-            
-        header.textLabel!.textColor = Constants.Colors.textColorType2.color
-            
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: 40)))
+        view.backgroundColor = Constants.Colors.textColorType8.color
+        let lable = UILabel(frame: CGRect(x: 20, y: 0, width: 200, height: 40))
+        lable.font = Constants.Fonts.SFBold17
+        lable.textColor = Constants.Colors.textColorType1.color
+        let sectionTitle = sections[section]
+        lable.setupAutolocalization(withKey: sectionTitle, keyPath: "text")
+        view.addSubview(lable)
+        return view
     }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+            return 40
+        }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -155,15 +173,16 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             navigationController?.pushViewController(vc!, animated: true)
         }
         
-        if userInforSettingTitle == "Cập nhật ảnh đại diện" {
+        if userInforSettingTitle == Constants.Strings.updateAvatar {
             
            
-            
-            let actionSheet = UIAlertController(title: "Thay ảnh đại diện", message: "", preferredStyle: .actionSheet)
+            let title = Constants.Strings.changeAvatar.addLocalization(str: languague ?? "vi")
+            let actionSheet = UIAlertController(title: title, message: "", preferredStyle: .actionSheet)
             actionSheet.setTitle(font: .boldSystemFont(ofSize: 17), color: Constants.Colors.textColorType3.color)
             actionSheet.setTint(color: Constants.Colors.textColorType7.color)
             
-            let takeNewPhoto = UIAlertAction(title: "Chụp ảnh mới", style: .default) {[weak self] _ in
+            let takeNPT = Constants.Strings.alertChangeAvatarTakeNewPhoto.addLocalization(str: languague ?? "vi")
+            let takeNewPhoto = UIAlertAction(title: takeNPT, style: .default) {[weak self] _ in
                 guard let self = self else {return}
                 let picker = UIImagePickerController()
                 picker.sourceType = .camera
@@ -173,7 +192,9 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 self.present(picker, animated: true)
             }
             
-            let getPhotoInYourDevice = UIAlertAction(title: "Chọn ảnh từ thiết bị", style: .default) {[weak self] _ in
+            
+            let choosePT = Constants.Strings.alertChangeAvatarChoosePhotoFromLibrary.addLocalization(str: languague ?? "vi")
+            let getPhotoInYourDevice = UIAlertAction(title: choosePT, style: .default) {[weak self] _ in
                 guard let self = self else {return}
                 print("Chọn ảnh từ thiết bị")
                 let picker = UIImagePickerController()
@@ -184,7 +205,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 self.present(picker, animated: true)
             }
             
-            let cancle = UIAlertAction(title: "Hủy", style: .cancel)
+            let cancelTitle = Constants.Strings.cancel.addLocalization(str: languague ?? "vi")
+            let cancle = UIAlertAction(title: cancelTitle, style: .cancel)
             
             actionSheet.addAction(takeNewPhoto)
             actionSheet.addAction(getPhotoInYourDevice)
@@ -194,14 +216,15 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             present(actionSheet, animated: true)
         }
         
-        if userInforSettingTitle == "Cập nhật ảnh bìa" {
-            let actionSheet = UIAlertController(title: "Thay ảnh bìa", message: "", preferredStyle: .actionSheet)
+        if userInforSettingTitle == Constants.Strings.updateBackground {
+            let titleSheet = Constants.Strings.changeBackground.addLocalization(str: languague ?? "vi")
+            let actionSheet = UIAlertController(title: titleSheet, message: "", preferredStyle: .actionSheet)
             actionSheet.setTitle(font: .boldSystemFont(ofSize: 17), color: Constants.Colors.textColorType3.color)
             actionSheet.setTint(color: Constants.Colors.textColorType7.color)
             
-            let takeNewPhoto = UIAlertAction(title: "Chụp ảnh mới", style: .default) { [weak self] _ in
+            let takeNPT = Constants.Strings.alertChangeAvatarTakeNewPhoto.addLocalization(str: languague ?? "vi")
+            let takeNewPhoto = UIAlertAction(title: takeNPT, style: .default) { [weak self] _ in
                 guard let self = self else {return}
-                print("chụp ảnh mới")
                 let picker = UIImagePickerController()
                 picker.sourceType = .camera
                 picker.delegate = self
@@ -209,9 +232,10 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 self.typeOfImage = "background"
                 self.present(picker, animated: true)
             }
-            let getPhotoInYourDevice = UIAlertAction(title: "Chọn ảnh từ thiết bị", style: .default) {[weak self] _ in
+            
+            let choosePT = Constants.Strings.alertChangeAvatarChoosePhotoFromLibrary.addLocalization(str: languague ?? "vi")
+            let getPhotoInYourDevice = UIAlertAction(title: choosePT, style: .default) {[weak self] _ in
                 guard let self = self else {return}
-                print("Chọn ảnh từ thiết bị")
                 let picker = UIImagePickerController()
                 picker.sourceType = .photoLibrary
                 picker.delegate = self
@@ -220,7 +244,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 self.present(picker, animated: true)
             }
             
-            let cancle = UIAlertAction(title: "Hủy", style: .cancel)
+            let cancelTitle = Constants.Strings.cancel.addLocalization(str: languague ?? "vi")
+            let cancle = UIAlertAction(title: cancelTitle, style: .cancel)
             
             actionSheet.addAction(takeNewPhoto)
             actionSheet.addAction(getPhotoInYourDevice)
@@ -229,9 +254,10 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             present(actionSheet, animated: true)
         }
         
-        if userInforSettingTitle == "Cập nhật giới thiệu bản thân" {
+        if userInforSettingTitle == Constants.Strings.updateDescription {
             let vc = storyboard?.instantiateViewController(withIdentifier: "ChangeUserDescriptionViewController") as? ChangeUserDescriptionViewController
-            self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Đóng", style: .done, target: nil, action: nil)
+            let closeVC = Constants.Strings.closeVC.addLocalization(str: languague ?? "vi")
+            self.navigationItem.backBarButtonItem = UIBarButtonItem(title: closeVC, style: .done, target: nil, action: nil)
             navigationController?.pushViewController(vc!, animated: true)
         }
         
@@ -249,52 +275,43 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
 extension SettingViewController {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
-        guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage, let data = selectedImage.pngData(), let fileName = user?.profilePictureFileName  else {
+        guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage, let data = selectedImage.pngData() else {
             return
         }
         
         spinner.show(in: view)
+        
+        var fileName = ""
+        if self.typeOfImage == "avatar" {
+            fileName = user?.profilePictureFileName ?? ""
+        }else if self.typeOfImage == "background" {
+            fileName = user?.profilePictureBackgoundFileName ?? ""
+        }
         StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName) {[weak self] (result: Result<String, Error>) in
             guard let self = self else {return}
             switch result {
             case .success(let downloadUrl):
-                if self.typeOfImage == "avatar" {
-                    DatabaseManager.shared.updateUserImageAvatar(user: self.user, urlUpdate: downloadUrl) { succsess in
-                        
-                        switch succsess {
-                        case true:
-                            DispatchQueue.main.async {
-                                    self.delegate?.updateAvatar(avatarImage: downloadUrl)
-                                self.spinner.dismiss()
-                                self.navigationController?.popViewController(animated: true)
-                            }
-                            
-                        case false:
-                            print("faile to upload new photo to database RealmTime")
-                        }
-                    }
-                }else if self.typeOfImage == "background" {
-                    DatabaseManager.shared.updateUserImageBackground(urlUpdate: downloadUrl) { succsess in
-                        
-                        switch succsess {
-                        case true:
-                            DispatchQueue.main.async {
-                                    self.delegate?.updateBackground(backgroundImage: downloadUrl)
-                                self.spinner.dismiss()
-                                self.navigationController?.popViewController(animated: true)
-                            }
-                            
-                        case false:
-                            print("faile to upload new photo to database RealmTime")
-                        }
-                    }
+                DatabaseManager.shared.updateUserImageAvatar(user: self.user, urlUpdate: downloadUrl) { succsess in
                     
-                    
+                    switch succsess {
+                    case true:
+                        DispatchQueue.main.async {
+                            if self.typeOfImage == "avatar" {
+                                self.delegate?.updateAvatar(avatarImage: downloadUrl)
+                            }else if self.typeOfImage == "background" {
+                                self.delegate?.updateBackground(backgroundImage: downloadUrl)
+                            }
+                            self.spinner.dismiss()
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                        
+                    case false:
+                        print("faile to upload new photo to database RealmTime")
+                    }
                 }
-                case .failure(let error):
-                    print("StorageManager error: \(error)")
-                }
-            
+            case .failure(let error):
+                print("StorageManager error: \(error)")
+            }
         }
         
     }
@@ -309,8 +326,11 @@ extension SettingViewController {
 
 
 class SettingData {
+    
+    
     static let shared = SettingData()
     
+   
     func getAllSectionSetting() -> [SectionSetting] {
         let section = [SectionSetting(title: Constants.Strings.settingVCInfomation, identifier: 0), SectionSetting(title: Constants.Strings.setting, identifier: 1)]
         

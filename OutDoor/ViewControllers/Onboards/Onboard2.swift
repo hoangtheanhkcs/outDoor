@@ -15,6 +15,10 @@ class Onboard2: UIViewController {
     
     @IBOutlet weak var textView: UITextView!
 
+    private var languague:String? {
+        return  UserDefaults.standard.value(forKey: "language") as? String
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubviews()
@@ -24,9 +28,9 @@ class Onboard2: UIViewController {
 
     func setupSubviews() {
         imageView.image = UIImage(named: Constants.Images.onboard2Image)
-        lable.text = Constants.Strings.onboard2Lable
+        lable.setupAutolocalization(withKey: Constants.Strings.onboard2Lable, keyPath: "text")
         lable.font = Constants.Fonts.SFBold34
-        textView.settingTextView(text: Constants.Strings.onboard2TextView, textColor: Constants.Colors.textColorType6.color, font: Constants.Fonts.SFReguler17, lineSpacing: 8)
+        textView.settingTextView(text: Constants.Strings.onboard2TextView, textColor: Constants.Colors.textColorType6.color, font: Constants.Fonts.SFReguler17, lineSpacing: 8, str: languague)
     }
 
 }

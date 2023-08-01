@@ -32,3 +32,12 @@ extension String {
         return lastComponent
     }
 }
+
+
+extension String {
+    func addLocalization(str:String) -> String {
+        let path = Bundle.main.path(forResource: str, ofType: "lproj")!
+        let bundle = Bundle(path: path)!
+        return NSLocalizedString(self, tableName: nil, bundle: bundle, value: "", comment: "")
+    }
+}

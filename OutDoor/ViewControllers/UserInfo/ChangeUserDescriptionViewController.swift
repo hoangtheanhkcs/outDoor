@@ -19,9 +19,14 @@ class ChangeUserDescriptionViewController: UIViewController {
     @IBOutlet weak var textCountNumber: UILabel!
     @IBOutlet weak var updateButton: UIButton!
     
+    private var languague:String? {
+        return  UserDefaults.standard.value(forKey: "language") as? String
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Chỉnh sửa giới thiệu"
+//        title = "Chỉnh sửa giới thiệu"
+        self.setupAutolocalization(withKey: Constants.Strings.changeDescription, keyPath: "title")
         textView.becomeFirstResponder()
         textView.delegate = self
        
@@ -37,10 +42,10 @@ class ChangeUserDescriptionViewController: UIViewController {
        
         updateButton.layer.cornerRadius = 21
         updateButton.backgroundColor = Constants.Colors.buttonBackgroundColor.color
-        updateButton.setTitle("Cập nhật", for: .normal)
+        updateButton.setupAutolocalization(withKey: Constants.Strings.update, keyPath: "autolocalizationTitle")
         updateButton.setTitleColor(.white, for: .normal)
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Lưu", image: nil, target: self, action: #selector(saveDidTap))
+        let saveTitle = Constants.Strings.save.addLocalization(str: languague ?? "vi")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: saveTitle, image: nil, target: self, action: #selector(saveDidTap))
         
         let yourBackImage = UIImage(named: "Group 40")
         self.navigationController?.navigationBar.backIndicatorImage = yourBackImage
@@ -68,7 +73,8 @@ class ChangeUserDescriptionViewController: UIViewController {
         let backImage = UIImage()
         self.navigationController?.navigationBar.backIndicatorImage = backImage
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Đóng", style: .done, target: nil, action: nil)
+        let closeVC = Constants.Strings.closeVC.addLocalization(str: languague ?? "vi")
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: closeVC, style: .done, target: nil, action: nil)
         navigationController?.navigationBar.tintColor = .white
        
         
@@ -92,7 +98,8 @@ class ChangeUserDescriptionViewController: UIViewController {
         }else {
             description = userInfo["description"] as? String ?? ""
         }
-        textView.text = description
+//        textView.text = description
+        textView.setupAutolocalization(withKey: description, keyPath: "text")
     }
     
 

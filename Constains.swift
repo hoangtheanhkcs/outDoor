@@ -38,57 +38,76 @@ enum Constants {
    
     enum Strings {
         // NSLocalizedString("", comment: "")
-        static let loginHello = NSLocalizedString("Xin chào!", comment: "")
-        static let loginWelcome = NSLocalizedString("     Chào mừng bạn đến với Outdoor ứng dụng tìm kiếm và chia sẻ kinh nghiệm dã ngoại cho gia đình, khuyến khích trẻ khám phá thiên nhiên.", comment: "")
-        static let logginFacebook = NSLocalizedString("    Đăng nhập với Facebook", comment: "")
-        static let logginGoogle = NSLocalizedString("    Đăng nhập với Google", comment: "")
+        static let loginHello = "Xin chào!"
+        static let loginWelcome = "Chào mừng bạn đến với Outdoor ứng dụng tìm kiếm và chia sẻ kinh nghiệm dã ngoại cho gia đình, khuyến khích trẻ khám phá thiên nhiên."
+        static let logginFacebook = "Đăng nhập với Facebook"
+        static let logginGoogle = "    Đăng nhập với Google"
         
-        static let onboard1Lable = NSLocalizedString("Trải nghiệm", comment: "")
-        static let onboard1TextView = NSLocalizedString("Hãy cùng cho trẻ ra ngoài trải nghiệm Thiên nhiên , làm quen với các kỹ năng mềm và nâng cao sức khỏe ", comment: "")
-        static let onboard2Lable = NSLocalizedString("Chia sẻ", comment: "")
-        static let onboard2TextView = NSLocalizedString("Bạn có thể đăng những bài review về địa điểm vui chơi ngoài trời mà mình đã đến bằng Hình Ảnh và Văn Bản hay kể cả là Dụng cụ mình đã sử dụng. ", comment: "")
-        static let onboard3Lable = NSLocalizedString("Tìm kiếm", comment: "")
-        static let onboard3TextView = NSLocalizedString("Bạn có thể search những địa điểm vui chơi ngoài thiên nhiên gần mình hoặc khắp nước Việt nam xinh đẹp này ", comment: "")
-        static let onboard4Lable = NSLocalizedString("Lưu giữ", comment: "")
-        static let onboard4TextView = NSLocalizedString("Bạn có thể Lưu bài viết , giao lưu kết bạn bằng cách bấm Follow các Phụ huynh khác cũng như Thả tim hoặc Comment bài viết ", comment: "")
-        static let onboard5Lable = NSLocalizedString("Let’s GO!", comment: "")
-        static let onboard5TextView = NSLocalizedString("Với mong muốn con phát triển toàn diện về Thể Chất và Tinh thần - các bậc phụ huynh hãy cùng chúng tôi chia sẻ và trải nghiệm", comment: "")
+        static let onboard1Lable = "Trải nghiệm"
+        static let onboard1TextView = "Hãy cùng cho trẻ ra ngoài trải nghiệm Thiên nhiên , làm quen với các kỹ năng mềm và nâng cao sức khỏe"
+        static let onboard2Lable = "Chia sẻ"
+        static let onboard2TextView = "Bạn có thể đăng những bài review về địa điểm vui chơi ngoài trời mà mình đã đến bằng Hình Ảnh và Văn Bản hay kể cả là Dụng cụ mình đã sử dụng."
+        static let onboard3Lable = "Tìm kiếm"
+        static let onboard3TextView = "Bạn có thể search những địa điểm vui chơi ngoài thiên nhiên gần mình hoặc khắp nước Việt nam xinh đẹp này"
+        static let onboard4Lable = "Lưu giữ"
+        static let onboard4TextView = "Bạn có thể Lưu bài viết , giao lưu kết bạn bằng cách bấm Follow các Phụ huynh khác cũng như Thả tim hoặc Comment bài viết"
+        static let onboard5Lable = "Let’s GO!"
+        static let onboard5TextView = "Với mong muốn con phát triển toàn diện về Thể Chất và Tinh thần - các bậc phụ huynh hãy cùng chúng tôi chia sẻ và trải nghiệm"
         
-        static let welcomeVCYellowCartLable = NSLocalizedString("Cùng con khám phá", comment: "")
-        static let welcomeVCYellowCartText = NSLocalizedString("Tìm kiếm các điểm vui chơi tăng sự phát triển cho con", comment: "")
-        static let welcomeVCRedCartLable = NSLocalizedString("Chia sẻ", comment: "")
-        static let welcomeVCRedCartText = NSLocalizedString("khoảnh khắc bên nhau", comment: "")
-        static let welcomeVCGreenCartLable = NSLocalizedString("Giao lưu", comment: "")
-        static let welcomeVCGreenCartText = NSLocalizedString("kinh nghiệm dã ngoại", comment: "")
+        static let welcomeVCYellowCartLable = "Cùng con khám phá"
+        static let welcomeVCYellowCartText = "Tìm kiếm các điểm vui chơi tăng sự phát triển cho con"
+        static let welcomeVCRedCartLable = "Chia sẻ"
+        static let welcomeVCRedCartText = "khoảnh khắc bên nhau"
+        static let welcomeVCGreenCartLable = "Giao lưu"
+        static let welcomeVCGreenCartText = "kinh nghiệm dã ngoại"
         
-        static let welcomeVCButton = NSLocalizedString("Khám phá", comment: "")
+        static let welcomeVCButton = "Khám phá"
         
-        static let homeContainerTopbarTitleSpotlight = NSLocalizedString("Tiêu điểm", comment: "")
-        static let homeContainerTopbarTitleBreakingNews = NSLocalizedString("Tin mới", comment: "")
-        static let homeContainerTopbarTitleFollowing = NSLocalizedString("Theo dõi", comment: "")
+        static let homeContainerTopbarTitleSpotlight = "Tiêu điểm"
+        static let homeContainerTopbarTitleBreakingNews = "Tin mới"
+        static let homeContainerTopbarTitleFollowing = "Theo dõi"
         
        
-        static let settingVCInfomation = NSLocalizedString("Thông tin", comment: "")
-        static let updateAvatar = NSLocalizedString("Cập nhật ảnh đại diện", comment: "")
-        static let updateBackground = NSLocalizedString("Cập nhật ảnh bìa", comment: "")
-        static let updateDescription = NSLocalizedString("Cập nhật giới thiệu bản thân", comment: "")
-        static let setting = NSLocalizedString("Cài đặt", comment: "")
-        static let receiveNotification = NSLocalizedString("Nhận thông báo", comment: "")
-        static let policy = NSLocalizedString("Chính sách", comment: "")
-        static let provision = NSLocalizedString("Điều khoản", comment: "")
-        static let reports = NSLocalizedString("Báo cáo vi phạm", comment: "")
-        static let language = NSLocalizedString("Ngôn ngữ", comment: "")
-        static let instruct = NSLocalizedString("Hướng dẫn", comment: "")
-        static let loggout = NSLocalizedString("Đăng xuất", comment: "")
+        static let settingVCInfomation = "Thông tin"
+        static let updateAvatar = "Cập nhật ảnh đại diện"
+        static let updateBackground = "Cập nhật ảnh bìa"
+        static let updateDescription = "Cập nhật giới thiệu bản thân"
+        static let setting = "Cài đặt"
+        static let receiveNotification = "Nhận thông báo"
+        static let policy = "Chính sách"
+        static let provision = "Điều khoản"
+        static let reports = "Báo cáo vi phạm"
+        static let language = "Ngôn ngữ"
+        static let instruct = "Hướng dẫn"
+        static let loggout = "Đăng xuất"
         
-        static let userInfoDetailGender = NSLocalizedString("Giới tính", comment: "")
-        static let userInfoDetailBirth = NSLocalizedString("Ngày sinh", comment: "")
-        static let userInfoDetailPhoneNumber = NSLocalizedString("Điện thoại", comment: "")
+        static let userInfoDetailGender = "Giới tính"
+        static let userInfoDetailBirth = "Ngày sinh"
+        static let userInfoDetailPhoneNumber = "Điện thoại"
         
-        static let titleAlertChangeAvatar = NSLocalizedString("Ảnh đại diện", comment: "")
-        static let previewAvatar = NSLocalizedString("Xem ảnh đại diện", comment: "")
-        static let alertChangeAvatarChoosePhotoFromLibrary = NSLocalizedString("Chọn ảnh từ thiết bị", comment: "")
-        static let alertChangeAvatarTakeNewPhoto = NSLocalizedString("Chụp ảnh mới", comment: "")
+        static let titleAlertChangeAvatar = "Ảnh đại diện"
+        static let previewAvatar = "Xem ảnh đại diện"
+        static let alertChangeAvatarChoosePhotoFromLibrary = "Chọn ảnh từ thiết bị"
+        static let alertChangeAvatarTakeNewPhoto = "Chụp ảnh mới"
+        static let changeAvatar = "Thay ảnh đại diện"
+        static let changeBackground = "Thay ảnh bìa"
+        
+        static let yourPost = "Bài viết của bạn"
+        static let savedPost = "Bài viết đã lưu"
+        
+        static let cancel = "Hủy"
+        static let changeUserInfo = "Đổi thông tin"
+        static let name = "Tên"
+        static let gender = "Giới tính"
+        static let birth = "Ngày sinh"
+        static let phone = "Điện thoại"
+        static let update = "Cập nhật"
+        static let man = "Nam"
+        static let women = "Nữ"
+        
+        static let changeDescription = "Chỉnh sửa giới thiệu"
+        static let closeVC = "Đóng"
+        static let save = "Lưu"
         
     }
     enum Fonts {

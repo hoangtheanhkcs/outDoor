@@ -42,7 +42,9 @@ class WelcomeViewController: UIViewController {
     @IBOutlet weak var greenCartButton: UIButton!
     
     
-    
+    private var languague:String? {
+        return  UserDefaults.standard.value(forKey: "language") as? String
+    }
     
     
     
@@ -60,13 +62,15 @@ class WelcomeViewController: UIViewController {
         redCartImageView.image = UIImage(named: Constants.Images.welcomeVCRedCart)
         greenCartImageView.image = UIImage(named: Constants.Images.welcomeVCGreenCart)
         
-        yellowCartLable.text = Constants.Strings.welcomeVCYellowCartLable
+//        yellowCartLable.text = Constants.Strings.welcomeVCYellowCartLable
+        yellowCartLable.setupAutolocalization(withKey: Constants.Strings.welcomeVCYellowCartLable, keyPath: "text")
         yellowCartLable.font = Constants.Fonts.SFBold24
         yellowCartLable.textColor = Constants.Colors.textColorType5.color
         
-        yelloCartContentLable.settingLableText(text: Constants.Strings.welcomeVCYellowCartText, textColor: Constants.Colors.textColorType5.color, font: Constants.Fonts.SFReguler15, lineSpacing: 2)
+        yelloCartContentLable.settingLableText(text: Constants.Strings.welcomeVCYellowCartText, textColor: Constants.Colors.textColorType5.color, font: Constants.Fonts.SFReguler15, lineSpacing: 2, str: languague)
         
-        yellowCartButton.setTitle(Constants.Strings.welcomeVCButton, for: .normal)
+//        yellowCartButton.setTitle(Constants.Strings.welcomeVCButton, for: .normal)
+        yellowCartButton.setupAutolocalization(withKey: Constants.Strings.welcomeVCButton, keyPath: "autolocalizationTitle")
         yellowCartButton.setTitleColor(Constants.Colors.textColorType1.color, for: .normal)
         yellowCartButton.changeButtonFont(Constants.Fonts.SFLight16)
         yellowCartButton.backgroundColor = Constants.Colors.textColorType5.color
@@ -74,12 +78,13 @@ class WelcomeViewController: UIViewController {
         yellowCartButton.addTarget(self, action: #selector(didTapCartButton), for: .touchUpInside)
         
         
-        redCartLable.text = Constants.Strings.welcomeVCRedCartLable
+//        redCartLable.text = Constants.Strings.welcomeVCRedCartLable
+        redCartLable.setupAutolocalization(withKey: Constants.Strings.welcomeVCRedCartLable, keyPath: "text")
         redCartLable.textColor = Constants.Colors.textColorType5.color
         redCartLable.font = Constants.Fonts.SFBold20
         
         
-        redCartContent.settingLableText(text: Constants.Strings.welcomeVCRedCartText, textColor: Constants.Colors.textColorType5.color, font: Constants.Fonts.SFReguler15, lineSpacing: 2)
+        redCartContent.settingLableText(text: Constants.Strings.welcomeVCRedCartText, textColor: Constants.Colors.textColorType5.color, font: Constants.Fonts.SFReguler15, lineSpacing: 2, str: languague)
         
         redCartButton.setTitle(Constants.Strings.welcomeVCButton, for: .normal)
         redCartButton.setTitleColor(Constants.Colors.textColorType1.color, for: .normal)
@@ -87,12 +92,12 @@ class WelcomeViewController: UIViewController {
         redCartButton.backgroundColor = Constants.Colors.textColorType5.color
         redCartButton.layer.cornerRadius = 12.5
         
-        greenCartLable.text = Constants.Strings.welcomeVCGreenCartLable
+        greenCartLable.setupAutolocalization(withKey: Constants.Strings.welcomeVCGreenCartLable, keyPath: "text")
         greenCartLable.textColor = Constants.Colors.textColorType5.color
         greenCartLable.font = Constants.Fonts.SFBold20
         
         
-        greenCartContent.settingLableText(text: Constants.Strings.welcomeVCGreenCartText, textColor: Constants.Colors.textColorType5.color, font: Constants.Fonts.SFReguler15, lineSpacing: 2)
+        greenCartContent.settingLableText(text: Constants.Strings.welcomeVCGreenCartText, textColor: Constants.Colors.textColorType5.color, font: Constants.Fonts.SFReguler15, lineSpacing: 2, str: languague)
         
         greenCartButton.setTitle(Constants.Strings.welcomeVCButton, for: .normal)
         greenCartButton.setTitleColor(Constants.Colors.textColorType1.color, for: .normal)

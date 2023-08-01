@@ -55,6 +55,10 @@ class LoginViewController: UIViewController {
     private let spinner = JGProgressHUD(style: .dark)
     
     
+    private var languague:String? {
+        return  UserDefaults.standard.value(forKey: "language") as? String
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -72,11 +76,11 @@ class LoginViewController: UIViewController {
         logginLogoImageView.contentMode = .scaleToFill
         logginImageView.image = UIImage(named: Constants.Images.loginImage)
         logginImageView.contentMode = .scaleToFill
-        helloLable.text = Constants.Strings.loginHello
+        helloLable.setupAutolocalization(withKey: Constants.Strings.loginHello, keyPath: "text")
         helloLable.font = Constants.Fonts.SFBold34
         helloLable.textColor = Constants.Colors.textColorType1.color
         
-        welcomeTextView.settingTextView(text: Constants.Strings.loginWelcome, textColor: Constants.Colors.textColorType6.color, font: Constants.Fonts.SFLight17, lineSpacing: 8)
+        welcomeTextView.settingTextView(text: Constants.Strings.loginWelcome, textColor: Constants.Colors.textColorType6.color, font: Constants.Fonts.SFLight17, lineSpacing: 8, str: languague)
         
         
         logginFacebookButton.isHidden = true
@@ -104,7 +108,7 @@ class LoginViewController: UIViewController {
         insertView.frame.origin.y = fbLoginButton.frame.origin.y
         view.addSubview(insertView)
         
-        logginGoogleButton.setTitle(Constants.Strings.logginGoogle, for: .normal)
+        logginGoogleButton.setupAutolocalization(withKey: Constants.Strings.logginGoogle, keyPath: "autolocalizationTitle")
         logginGoogleButton.setTitleColor(Constants.Colors.textColorType1.color, for: .normal)
         logginGoogleButton.titleLabel?.font = Constants.Fonts.SFReguler16
         logginGoogleButton.layer.cornerRadius  = 26
@@ -227,8 +231,12 @@ extension LoginViewController: LoginButtonDelegate {
                 if !exist {
                     let user = OutDoorUser(firstName: firstName, lastName: lastName, emailAddress: id)
                     DatabaseManager.shared.addNewUser(user: user) { success in
-                        if success {
-                            print("34343434343434343434343")
+                        switch success {
+                            
+                        case true:
+                            print("success to add new user")
+                        case false:
+                            print("faile to add new user")
                         }
                     }
                 }

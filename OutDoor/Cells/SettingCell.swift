@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DPLocalization
 
 class SettingCell: UITableViewCell {
     
@@ -25,7 +26,16 @@ class SettingCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupSubviews()
+        let language = UserDefaults.standard.value(forKey: "language") as? String
+        if language == "vi" {
+            print("11111111111111111111111")
+            firstButtonAction(1)
+        }else if language == "en"{
+            print("22222222222222222222")
+            secondButton(1)
+        }
+        
+       
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -34,17 +44,13 @@ class SettingCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setupSubviews() {
-       
-            firstButton.setImage(UIImage(named: "ic_disc_red"), for: .normal)
-            secondButton.setImage(UIImage(named: "ic_circle_gray"), for: .normal)
-       
-    }
+   
     
     @IBAction func firstButtonAction(_ sender: Any) {
         firstButton.setImage(UIImage(named: "ic_disc_red"), for: .normal)
         secondButton.setImage(UIImage(named: "ic_circle_gray"), for: .normal)
-        print("1111111111")
+        dp_set_current_language("vi")
+        UserDefaults.standard.set("vi", forKey: "language")
     }
     
   
@@ -52,8 +58,10 @@ class SettingCell: UITableViewCell {
         secondButton.setImage(UIImage(named: "ic_disc_red"), for: .normal)
         firstButton.setImage(UIImage(named: "ic_circle_gray"), for: .normal)
         
-        print("22222222")
+        dp_set_current_language("en")
+        UserDefaults.standard.set("en", forKey: "language")
     }
+    
     
     
     

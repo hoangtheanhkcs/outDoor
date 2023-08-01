@@ -1,0 +1,76 @@
+/* 
+  Localizable.strings
+  OutDoor
+
+  Created by hoang the anh on 31/07/2023.
+  
+*/
+"Xin chào!" = "Xin chào!";
+"     Chào mừng bạn đến với Outdoor ứng dụng tìm kiếm và chia sẻ kinh nghiệm dã ngoại cho gia đình, khuyến khích trẻ khám phá thiên nhiên." = "     Chào mừng bạn đến với Outdoor ứng dụng tìm kiếm và chia sẻ kinh nghiệm dã ngoại cho gia đình, khuyến khích trẻ khám phá thiên nhiên.";
+"    Đăng nhập với Facebook" = "    Đăng nhập với Facebook";
+"    Đăng nhập với Google" = "    Đăng nhập với Google";
+
+"Trải nghiệm" = "Trải nghiệm";
+"Hãy cùng cho trẻ ra ngoài trải nghiệm Thiên nhiên , làm quen với các kỹ năng mềm và nâng cao sức khỏe" = "Hãy cùng cho trẻ ra ngoài trải nghiệm Thiên nhiên , làm quen với các kỹ năng mềm và nâng cao sức khỏe";
+"Chia sẻ" = "Chia sẻ";
+"Bạn có thể đăng những bài review về địa điểm vui chơi ngoài trời mà mình đã đến bằng Hình Ảnh và Văn Bản hay kể cả là Dụng cụ mình đã sử dụng." = "Bạn có thể đăng những bài review về địa điểm vui chơi ngoài trời mà mình đã đến bằng Hình Ảnh và Văn Bản hay kể cả là Dụng cụ mình đã sử dụng.";
+"Tìm kiếm" = "Tìm kiếm";
+"Bạn có thể search những địa điểm vui chơi ngoài thiên nhiên gần mình hoặc khắp nước Việt nam xinh đẹp này" = "Bạn có thể search những địa điểm vui chơi ngoài thiên nhiên gần mình hoặc khắp nước Việt nam xinh đẹp này";
+"Lưu giữ" = "Lưu giữ";
+"Bạn có thể Lưu bài viết , giao lưu kết bạn bằng cách bấm Follow các Phụ huynh khác cũng như Thả tim hoặc Comment bài viết" = "Bạn có thể Lưu bài viết , giao lưu kết bạn bằng cách bấm Follow các Phụ huynh khác cũng như Thả tim hoặc Comment bài viết";
+"Let’s GO!" = "Let’s GO!";
+"Với mong muốn con phát triển toàn diện về Thể Chất và Tinh thần - các bậc phụ huynh hãy cùng chúng tôi chia sẻ và trải nghiệm" = "Với mong muốn con phát triển toàn diện về Thể Chất và Tinh thần - các bậc phụ huynh hãy cùng chúng tôi chia sẻ và trải nghiệm";
+
+"Cùng con khám phá" = "Cùng con khám phá";
+"Tìm kiếm các điểm vui chơi tăng sự phát triển cho con" = "Tìm kiếm các điểm vui chơi tăng sự phát triển cho con";
+"Chia sẻ" = "Chia sẻ";
+"khoảnh khắc bên nhau" = "khoảnh khắc bên nhau";
+"Giao lưu" = "Giao lưu";
+"kinh nghiệm dã ngoại" = "kinh nghiệm dã ngoại";
+
+"Khám phá" = "Khám phá";
+
+"Tiêu điểm" = "Tiêu điểm";
+"Tin mới" = "Tin mới";
+"Theo dõi" = "Theo dõi";
+
+
+"Thông tin" = "Thông tin";
+"Cập nhật ảnh đại diện" = "Cập nhật ảnh đại diện";
+"Cập nhật ảnh bìa" = "Cập nhật ảnh bìa";
+"Cập nhật giới thiệu bản thân" = "Cập nhật giới thiệu bản thân";
+"Cài đặt" = "Cài đặt";
+"Nhận thông báo" = "Nhận thông báo";
+"Chính sách" = "Chính sách";
+"Điều khoản" = "Điều khoản";
+"Báo cáo vi phạm" = "Báo cáo vi phạm";
+"Ngôn ngữ" = "Ngôn ngữ";
+"Hướng dẫn" = "Hướng dẫn";
+"Đăng xuất" = "Đăng xuất";
+
+"Giới tính" = "Giới tính";
+"Ngày sinh" = "Ngày sinh";
+"Điện thoại" = "Điện thoại";
+
+"Ảnh đại diện" = "Ảnh đại diện";
+"Xem ảnh đại diện" = "Xem ảnh đại diện";
+"Chọn ảnh từ thiết bị" = "Chọn ảnh từ thiết bị";
+"Chụp ảnh mới" = "Chụp ảnh mới";
+"Thay ảnh đại diện" = "Thay ảnh đại diện";
+"Thay ảnh bìa" = "Thay ảnh bìa";
+
+"Bài viết của bạn" = "Bài viết của bạn";
+"Bài viết đã lưu" = "Bài viết đã lưu";
+
+"Hủy" = "Hủy";
+"Đổi thông tin" = "Đổi thông tin";
+"Tên" = "Tên";
+"Giới tính" = "Giới tính";
+"Ngày sinh" = "Ngày sinh";
+"Điện thoại" = "Điện thoại";
+"Cập nhật" = "Cập nhật";
+"Nam" = "Nam   ";
+"Nữ" = "Nữ   ";
+"Chỉnh sửa giới thiệu" = "Chỉnh sửa giới thiệu";
+"Đóng" = "Đóng";
+"Lưu" = "Lưu";

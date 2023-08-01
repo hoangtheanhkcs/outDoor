@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 import FBSDKCoreKit
 import GoogleSignIn
-
+import DPLocalization
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -27,7 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let config = GIDConfiguration(clientID: clientID)
             GIDSignIn.sharedInstance.configuration = config
         }
-        
+     
+        UserDefaults.standard.set("en", forKey: "language")
+        dp_set_current_language("en")
         return true
     }
 

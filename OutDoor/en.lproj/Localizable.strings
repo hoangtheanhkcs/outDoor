@@ -1,0 +1,76 @@
+ /* 
+  Localizable.strings
+  OutDoor
+
+  Created by hoang the anh on 31/07/2023.
+  
+*/
+"Xin chào!" = "Hello!";
+"Chào mừng bạn đến với Outdoor ứng dụng tìm kiếm và chia sẻ kinh nghiệm dã ngoại cho gia đình, khuyến khích trẻ khám phá thiên nhiên." = "Welcome to the Outdoor app Find and share family picnic experiences, encourage children to explore nature.";
+"    Đăng nhập với Facebook" = "    Login with Facebook";
+"    Đăng nhập với Google" = "    Login with Google";
+
+"Trải nghiệm" = "Experience";
+"Hãy cùng cho trẻ ra ngoài trải nghiệm Thiên nhiên , làm quen với các kỹ năng mềm và nâng cao sức khỏe" = "Let children go out to experience Nature, familiarize themselves with soft skills and improve health";
+"Chia sẻ" = "Share";
+"Bạn có thể đăng những bài review về địa điểm vui chơi ngoài trời mà mình đã đến bằng Hình Ảnh và Văn Bản hay kể cả là Dụng cụ mình đã sử dụng." = "You can post reviews of outdoor places you've been to with Photos and Text or even the Tools you've used.";
+"Tìm kiếm" = "Find";
+"Bạn có thể search những địa điểm vui chơi ngoài thiên nhiên gần mình hoặc khắp nước Việt nam xinh đẹp này" = "You can search for places to play in nature near you or throughout this beautiful Vietnam";
+"Lưu giữ" = "Save";
+"Bạn có thể Lưu bài viết , giao lưu kết bạn bằng cách bấm Follow các Phụ huynh khác cũng như Thả tim hoặc Comment bài viết" = "You can Save the article, make friends by clicking Follow other Parents as well as Drop a Heart or Comment on the article.";
+"Let’s GO!" = "Let’s GO!";
+"Với mong muốn con phát triển toàn diện về Thể Chất và Tinh thần - các bậc phụ huynh hãy cùng chúng tôi chia sẻ và trải nghiệm" = "With the desire for children to develop comprehensively physically and mentally - parents, please join us in sharing and experiencing";
+
+"Cùng con khám phá" = "Explore with your kids";
+"Tìm kiếm các điểm vui chơi tăng sự phát triển cho con" = "Looking for fun spots to increase your child's development";
+"Chia sẻ" = "Share";
+"khoảnh khắc bên nhau" = "Moments together";
+"Giao lưu" = "Exchange";
+"kinh nghiệm dã ngoại" = "Picnic experience";
+
+"Khám phá" = "Explore";
+
+"Tiêu điểm" = "Spotlight";
+"Tin mới" = "BreakNews";
+"Theo dõi" = "Follows";
+
+
+"Thông tin" = "Infomation";
+"Cập nhật ảnh đại diện" = "Update profile picture";
+"Cập nhật ảnh bìa" = "Cover photo update";
+"Cập nhật giới thiệu bản thân" = "Update self introduction";
+"Cài đặt" = "Setting";
+"Nhận thông báo" = "Get notifications";
+"Chính sách" = "Policy";
+"Điều khoản" = "Provision";
+"Báo cáo vi phạm" = "Reports";
+"Ngôn ngữ" = "Language";
+"Hướng dẫn" = "Instruct";
+"Đăng xuất" = "LogOut";
+
+"Giới tính" = "Gender";
+"Ngày sinh" = "Birth";
+"Điện thoại" = "Phone";
+
+"Ảnh đại diện" = "Avatar";
+"Xem ảnh đại diện" = "Profile picture preview";
+"Chọn ảnh từ thiết bị" = "Select photo from device";
+"Chụp ảnh mới" = "Take a new photo";
+"Thay ảnh đại diện" = "Change avatar";
+"Thay ảnh bìa" = "Change background";
+
+"Bài viết của bạn" = "Your post";
+"Bài viết đã lưu" = "Saved post";
+
+"Hủy" = "Cancel";
+"Đổi thông tin" = "Change user info";
+"Tên" = "Name";
+"Giới tính" = "Gender";
+"Ngày sinh" = "Birth";
+"Điện thoại" = "Phone";
+"Cập nhật" = "Update";
+"Nam" = "Man   ";
+"Nữ" = "Women   ";
+"Chỉnh sửa giới thiệu" = "Change description";
+"Đóng" = "Close";
+"Lưu" = "Save";
