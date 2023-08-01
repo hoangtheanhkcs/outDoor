@@ -6,6 +6,10 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import FBSDKLoginKit
+import GoogleSignIn
 import JGProgressHUD
 
 protocol SettingViewControllerDelegate: class {
@@ -196,7 +200,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             let choosePT = Constants.Strings.alertChangeAvatarChoosePhotoFromLibrary.addLocalization(str: languague ?? "vi")
             let getPhotoInYourDevice = UIAlertAction(title: choosePT, style: .default) {[weak self] _ in
                 guard let self = self else {return}
-                print("Chọn ảnh từ thiết bị")
+                
                 let picker = UIImagePickerController()
                 picker.sourceType = .photoLibrary
                 picker.delegate = self
@@ -256,12 +260,42 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         
         if userInforSettingTitle == Constants.Strings.updateDescription {
             let vc = storyboard?.instantiateViewController(withIdentifier: "ChangeUserDescriptionViewController") as? ChangeUserDescriptionViewController
+            vc?.user = user
             let closeVC = Constants.Strings.closeVC.addLocalization(str: languague ?? "vi")
             self.navigationItem.backBarButtonItem = UIBarButtonItem(title: closeVC, style: .done, target: nil, action: nil)
             navigationController?.pushViewController(vc!, animated: true)
         }
         
        
+        if userInforSettingTitle == Constants.Strings.loggout {
+            spinner.show(in: view)
+            
+           
+            
+            
+            FBSDKLoginKit.LoginManager().logOut()
+            GIDSignIn.sharedInstance.signOut()
+            UserDefaults.standard.set("", forKey: "userInfo")
+            UserDefaults.standard.set("", forKey: "userIFValue")
+            UserDefaults.standard.set("", forKey: "newUserInfo")
+            UserDefaults.standard.set("", forKey: "userDSValue")
+            
+            
+            
+            do{
+                try FirebaseAuth.Auth.auth().signOut()
+                
+                let vc = storyboard?.instantiateViewController(withIdentifier: "WelcomeViewController") as? WelcomeViewController
+                vc?.modalPresentationStyle = .fullScreen
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    self.spinner.dismiss()
+                    self.present(vc!, animated: false)
+                }
+                
+            }catch {
+                print("Failed to log out")
+            }
+        }
         
         
     }

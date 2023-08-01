@@ -12,7 +12,7 @@ import FBSDKLoginKit
 import GoogleSignIn
 import JGProgressHUD
 import SnapKit
-
+import DPLocalization
 
 protocol LoginViewControllerDelegate: class {
     func presentHomeVC()
@@ -35,13 +35,17 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var logginGoogleButton: UIButton!
     
     weak var delegate: LoginViewControllerDelegate?
-    
+    private var languague:String? {
+        return  UserDefaults.standard.value(forKey: "language") as? String
+    }
     
     
     private let fbLoginButton : FBLoginButton = {
         let fbButton = FBLoginButton()
         fbButton.permissions = ["public_profile"]  //scope email đã ko còn được hỗ trợ cho developers
-        let title = NSAttributedString(string: Constants.Strings.logginFacebook)
+        let languague = UserDefaults.standard.value(forKey: "language") as? String
+        let titleString = Constants.Strings.logginFacebook.addLocalization(str: languague ?? "vi")
+        let title = NSAttributedString(string: titleString)
         fbButton.setAttributedTitle(title, for: .normal)
         fbButton.titleLabel?.font = Constants.Fonts.SFReguler17
         fbButton.titleLabel?.textColor = Constants.Colors.textColorType5.color
@@ -55,13 +59,11 @@ class LoginViewController: UIViewController {
     private let spinner = JGProgressHUD(style: .dark)
     
     
-    private var languague:String? {
-        return  UserDefaults.standard.value(forKey: "language") as? String
-    }
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupSubview()
         
     }
@@ -140,7 +142,7 @@ class LoginViewController: UIViewController {
                 
 
                 let avartaURL: URL? = (user.profile?.imageURL(withDimension: 100))
-               
+                let accessToken = user.accessToken.tokenString
                 
                 if let email = user.profile?.email, let firstName = user.profile?.givenName, let lastName = user.profile?.familyName {
                     let userInfo = email.replacingOccurrences(of: ".", with: "-")
@@ -148,39 +150,47 @@ class LoginViewController: UIViewController {
                     
                     DatabaseManager.shared.checkUserExists(with: userInfo) { exist in
                         if !exist {
-                            let avartarURL = user.profile?.imageURL(withDimension: 100)
+//                            let avartarURL = user.profile?.imageURL(withDimension: 100)
                             let user = OutDoorUser(firstName: firstName, lastName: lastName, gender: "Nam", dateOfBirth: "10/10/1990", emailAddress: email,avatar: avartaURL?.absoluteString,  description: "Hello im \(lastName)")
                             DatabaseManager.shared.addNewUser(user: user) { success in
-                                if success {
-                                    print("34343434343434343434343")
+                                switch success {
+                                    
+                                case true:
+                                    print("success add new user")
+                                case false:
+                                    print("failed to cread new user")
                                 }
                             }
+                            
+                            let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                                             accessToken: accessToken)
+                            
+                            FirebaseAuth.Auth.auth().signIn(with: credential) {(authResult, error) in
+                                guard let result = authResult, error == nil else {
+                                    print("Failed to log in user with credential :\(credential)")
+                                    return
+                                }
+                                
+                                DispatchQueue.main.async {
+                                    strongSelf.spinner.dismiss()
+                                }
+                                let user = result.user
+                                print("Loggeg In User: \(user.uid)")
+                                
+                               
+                                strongSelf.dismiss(animated: true)
+                                strongSelf.delegate?.presentHomeVC()
+                            }
+                            
+                        }else {
+                            let vc = strongSelf.storyboard?.instantiateViewController(withIdentifier: "TabBarViewController") as? TabBarViewController
+                            vc?.modalPresentationStyle = .fullScreen
+                            strongSelf.present(vc!, animated: true)
+                            
                         }
                     }
                     
                 }
-                
-                let credential = GoogleAuthProvider.credential(withIDToken: idToken,
-                                                                 accessToken: user.accessToken.tokenString)
-                
-                FirebaseAuth.Auth.auth().signIn(with: credential) {(authResult, error) in
-                    guard let result = authResult, error == nil else {
-                        print("Failed to log in user with credential :\(credential)")
-                        return
-                    }
-                    
-                    DispatchQueue.main.async {
-                        strongSelf.spinner.dismiss()
-                    }
-                    let user = result.user
-                    print("Loggeg In User: \(user.uid)")
-                    print(user)
-                   
-                    strongSelf.dismiss(animated: true)
-                    strongSelf.delegate?.presentHomeVC()
-                }
-               
-                
         }
     }
     }
@@ -195,15 +205,13 @@ class LoginViewController: UIViewController {
         }
     }
     
-   
-    
 }
 
 
 extension LoginViewController: LoginButtonDelegate {
     
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-        
+        spinner.show(in: view)
         
         guard let token = result?.token?.tokenString else {
             print("User failed to log in with Facebook")
@@ -211,14 +219,14 @@ extension LoginViewController: LoginButtonDelegate {
         }
         let facebookRequest = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields" : "email, first_name, last_name, picture.type(large)"], tokenString: token, version: nil, httpMethod: .get)
         
-        
         facebookRequest.start { _, result, error in
             guard let result = result as? [String:Any], error == nil else {
                 
                 print("Failed to make facebook graph request")
                 return
             }
-            print("result is \(result)")
+            
+            
             guard let firstName = result["first_name"] as? String, let lastName = result["last_name"] as? String, let id = result["id"] as? String, let picture = result["picture"] as? [String:Any], let data = picture["data"] as? [String:Any], let pictureUrl = data["url"] as? String else {
                 print("Failed to get email end name from facebook result")
                 return
@@ -227,9 +235,10 @@ extension LoginViewController: LoginButtonDelegate {
             let userInfo = firstName + lastName + id
             UserDefaults.standard.set(userInfo, forKey: "userInfo")
             
-            DatabaseManager.shared.checkUserExists(with: userInfo) { exist in
+            DatabaseManager.shared.checkUserExists(with: userInfo) {[weak self] exist in
+                guard let strongSelf = self else {return}
                 if !exist {
-                    let user = OutDoorUser(firstName: firstName, lastName: lastName, emailAddress: id)
+                    let user = OutDoorUser(firstName: firstName, lastName: lastName, emailAddress: userInfo, avatar: pictureUrl)
                     DatabaseManager.shared.addNewUser(user: user) { success in
                         switch success {
                             
@@ -239,34 +248,42 @@ extension LoginViewController: LoginButtonDelegate {
                             print("faile to add new user")
                         }
                     }
-                }
-            }
-            
-            
-            let credential = FacebookAuthProvider.credential(withAccessToken: token)
-            
-            
-            FirebaseAuth.Auth.auth().signIn(with: credential) { [weak self] (authResult, error) in
-                guard let strongSelf = self else {return}
-                guard authResult != nil, error == nil else {
-                    if let error = error {
-                        print("Facebook credential login failed, MFA may be need - \(error)")
+                    
+                    let credential = FacebookAuthProvider.credential(withAccessToken: token)
+                    
+                    
+                    FirebaseAuth.Auth.auth().signIn(with: credential) { (authResult, error) in
+                        
+                        guard authResult != nil, error == nil else {
+                            if let error = error {
+                                print("Facebook credential login failed, MFA may be need - \(error)")
+                            }
+                            return
+                        }
+                        
+                        
+                        print("Successfully logged user in \(authResult?.user.uid ?? "")")
+                        
+                        strongSelf.dismiss(animated: true)
+                        strongSelf.delegate?.presentHomeVC()
                     }
-                    return
+                    
+                }else {
+                    
+                    let vc = strongSelf.storyboard?.instantiateViewController(withIdentifier: "TabBarViewController") as? TabBarViewController
+                    vc?.modalPresentationStyle = .fullScreen
+                    strongSelf.present(vc!, animated: true)
+                    
                 }
-                
-                
-                print("Successfully logged user in \(authResult?.user.uid ?? "")")
-                
-                strongSelf.dismiss(animated: true)
-                strongSelf.delegate?.presentHomeVC()
             }
         }
     }
         
         func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+            print("1111111111111111")
             
             FBSDKLoginKit.LoginManager().logOut()
+            
             do{
                 try FirebaseAuth.Auth.auth().signOut()
             }catch {

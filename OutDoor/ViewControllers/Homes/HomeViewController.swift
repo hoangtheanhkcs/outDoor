@@ -91,7 +91,7 @@ class HomeViewController: UIViewController, TopbarButtonDelegate, HomeContainerV
     }
     
     func resetTopBarButton(index: Int) {
-        print("index \(index)")
+        
         selectedIndex = index
         switch index {
         case 0:

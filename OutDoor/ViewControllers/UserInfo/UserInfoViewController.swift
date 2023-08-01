@@ -198,7 +198,11 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         let lastName = userInfo["last_name"] as? String ?? ""
         var description = ""
         if let updateDS = UserDefaults.standard.value(forKey: "userDSValue") as? String {
-            description = updateDS
+            if updateDS.count == 0 {
+                description = "Hello! Im " + firstName + " " + lastName
+            }else {
+                description = updateDS
+            }
         }else {
             description = userInfo["description"] as? String ?? ""
         }
@@ -315,7 +319,7 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
     
         let choosePhoto = Constants.Strings.alertChangeAvatarChoosePhotoFromLibrary.addLocalization(str: languague ?? "vi")
         let choosePhotoFromLibrary = UIAlertAction(title: choosePhoto, style: .default) { _ in
-            print("Chọn ảnh từ thiết bị")
+            
             let picker = UIImagePickerController()
             picker.sourceType = .photoLibrary
             picker.delegate = self
@@ -474,7 +478,7 @@ extension UserInfoViewController {
             switch result {
             case .success(let downloadUrl):
                 UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_avatar_url")
-                print("downloadUrl is \(downloadUrl)")
+                
                 DatabaseManager.shared.updateUserImageAvatar(user: self.user, urlUpdate: downloadUrl) { succsess in
                     switch succsess {
                         

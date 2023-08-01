@@ -41,7 +41,7 @@ enum Constants {
         static let loginHello = "Xin chào!"
         static let loginWelcome = "Chào mừng bạn đến với Outdoor ứng dụng tìm kiếm và chia sẻ kinh nghiệm dã ngoại cho gia đình, khuyến khích trẻ khám phá thiên nhiên."
         static let logginFacebook = "Đăng nhập với Facebook"
-        static let logginGoogle = "    Đăng nhập với Google"
+        static let logginGoogle = "Đăng nhập với Google"
         
         static let onboard1Lable = "Trải nghiệm"
         static let onboard1TextView = "Hãy cùng cho trẻ ra ngoài trải nghiệm Thiên nhiên , làm quen với các kỹ năng mềm và nâng cao sức khỏe"

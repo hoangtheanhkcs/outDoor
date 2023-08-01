@@ -28,10 +28,10 @@ class SettingCell: UITableViewCell {
         super.awakeFromNib()
         let language = UserDefaults.standard.value(forKey: "language") as? String
         if language == "vi" {
-            print("11111111111111111111111")
+            
             firstButtonAction(1)
         }else if language == "en"{
-            print("22222222222222222222")
+            
             secondButton(1)
         }
         

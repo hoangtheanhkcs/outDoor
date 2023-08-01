@@ -23,6 +23,8 @@ class ChangeUserDescriptionViewController: UIViewController {
         return  UserDefaults.standard.value(forKey: "language") as? String
     }
     
+    var user: OutDoorUser?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        title = "Chỉnh sửa giới thiệu"
@@ -94,7 +96,11 @@ class ChangeUserDescriptionViewController: UIViewController {
         
         var description = ""
         if let updateDS = UserDefaults.standard.value(forKey: "userDSValue") as? String {
-            description = updateDS
+            if updateDS.count == 0 {
+                description = user?.description ?? ""
+            }else {
+                description = updateDS
+            }
         }else {
             description = userInfo["description"] as? String ?? ""
         }

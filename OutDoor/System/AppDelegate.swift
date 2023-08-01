@@ -28,8 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             GIDSignIn.sharedInstance.configuration = config
         }
      
-        UserDefaults.standard.set("en", forKey: "language")
-        dp_set_current_language("en")
+        UserDefaults.standard.set("vi", forKey: "language")
+        dp_set_current_language("vi")
         return true
     }
 
