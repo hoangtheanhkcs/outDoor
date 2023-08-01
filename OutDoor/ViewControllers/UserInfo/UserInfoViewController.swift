@@ -9,6 +9,8 @@ import UIKit
 import SDWebImage
 import JGProgressHUD
 
+
+
 class UserInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate , PreviewAvatarViewControllerDelegate {
     
     private let spinner = JGProgressHUD(style: .dark)
@@ -106,10 +108,11 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NotificationCenter.default.post(Notification(name: Notification.Name("closePreviewAvatar")))
         userPostBTAction(1)
         tableView.setContentOffset(.zero, animated: true)
         UIApplication.shared.statusBarStyle = .lightContent
-        
+        navigationController?.navigationBar.tintColor = .white
       
         setupSubviews()
         
@@ -127,10 +130,7 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
    private func setUpNavigation() {
         navigationItem.rightBarButtonItem  = UIBarButtonItem(image: UIImage(named: "ic_arrow_left_white"), style: .plain, target: self, action: #selector(didTapSettingButton))
         
-        let backImage = UIImage(named: "Group 40")
-        self.navigationController?.navigationBar.backIndicatorImage = backImage
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .done, target: nil, action: nil)
+       self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .done, target: nil, action: nil)
         navigationController?.navigationBar.tintColor = .white
        
         
@@ -313,7 +313,8 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         let previewAvatarAction = UIAlertAction(title: previewA, style: .default) {[weak self] _ in
             guard let self = self else {return}
             viewPreview?.isHidden  = false
-           
+            navigationItem.rightBarButtonItem?.isHidden = true
+            NotificationCenter.default.post(Notification(name: Notification.Name("openPreviewAvatar")))
         }
         previewAvatarAction.setValue(UIImage(named: "eye"), forKey: "image")
     
@@ -356,6 +357,8 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
     
     func didTapCloseBT() {
         viewPreview?.isHidden = true
+        navigationItem.rightBarButtonItem?.isHidden = false
+        
         
     }
 
@@ -473,7 +476,7 @@ extension UserInfoViewController {
         }
         
         spinner.show(in: view)
-        StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName) {[weak self] (result: Result<String, Error>) in
+        StorageManager.shared.uploadProfilePicture(userInfo: user?.safeEmail ?? "", with: data, fileName: fileName) {[weak self] (result: Result<String, Error>) in
             guard let self = self else {return}
             switch result {
             case .success(let downloadUrl):

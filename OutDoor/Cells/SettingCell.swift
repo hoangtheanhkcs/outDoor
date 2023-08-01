@@ -8,6 +8,11 @@
 import UIKit
 import DPLocalization
 
+
+protocol SettingCellDelegate: class {
+    func switchButtonChangeValue(isOn: Bool)
+}
+
 class SettingCell: UITableViewCell {
     
     @IBOutlet weak var settingLable: UILabel!
@@ -23,6 +28,7 @@ class SettingCell: UITableViewCell {
     
     @IBOutlet weak var settingImageView: UIImageView!
     
+    weak var delegate: SettingCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -62,7 +68,13 @@ class SettingCell: UITableViewCell {
         UserDefaults.standard.set("en", forKey: "language")
     }
     
-    
-    
+    @IBAction func switchButtonAC(_ sender: UISwitch) {
+        if sender.isOn {
+            delegate?.switchButtonChangeValue(isOn: true)
+            
+        }else {
+            delegate?.switchButtonChangeValue(isOn: false)
+        }
+    }
     
 }

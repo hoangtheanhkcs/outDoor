@@ -54,6 +54,7 @@ class SettingViewController: UIViewController, UIImagePickerControllerDelegate &
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         setUpNavigation()
+        NotificationCenter.default.post(Notification(name: Notification.Name("openPreviewAvatar")))
 
     }
     func setUpNavigation() {
@@ -107,7 +108,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath) as! SettingCell
             let title = settings[indexPath.section][indexPath.row].title
             cell.settingLable.setupAutolocalization(withKey: title, keyPath: "text")
-            
+            cell.delegate = self
             
             cell.settingLable.font = UIFont(name: "SanFranciscoText-Light", size: 17)
 
@@ -321,7 +322,7 @@ extension SettingViewController {
         }else if self.typeOfImage == "background" {
             fileName = user?.profilePictureBackgoundFileName ?? ""
         }
-        StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName) {[weak self] (result: Result<String, Error>) in
+        StorageManager.shared.uploadProfilePicture(userInfo: user?.safeEmail ?? "", with: data, fileName: fileName) {[weak self] (result: Result<String, Error>) in
             guard let self = self else {return}
             switch result {
             case .success(let downloadUrl):
@@ -356,15 +357,42 @@ extension SettingViewController {
 }
 
 
+extension SettingViewController: SettingCellDelegate {
+    func switchButtonChangeValue(isOn: Bool) {
+        
+        var title = ""
+        
+        if isOn == true {
+            title = Constants.Strings.openNotification.addLocalization(str: languague ?? "vi")
+        }else {
+            title = Constants.Strings.closeNotification.addLocalization(str: languague ?? "vi")
+        }
+        
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alert.setTint(color: Constants.Colors.textColorType8.color)
+        alert.setTitle(font: Constants.Fonts.SFSemibold17, color: Constants.Colors.textColorType6.color)
+        present(alert, animated: true) {
+            alert.view.superview?.isUserInteractionEnabled = true
+           
+                alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+            
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            alert.dismiss(animated: true)
+        }
+    }
+    @objc private func alertControllerBackgroundTapped()
+    {
+        self.dismiss(animated: true, completion: nil)
+    }
+}
+
 
 
 
 class SettingData {
-    
-    
     static let shared = SettingData()
-    
-   
     func getAllSectionSetting() -> [SectionSetting] {
         let section = [SectionSetting(title: Constants.Strings.settingVCInfomation, identifier: 0), SectionSetting(title: Constants.Strings.setting, identifier: 1)]
         

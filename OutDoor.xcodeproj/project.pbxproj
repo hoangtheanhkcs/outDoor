@@ -307,11 +307,11 @@
 				5A4526792A6F5F54001E2028 /* Cells */,
 				5A10A2452A6CFB340081160D /* Model */,
 				5AD42B4B2A6A711B00D51C6F /* Database */,
-				5AD42ACF2A6955E300D51C6F /* Fonts */,
 				5AD42AC02A69309D00D51C6F /* Utilties */,
 				5AD42AB12A68DE7600D51C6F /* LaunchScreen.storyboard */,
 				5AD42AB42A68DE7600D51C6F /* Info.plist */,
 				5AD42ABA2A68DF7E00D51C6F /* GoogleService-Info.plist */,
+				5AD42ACF2A6955E300D51C6F /* Fonts */,
 				5AAE203C2A77A1CA000EA78D /* Localizable.strings */,
 			);
 			path = OutDoor;

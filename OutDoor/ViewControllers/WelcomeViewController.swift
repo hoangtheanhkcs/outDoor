@@ -91,6 +91,7 @@ class WelcomeViewController: UIViewController {
         redCartButton.changeButtonFont(Constants.Fonts.SFLight13)
         redCartButton.backgroundColor = Constants.Colors.textColorType5.color
         redCartButton.layer.cornerRadius = 12.5
+        redCartButton.addTarget(self, action: #selector(didTapCartButton), for: .touchUpInside)
         
         greenCartLable.setupAutolocalization(withKey: Constants.Strings.welcomeVCGreenCartLable, keyPath: "text")
         greenCartLable.textColor = Constants.Colors.textColorType5.color
@@ -104,6 +105,7 @@ class WelcomeViewController: UIViewController {
         greenCartButton.changeButtonFont(Constants.Fonts.SFLight13)
         greenCartButton.backgroundColor = Constants.Colors.textColorType5.color
         greenCartButton.layer.cornerRadius = 12.5
+        greenCartButton.addTarget(self, action: #selector(didTapCartButton), for: .touchUpInside)
         
     }
    

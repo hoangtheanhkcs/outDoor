@@ -109,6 +109,9 @@ enum Constants {
         static let closeVC = "Đóng"
         static let save = "Lưu"
         
+        static let openNotification = "Cho phép thông báo"
+        static let closeNotification = "Tắt nhận thông báo"
+        
     }
     enum Fonts {
         

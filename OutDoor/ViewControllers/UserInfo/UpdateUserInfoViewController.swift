@@ -42,6 +42,7 @@ class UpdateUserInfoViewController: UIViewController,  UpdateUserInfoViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.tintColor = .white
         
         for index in 0..<userEdit.count {
             allIndex.append(index)
@@ -69,11 +70,16 @@ class UpdateUserInfoViewController: UIViewController,  UpdateUserInfoViewControl
         
         NotificationCenter.default.addObserver(self, selector: #selector(didTapCellButton), name: NSNotification.Name("cellValue"), object: nil)
         
+        
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        title = "Thông Tin"
+        NotificationCenter.default.post(Notification(name: Notification.Name("openPreviewAvatar")))
         self.setupAutolocalization(withKey: Constants.Strings.settingVCInfomation, keyPath: "title")
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         setUpNavigation()

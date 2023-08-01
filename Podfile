@@ -30,6 +30,7 @@ pod 'RealmSwift'
 pod 'SnapKit'
 pod 'JGProgressHUD'
 pod 'DPLocalization'
+pod 'TheAnimation'
 
 end
 post_install do |installer|

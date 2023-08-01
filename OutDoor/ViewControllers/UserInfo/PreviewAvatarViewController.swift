@@ -91,6 +91,7 @@ class PreviewAvatarViewController: UIViewController {
     
     @objc private func didTapCloseBT() {
         delegete?.didTapCloseBT()
+        NotificationCenter.default.post(Notification(name: Notification.Name("closePreviewAvatar")))
     }
     
 }

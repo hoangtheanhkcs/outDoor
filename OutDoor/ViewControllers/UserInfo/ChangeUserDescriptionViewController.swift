@@ -27,7 +27,8 @@ class ChangeUserDescriptionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        title = "Chỉnh sửa giới thiệu"
+
+        navigationController?.navigationBar.tintColor = .white
         self.setupAutolocalization(withKey: Constants.Strings.changeDescription, keyPath: "title")
         textView.becomeFirstResponder()
         textView.delegate = self
@@ -59,6 +60,8 @@ class ChangeUserDescriptionViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        NotificationCenter.default.post(Notification(name: Notification.Name("openPreviewAvatar")))
         
         UIApplication.shared.statusBarStyle = .lightContent
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
