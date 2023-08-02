@@ -451,10 +451,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2fm-WA-an6">
-                                <rect key="frame" x="20" y="133" width="353" height="205"/>
-                                <color key="backgroundColor" systemColor="systemGreenColor"/>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1sb-iU-XZm">
                                 <rect key="frame" x="0.0" y="103" width="393" height="0.6666666666666714"/>
                                 <color key="backgroundColor" systemColor="systemCyanColor"/>
@@ -542,23 +538,52 @@
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4LU-w0-Vf3">
+                                <rect key="frame" x="20" y="344" width="353" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="foS-44-246"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KYJ-ay-fLi">
+                                <rect key="frame" x="20" y="416" width="353" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRM-Va-xbo">
+                                <rect key="frame" x="20" y="488" width="353" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="fLu-no-mcR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SeA-4h-0eT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="TYc-qo-gXW" firstAttribute="top" secondItem="rNm-0u-VAr" secondAttribute="bottom" constant="30" id="2eg-mh-e40"/>
+                            <constraint firstItem="KYJ-ay-fLi" firstAttribute="top" secondItem="TYc-qo-gXW" secondAttribute="bottom" constant="1" id="AhE-U3-noq"/>
+                            <constraint firstItem="4LU-w0-Vf3" firstAttribute="trailing" secondItem="rNm-0u-VAr" secondAttribute="trailing" id="FNF-AB-Jbk"/>
                             <constraint firstItem="Fmr-b1-68w" firstAttribute="centerX" secondItem="SeA-4h-0eT" secondAttribute="centerX" id="HNd-46-G8e"/>
-                            <constraint firstItem="2fm-WA-an6" firstAttribute="trailing" secondItem="rNm-0u-VAr" secondAttribute="trailing" id="Qwd-Eb-2le"/>
+                            <constraint firstItem="cRM-Va-xbo" firstAttribute="leading" secondItem="QM4-fP-eJU" secondAttribute="leading" id="JhQ-cA-coC"/>
+                            <constraint firstItem="cRM-Va-xbo" firstAttribute="top" secondItem="QM4-fP-eJU" secondAttribute="bottom" constant="1" id="Nnm-R3-xod"/>
+                            <constraint firstItem="KYJ-ay-fLi" firstAttribute="leading" secondItem="TYc-qo-gXW" secondAttribute="leading" id="QJX-DZ-co5"/>
                             <constraint firstItem="QM4-fP-eJU" firstAttribute="top" secondItem="TYc-qo-gXW" secondAttribute="bottom" constant="30" id="T7q-9p-av0"/>
+                            <constraint firstItem="KYJ-ay-fLi" firstAttribute="trailing" secondItem="TYc-qo-gXW" secondAttribute="trailing" id="Umc-Zj-CLU"/>
                             <constraint firstItem="rNm-0u-VAr" firstAttribute="leading" secondItem="SeA-4h-0eT" secondAttribute="leading" constant="20" id="VAS-wh-0Qg"/>
+                            <constraint firstItem="4LU-w0-Vf3" firstAttribute="top" secondItem="rNm-0u-VAr" secondAttribute="bottom" constant="1" id="XB2-ax-cs5"/>
                             <constraint firstItem="QM4-fP-eJU" firstAttribute="leading" secondItem="rNm-0u-VAr" secondAttribute="leading" id="bjU-ei-Iu2"/>
-                            <constraint firstItem="2fm-WA-an6" firstAttribute="bottom" secondItem="rNm-0u-VAr" secondAttribute="bottom" constant="-5" id="e0I-Xm-QmW"/>
                             <constraint firstItem="rNm-0u-VAr" firstAttribute="top" secondItem="SeA-4h-0eT" secondAttribute="top" constant="30" id="ejs-Ib-P1G"/>
                             <constraint firstItem="QM4-fP-eJU" firstAttribute="trailing" secondItem="rNm-0u-VAr" secondAttribute="trailing" id="ewU-Yf-O3I"/>
                             <constraint firstItem="TYc-qo-gXW" firstAttribute="trailing" secondItem="rNm-0u-VAr" secondAttribute="trailing" id="fJ8-z4-2xz"/>
                             <constraint firstItem="1sb-iU-XZm" firstAttribute="top" secondItem="SeA-4h-0eT" secondAttribute="top" id="fNM-ZT-2cF"/>
-                            <constraint firstItem="2fm-WA-an6" firstAttribute="top" secondItem="rNm-0u-VAr" secondAttribute="top" id="lSp-6N-7s8"/>
-                            <constraint firstItem="2fm-WA-an6" firstAttribute="leading" secondItem="rNm-0u-VAr" secondAttribute="leading" id="nmk-Q0-mW3"/>
+                            <constraint firstItem="cRM-Va-xbo" firstAttribute="trailing" secondItem="QM4-fP-eJU" secondAttribute="trailing" id="gxl-EO-32g"/>
+                            <constraint firstItem="4LU-w0-Vf3" firstAttribute="leading" secondItem="rNm-0u-VAr" secondAttribute="leading" id="kyt-pq-bLp"/>
                             <constraint firstItem="1sb-iU-XZm" firstAttribute="trailing" secondItem="SeA-4h-0eT" secondAttribute="trailing" id="sFc-o3-HHx"/>
                             <constraint firstItem="TYc-qo-gXW" firstAttribute="leading" secondItem="rNm-0u-VAr" secondAttribute="leading" id="y8L-28-jpI"/>
                             <constraint firstItem="1sb-iU-XZm" firstAttribute="leading" secondItem="SeA-4h-0eT" secondAttribute="leading" id="yBy-eq-hnK"/>
@@ -573,7 +598,9 @@
                         <outlet property="contentArticleTextView" destination="QM4-fP-eJU" id="Les-w9-R79"/>
                         <outlet property="emptyImageView" destination="Fmr-b1-68w" id="Jmt-LG-8dA"/>
                         <outlet property="emptyLable" destination="wCM-IR-QEr" id="TAR-Xp-J4s"/>
-                        <outlet property="groundView" destination="2fm-WA-an6" id="Fkp-7M-Bf7"/>
+                        <outlet property="postDescriptionReport" destination="cRM-Va-xbo" id="p65-eG-baI"/>
+                        <outlet property="postImageReport" destination="4LU-w0-Vf3" id="etE-kq-qN1"/>
+                        <outlet property="postLableReport" destination="KYJ-ay-fLi" id="udD-9g-b2c"/>
                         <outlet property="separateView" destination="1sb-iU-XZm" id="Eg7-FH-jvc"/>
                         <outlet property="uploadPhoto" destination="CYc-a3-rU7" id="ofD-tm-dIa"/>
                         <outlet property="uploadedPhotoImv" destination="1Om-yK-A5R" id="BVw-Zl-M5G"/>
@@ -581,7 +608,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fKD-qz-12R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1599.2366412213739" y="5719.7183098591549"/>
+            <point key="canvasLocation" x="-1611.4503816793892" y="5719.7183098591549"/>
         </scene>
         <!--Breaking News View Controller-->
         <scene sceneID="xgc-i9-84Z">
@@ -1563,9 +1590,6 @@
         </systemColor>
         <systemColor name="systemCyanColor">
             <color red="0.19607843137254902" green="0.67843137254901964" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemMintColor">
             <color red="0.0" green="0.7803921568627451" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
