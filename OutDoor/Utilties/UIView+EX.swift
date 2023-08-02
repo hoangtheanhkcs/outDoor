@@ -33,3 +33,22 @@ extension UIView {
         layer.shadowOpacity = 0.5
     }
 }
+
+extension UIView {
+  func addDashedBorder(_ color: UIColor = UIColor.black, withWidth width: CGFloat = 2, cornerRadius: CGFloat = 5, dashPattern: [NSNumber] = [3,6]) {
+ 
+    let shapeLayer = CAShapeLayer()
+ 
+      shapeLayer.frame.size.width = self.bounds.width
+      shapeLayer.frame.size.height = self.bounds.height
+    shapeLayer.position = CGPoint(x: bounds.width/2, y: bounds.height/2)
+    shapeLayer.fillColor = nil
+    shapeLayer.strokeColor = color.cgColor
+    shapeLayer.lineWidth = width
+      shapeLayer.lineJoin = CAShapeLayerLineJoin.round // Updated in swift 4.2
+    shapeLayer.lineDashPattern = dashPattern
+      shapeLayer.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: cornerRadius).cgPath
+     
+    self.layer.addSublayer(shapeLayer)
+  }
+}

@@ -131,7 +131,7 @@ private class TopbarButton: UIView {
 
         touchReceiver.setTitle(titleButton, for: .normal)
         touchReceiver.setupAutolocalization(withKey: titleButton, keyPath: "autolocalizationTitle")
-        touchReceiver.titleLabel?.font = Constants.Fonts.SFSemibold16
+        touchReceiver.changeButtonFont(Constants.Fonts.SFSemibold16)
         touchReceiver.addTarget(self, action: #selector(didReceiveTouch), for: .touchUpInside)
         
         dotView.alpha = 0

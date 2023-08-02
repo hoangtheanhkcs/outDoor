@@ -180,7 +180,7 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
         userPostBT.layer.masksToBounds = true
         userPostBT.layer.borderWidth = 1
         userPostBT.layer.borderColor = Constants.Colors.buttonBackgroundColor.color.cgColor
-        userPostBT.titleLabel?.font = Constants.Fonts.SFReguler17
+        userPostBT.changeButtonFont(Constants.Fonts.SFReguler17)
         
         
         savePostBT.layer.cornerRadius = 21
@@ -423,7 +423,7 @@ extension UserInfoViewController {
             
            
             postBT.setupAutolocalization(withKey: Constants.Strings.yourPost, keyPath: "autolocalizationTitle")
-            postBT.titleLabel?.font = Constants.Fonts.SFReguler17
+            postBT.changeButtonFont(Constants.Fonts.SFReguler17)
             postBT.layer.cornerRadius = 21
             postBT.layer.masksToBounds = true
             postBT.layer.borderWidth = 1
@@ -432,7 +432,7 @@ extension UserInfoViewController {
             postBT.isHidden = false
             
             saveBT.setupAutolocalization(withKey: Constants.Strings.savedPost, keyPath: "autolocalizationTitle")
-            saveBT.titleLabel?.font = Constants.Fonts.SFReguler17
+            saveBT.changeButtonFont(Constants.Fonts.SFReguler17)
             saveBT.layer.cornerRadius = 21
             saveBT.layer.masksToBounds = true
             saveBT.layer.borderWidth = 1

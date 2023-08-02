@@ -47,7 +47,7 @@ class LoginViewController: UIViewController {
         let titleString = Constants.Strings.logginFacebook.addLocalization(str: languague ?? "vi")
         let title = NSAttributedString(string: titleString)
         fbButton.setAttributedTitle(title, for: .normal)
-        fbButton.titleLabel?.font = Constants.Fonts.SFReguler17
+        fbButton.changeButtonFont(Constants.Fonts.SFReguler16)
         fbButton.titleLabel?.textColor = Constants.Colors.textColorType5.color
         fbButton.layer.masksToBounds = true
         fbButton.layer.cornerRadius = 26
@@ -112,7 +112,7 @@ class LoginViewController: UIViewController {
         
         logginGoogleButton.setupAutolocalization(withKey: Constants.Strings.logginGoogle, keyPath: "autolocalizationTitle")
         logginGoogleButton.setTitleColor(Constants.Colors.textColorType1.color, for: .normal)
-        logginGoogleButton.titleLabel?.font = Constants.Fonts.SFReguler16
+        logginGoogleButton.changeButtonFont(Constants.Fonts.SFReguler16)
         logginGoogleButton.layer.cornerRadius  = 26
         logginGoogleButton.layer.borderWidth = 1
         logginGoogleButton.layer.borderColor = Constants.Colors.logginGoogleBorder.color.cgColor
@@ -280,7 +280,7 @@ extension LoginViewController: LoginButtonDelegate {
     }
         
         func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-            print("1111111111111111")
+          
             
             FBSDKLoginKit.LoginManager().logOut()
             

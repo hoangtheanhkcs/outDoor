@@ -35,6 +35,7 @@
 		5AAE200D2A73A254000EA78D /* String+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE200C2A73A254000EA78D /* String+EX.swift */; };
 		5AAE20372A76D684000EA78D /* PreviewAvatarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE20362A76D684000EA78D /* PreviewAvatarViewController.swift */; };
 		5AAE203A2A77A1CA000EA78D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5AAE203C2A77A1CA000EA78D /* Localizable.strings */; };
+		5AAE20462A79E8DD000EA78D /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE20452A79E8DD000EA78D /* PostViewController.swift */; };
 		5AD42AA72A68DE7400D51C6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD42AA62A68DE7400D51C6F /* AppDelegate.swift */; };
 		5AD42AA92A68DE7400D51C6F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD42AA82A68DE7400D51C6F /* SceneDelegate.swift */; };
 		5AD42AAB2A68DE7400D51C6F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD42AAA2A68DE7400D51C6F /* ViewController.swift */; };
@@ -130,6 +131,7 @@
 		5AAE203D2A77A24F000EA78D /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Main.strings; sourceTree = "<group>"; };
 		5AAE203E2A77A250000EA78D /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		5AAE203F2A77A250000EA78D /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5AAE20452A79E8DD000EA78D /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		5AD42AA32A68DE7400D51C6F /* OutDoor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OutDoor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD42AA62A68DE7400D51C6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5AD42AA82A68DE7400D51C6F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -278,6 +280,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		5AAE20442A79E868000EA78D /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				5AAE20452A79E8DD000EA78D /* PostViewController.swift */,
+			);
+			path = Posts;
+			sourceTree = "<group>";
+		};
 		5AD42A9A2A68DE7400D51C6F = {
 			isa = PBXGroup;
 			children = (
@@ -334,6 +344,7 @@
 				5AD42B1A2A69859B00D51C6F /* OnboardViewController.swift */,
 				5AD42ACD2A69416700D51C6F /* LoginViewController.swift */,
 				5A4526692A6F564F001E2028 /* TabBarViewController.swift */,
+				5AAE20442A79E868000EA78D /* Posts */,
 				5AD42B1C2A6989B000D51C6F /* Onboards */,
 				5A45266B2A6F5A41001E2028 /* Homes */,
 				5A45266C2A6F5A54001E2028 /* Search */,
@@ -598,6 +609,7 @@
 				5AD42B222A6989F700D51C6F /* Onboard3.swift in Sources */,
 				5A4526762A6F5CE3001E2028 /* FollowingViewController.swift in Sources */,
 				5AD42AC82A69314A00D51C6F /* Observable.swift in Sources */,
+				5AAE20462A79E8DD000EA78D /* PostViewController.swift in Sources */,
 				5AD42ACC2A693F6500D51C6F /* CustomSlider.swift in Sources */,
 				5AD42ABF2A6929BB00D51C6F /* Constains.swift in Sources */,
 				5AD42B202A6989E700D51C6F /* Onboard2.swift in Sources */,

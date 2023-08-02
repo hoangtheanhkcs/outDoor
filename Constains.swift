@@ -34,6 +34,11 @@ enum Constants {
         static let userEditAvatar = "edit-2"
         
         static let updateCelliconCheck = "icons8-check-50"
+        static let emptyImage = "Group 98"
+        static let closeUploadedPhoto = "x-circle"
+        static let uploadButton = "Group 103"
+        static let paperPlane = "Group 104"
+        static let xIcon = "x (1)"
     }
    
     enum Strings {
@@ -112,6 +117,17 @@ enum Constants {
         static let openNotification = "Cho phép thông báo"
         static let closeNotification = "Tắt nhận thông báo"
         
+        static let postProfilePicture = "Ảnh đại diện bài viết (bắt buộc)"
+        static let uploadPhoto = "Tải ảnh lên"
+        
+        static let postArticle = "Đăng bài viết"
+        static let postTools = "Đăng dụng cụ"
+        static let articleTitle = "Tiêu đề bài viết..."
+        static let content = "Nội dung..."
+        static let toolName = "Tên dụng cụ..."
+        static let toolDescription = "Mô tả..."
+        
+        
     }
     enum Fonts {
         
@@ -160,7 +176,10 @@ enum Constants {
         static let logginGoogleBorder = "#E0E0E0"
         
         static let alertAvatar = "#759E50"
+        static let emptyPhoto = "#E0E0E0"
+        static let paperPlane = "#BDBDBD"
         
+        static let defaultPlaceHolder = UIColor.lightGray.withAlphaComponent(0.8)
        
 
     }
