@@ -100,14 +100,10 @@ class OnboardViewController: UIPageViewController, UIPageViewControllerDelegate,
     }
     
     @objc private func didTapButton() {
-        
-      
-       
         currentPageIndex = currentPageIndex + 1
         if currentPageIndex > pageViewControllers.count - 1 {
             spinner.show(in: view)
             let userInfo = UserDefaults.standard.value(forKey: "userInfo") as? String ?? ""
-            
             
             if userInfo.count == 0 {
                 let vc = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
@@ -132,12 +128,7 @@ class OnboardViewController: UIPageViewController, UIPageViewControllerDelegate,
                     }
                 }
             }
-            
-            
-            
-          
         }
-     
     }
 
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
@@ -181,19 +172,12 @@ class OnboardViewController: UIPageViewController, UIPageViewControllerDelegate,
                 targetContentOffset.pointee = CGPoint(x: viewWidth, y: 0)
             }
         }
-    
-    
-    
-    
 }
 
 extension OnboardViewController:LoginViewControllerDelegate {
     func presentHomeVC() {
         let vc = storyboard?.instantiateViewController(withIdentifier: "TabBarViewController") as? TabBarViewController
-        
         vc?.modalPresentationStyle = .fullScreen
         present(vc!, animated: true)
     }
-    
-    
 }

@@ -11,7 +11,8 @@ import UIKit
 
 
 extension UIImage {
-    func imageWithColor(color:UIColor) -> UIImage {
+
+    func imageWithColor(color: UIColor) -> UIImage {
         var image = withRenderingMode(.alwaysTemplate)
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         color.set()
@@ -20,6 +21,7 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return image
     }
+
 }
 
 

@@ -327,6 +327,7 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
             picker.allowsEditing = true
             self.present(picker, animated: true)
         }
+       
         choosePhotoFromLibrary.setValue(UIImage(named: "image"), forKey: "image")
         
         let takeNPT = Constants.Strings.alertChangeAvatarTakeNewPhoto.addLocalization(str: languague ?? "vi")

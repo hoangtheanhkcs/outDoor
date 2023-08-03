@@ -20,8 +20,6 @@ protocol LoginViewControllerDelegate: class {
  
 class LoginViewController: UIViewController {
    
-    
-    
     @IBOutlet weak var logginLogoImageView: UIImageView!
     
     @IBOutlet weak var logginImageView: UIImageView!
@@ -204,9 +202,7 @@ class LoginViewController: UIViewController {
             print("Failed to log out")
         }
     }
-    
 }
-
 
 extension LoginViewController: LoginButtonDelegate {
     

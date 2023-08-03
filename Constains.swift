@@ -126,6 +126,11 @@ enum Constants {
         static let content = "Nội dung..."
         static let toolName = "Tên dụng cụ..."
         static let toolDescription = "Mô tả..."
+        static let postImageReport = "Bạn chưa chọn ảnh đại diện bài viết"
+        static let postLableReport = "Bạn chưa nhập tiêu đề bài viết"
+        static let postDescriptionReport = "Bạn chưa nhập nội dung"
+        static let postToolNameReport = "Bạn chưa nhập tên dụng cụ"
+        static let postToolDescriptionReport = "Bạn chưa nhập mô tả"
         
         
     }
@@ -180,7 +185,7 @@ enum Constants {
         static let paperPlane = "#BDBDBD"
         
         static let defaultPlaceHolder = UIColor.lightGray.withAlphaComponent(0.8)
-       
+       static let planeCheckOk = "#86D141"
 
     }
 }

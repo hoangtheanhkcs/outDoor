@@ -23,6 +23,19 @@ extension UITextView {
         self.textColor = textColor
         
     }
+    
+    func settingSpacing(lineSpacing: CGFloat, textAlignment: NSTextAlignment) {
+        
+        let attributedString = NSMutableAttributedString(string: self.text)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = lineSpacing
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
+        
+        self.attributedText = attributedString
+        self.textAlignment = textAlignment
+        self.font = font
+        self.textColor = textColor
+    }
 }
 
 extension UILabel {
