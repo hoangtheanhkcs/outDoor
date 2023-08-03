@@ -39,6 +39,10 @@ enum Constants {
         static let uploadButton = "Group 103"
         static let paperPlane = "Group 104"
         static let xIcon = "x (1)"
+        
+        static let imageKeyboard = "image 1"
+        static let videoKeyboard = "youtube"
+        static let locationKeyboard = "map-pin"
     }
    
     enum Strings {

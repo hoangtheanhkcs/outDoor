@@ -75,10 +75,21 @@ class PostViewController: UIViewController {
     
     @IBOutlet weak var contentArticleTextView: UITextView!
     
+    @IBOutlet weak var keyboardGruopView: UIView!
+    
+    @IBOutlet weak var bottomConstants: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var postImageKeyboardBT: UIButton!
+    
+    @IBOutlet weak var postVideoKeyboardBT: UIButton!
+    
+    @IBOutlet weak var postLocationKeyboardBT: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        keyboardGruopView.isHidden = true
         self.setupAutolocalization(withKey: Constants.Strings.postArticle, keyPath: "title")
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Constants.Fonts.SFBold17]
         setupSubview()
@@ -87,6 +98,15 @@ class PostViewController: UIViewController {
         postImageReport.setupAutolocalization(withKey: "", keyPath: "text")
         postLableReport.setupAutolocalization(withKey: "", keyPath: "text")
         postDescriptionReport.setupAutolocalization(withKey: "", keyPath: "text")
+        contentArticleTextView.autocorrectionType = .no
+        contentArticleTextView.spellCheckingType = .no
+        articleTitleTextField.autocorrectionType = .no
+        articleTitleTextField.spellCheckingType = .no
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisplay), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHiddens), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        keyboardWillHidden()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -162,6 +182,7 @@ class PostViewController: UIViewController {
         
         articleTitleTextField.font = Constants.Fonts.SFReguler17
         articleTitleTextField.textColor = Constants.Colors.textColorType6.color
+        articleTitleTextField.autocapitalizationType = .sentences
         
         postImageReport.font = Constants.Fonts.SFLight13
         postImageReport.textColor = Constants.Colors.buttonBackgroundColor.color
@@ -186,7 +207,13 @@ class PostViewController: UIViewController {
         
         closeUplaodedPhotoBT.setImage(UIImage(named: Constants.Images.closeUploadedPhoto), for: .normal)
         setupTextView()
-    
+        keyboardGruopView.backgroundColor = Constants.Colors.textColorType8.color
+        postImageKeyboardBT.setImage(UIImage(named: Constants.Images.imageKeyboard), for: .normal)
+        postVideoKeyboardBT.setImage(UIImage(named: Constants.Images.videoKeyboard), for: .normal)
+        postLocationKeyboardBT.setImage(UIImage(named: Constants.Images.locationKeyboard), for: .normal)
+        postImageKeyboardBT.backgroundColor = .clear
+        postVideoKeyboardBT.backgroundColor = .clear
+        postLocationKeyboardBT.backgroundColor = .clear
     }
     
     private func setupTextView() {
@@ -237,7 +264,7 @@ class PostViewController: UIViewController {
             }else {
                 postLableReport.setupAutolocalization(withKey: "", keyPath: "text")
             }
-            if contentArticleTextView.text == Constants.Strings.content.addLocalization(str: languague!) {
+            if contentArticleTextView.text == Constants.Strings.content.addLocalization(str: languague!) || contentArticleTextView.text.count == 0 {
                 postDescriptionReport.setupAutolocalization(withKey: Constants.Strings.postDescriptionReport, keyPath: "text")
             }else {
                 postDescriptionReport.setupAutolocalization(withKey: "", keyPath: "text")
@@ -249,7 +276,7 @@ class PostViewController: UIViewController {
                 postLableReport.setupAutolocalization(withKey: "", keyPath: "text")
             }
             
-            if contentArticleTextView.text == Constants.Strings.toolDescription.addLocalization(str: languague!) {
+            if contentArticleTextView.text == Constants.Strings.toolDescription.addLocalization(str: languague!) || contentArticleTextView.text.count == 0  {
                 postDescriptionReport.setupAutolocalization(withKey: Constants.Strings.postToolDescriptionReport, keyPath: "text")
             }else {
                 postDescriptionReport.setupAutolocalization(withKey: "", keyPath: "text")
@@ -263,8 +290,10 @@ class PostViewController: UIViewController {
             sender.tintColor = Constants.Colors.buttonBackgroundColor.color
         }
         
-        
-        
+        articleTitleTextField.resignFirstResponder()
+        contentArticleTextView.resignFirstResponder()
+        self.bottomConstants.constant = 0
+        self.keyboardGruopView.isHidden = true
     }
     
     @objc private func didTapXIcon() {
@@ -272,7 +301,45 @@ class PostViewController: UIViewController {
         
     }
     
+    @objc private func keyboardWillDisplay(_ notification: Notification) {
+        
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardReactangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardReactangle.height
+            self.keyboardGruopView.isHidden = false
+            self.bottomConstants.constant = keyboardHeight - 34
+            
+        }
+    }
     
+    @objc private func keyboardWillHiddens() {
+        articleTitleTextField.resignFirstResponder()
+        contentArticleTextView.resignFirstResponder()
+        self.bottomConstants.constant = 0
+        self.keyboardGruopView.isHidden = true
+    }
+    
+    private func keyboardWillHidden() {
+        let tapToHiddenKeyboard = UITapGestureRecognizer(target: self, action: #selector(didTapToView))
+        view.addGestureRecognizer(tapToHiddenKeyboard)
+    }
+    @objc private func didTapToView() {
+        view.endEditing(true)
+        articleTitleTextField.resignFirstResponder()
+        contentArticleTextView.resignFirstResponder()
+        self.bottomConstants.constant = 0
+        self.keyboardGruopView.isHidden = true
+    }
+    
+    @IBAction func postImageKBAction(_ sender: Any) {
+        
+    }
+    @IBAction func postVideoKBAction(_ sender: Any) {
+        
+    }
+    @IBAction func postLocationKBAction(_ sender: Any) {
+        
+    }
     
     
 }

@@ -451,6 +451,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tns-7S-LfE">
+                                <rect key="frame" x="0.0" y="768" width="393" height="50"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="IZt-7n-sJi">
+                                        <rect key="frame" x="56.666666666666657" y="12.666666666666629" width="280" height="25"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5q-jU-VyV">
+                                                <rect key="frame" x="0.0" y="0.0" width="26.666666666666668" height="25"/>
+                                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain"/>
+                                                <connections>
+                                                    <action selector="postImageKBAction:" destination="z4N-nO-H0A" eventType="touchUpInside" id="Vng-yd-c7w"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Znb-rm-wgr">
+                                                <rect key="frame" x="126.6666666666667" y="0.0" width="26.666666666666671" height="25"/>
+                                                <color key="backgroundColor" name="AccentColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain"/>
+                                                <connections>
+                                                    <action selector="postVideoKBAction:" destination="z4N-nO-H0A" eventType="touchUpInside" id="rHt-mO-LnL"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gbb-5y-Ooi">
+                                                <rect key="frame" x="253.33333333333334" y="0.0" width="26.666666666666657" height="25"/>
+                                                <color key="backgroundColor" name="AccentColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain"/>
+                                                <connections>
+                                                    <action selector="postLocationKBAction:" destination="z4N-nO-H0A" eventType="touchUpInside" id="CV2-BK-ByL"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="280" id="rlc-TX-azf"/>
+                                            <constraint firstAttribute="height" constant="25" id="x90-p4-jtP"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                                <constraints>
+                                    <constraint firstItem="IZt-7n-sJi" firstAttribute="centerX" secondItem="Tns-7S-LfE" secondAttribute="centerX" id="5ky-Sg-Nuq"/>
+                                    <constraint firstItem="IZt-7n-sJi" firstAttribute="centerY" secondItem="Tns-7S-LfE" secondAttribute="centerY" id="TBh-Tq-dZR"/>
+                                    <constraint firstAttribute="height" constant="50" id="XmB-6X-pkO"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1sb-iU-XZm">
                                 <rect key="frame" x="0.0" y="103" width="393" height="0.6666666666666714"/>
                                 <color key="backgroundColor" systemColor="systemCyanColor"/>
@@ -612,11 +660,14 @@
                         <viewLayoutGuide key="safeArea" id="SeA-4h-0eT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Tns-7S-LfE" firstAttribute="leading" secondItem="SeA-4h-0eT" secondAttribute="leading" id="4ab-26-n5A"/>
                             <constraint firstItem="cqm-Rx-PuR" firstAttribute="leading" secondItem="SeA-4h-0eT" secondAttribute="leading" id="7HK-tc-RE8"/>
                             <constraint firstItem="SeA-4h-0eT" firstAttribute="trailing" secondItem="cqm-Rx-PuR" secondAttribute="trailing" id="LxY-e6-AJM"/>
+                            <constraint firstItem="SeA-4h-0eT" firstAttribute="trailing" secondItem="Tns-7S-LfE" secondAttribute="trailing" id="RAY-Mb-McH"/>
                             <constraint firstItem="cqm-Rx-PuR" firstAttribute="bottom" secondItem="SeA-4h-0eT" secondAttribute="bottom" id="TpJ-6q-Qdl"/>
                             <constraint firstItem="SeA-4h-0eT" firstAttribute="top" secondItem="cqm-Rx-PuR" secondAttribute="top" id="bIk-Bp-Nfo"/>
                             <constraint firstItem="1sb-iU-XZm" firstAttribute="top" secondItem="SeA-4h-0eT" secondAttribute="top" id="fNM-ZT-2cF"/>
+                            <constraint firstItem="SeA-4h-0eT" firstAttribute="bottom" secondItem="Tns-7S-LfE" secondAttribute="bottom" id="pMu-nr-gGR"/>
                             <constraint firstItem="1sb-iU-XZm" firstAttribute="trailing" secondItem="SeA-4h-0eT" secondAttribute="trailing" id="sFc-o3-HHx"/>
                             <constraint firstItem="1sb-iU-XZm" firstAttribute="leading" secondItem="SeA-4h-0eT" secondAttribute="leading" id="yBy-eq-hnK"/>
                         </constraints>
@@ -624,15 +675,20 @@
                     <navigationItem key="navigationItem" title="têttetete" id="iPa-oW-Y8K"/>
                     <connections>
                         <outlet property="articleTitleTextField" destination="TYc-qo-gXW" id="fxY-H2-wAe"/>
+                        <outlet property="bottomConstants" destination="pMu-nr-gGR" id="fhS-YN-T5H"/>
                         <outlet property="closeUplaodedPhotoBT" destination="qaA-JF-hGb" id="RTA-bJ-wAo"/>
                         <outlet property="containerView" destination="rNm-0u-VAr" id="INf-E4-B0l"/>
                         <outlet property="contentArticleTextView" destination="QM4-fP-eJU" id="Les-w9-R79"/>
                         <outlet property="emptyImageView" destination="Fmr-b1-68w" id="Jmt-LG-8dA"/>
                         <outlet property="emptyLable" destination="wCM-IR-QEr" id="TAR-Xp-J4s"/>
                         <outlet property="groupView" destination="qed-Ci-JaC" id="g1x-rc-9jx"/>
+                        <outlet property="keyboardGruopView" destination="Tns-7S-LfE" id="HRF-Ie-Qhg"/>
                         <outlet property="postDescriptionReport" destination="XAg-dG-KYJ" id="VWk-Rd-Gbj"/>
+                        <outlet property="postImageKeyboardBT" destination="u5q-jU-VyV" id="lSH-yE-XyE"/>
                         <outlet property="postImageReport" destination="oAJ-Fp-l2c" id="c0Y-C6-wSx"/>
                         <outlet property="postLableReport" destination="3KD-OL-AwT" id="6XN-8i-0qC"/>
+                        <outlet property="postLocationKeyboardBT" destination="Gbb-5y-Ooi" id="PTg-1v-xxq"/>
+                        <outlet property="postVideoKeyboardBT" destination="Znb-rm-wgr" id="xBe-c6-7pI"/>
                         <outlet property="separateView" destination="1sb-iU-XZm" id="Eg7-FH-jvc"/>
                         <outlet property="uploadPhoto" destination="CYc-a3-rU7" id="ofD-tm-dIa"/>
                         <outlet property="uploadedPhotoImv" destination="1Om-yK-A5R" id="BVw-Zl-M5G"/>
@@ -1608,6 +1664,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="outgoingMessageBackground">
             <color red="0.20399998128414154" green="0.77999997138977051" blue="0.34899997711181641" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -1616,6 +1675,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBrownColor">
             <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
