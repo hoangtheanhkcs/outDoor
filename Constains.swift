@@ -43,6 +43,7 @@ enum Constants {
         static let imageKeyboard = "image 1"
         static let videoKeyboard = "youtube"
         static let locationKeyboard = "map-pin"
+        static let takeNewPhotoCollectCell = "camera 1"
     }
    
     enum Strings {
@@ -135,7 +136,8 @@ enum Constants {
         static let postDescriptionReport = "Bạn chưa nhập nội dung"
         static let postToolNameReport = "Bạn chưa nhập tên dụng cụ"
         static let postToolDescriptionReport = "Bạn chưa nhập mô tả"
-        
+        static let takeNewPhotoLAbleCLVC = "Chụp ảnh"
+        static let finishBTTitle = "Xong"
         
     }
     enum Fonts {
