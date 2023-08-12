@@ -41,3 +41,18 @@ extension String {
         return NSLocalizedString(self, tableName: nil, bundle: bundle, value: "", comment: "")
     }
 }
+
+
+extension String {
+    static func duration(from timeInterval: TimeInterval) -> String {
+        let duration: Int = Int(ceil(timeInterval))
+        let seconds = duration % 60
+        let minutes = (duration / 60) % 60
+        let hour = duration / 60 / 60
+        var durationString = String(format: "%02d:%02d", minutes, seconds)
+        if hour > 0 {
+            durationString = "\(hour):" + durationString
+        }
+        return durationString
+    }
+}

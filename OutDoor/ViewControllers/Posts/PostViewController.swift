@@ -8,17 +8,19 @@
 import UIKit
 import Photos
 import TheAnimation
+import AVKit
 
 enum TypeOfPost {
     case articlePost, toolsPost
 }
 
-protocol PostViewControllerDelegate: class {
-    func selectedImage(index: Int)
+
+protocol PostViewControllerDelegate:class {
+    func selectedAsset(item: AssetItem)
 }
 
-class PostViewController: UIViewController, GaleryViewControllerDelegate {
-    
+class PostViewController: UIViewController, GaleryItemViewControllerDelegate {
+   
     var typeOfPost: TypeOfPost = .articlePost
     
     @IBOutlet weak var separateView: UIView!
@@ -45,12 +47,72 @@ class PostViewController: UIViewController, GaleryViewControllerDelegate {
     
     @IBOutlet weak var postDescriptionReport: UILabel!
     
+    @IBOutlet weak var articleTitleTextField: UITextField!
+    
+    @IBOutlet weak var contentArticleTextView: UITextView!
+    
+    @IBOutlet weak var keyboardGruopView: UIView!
+    
+    @IBOutlet weak var postImageKeyboardBT: UIButton!
+    
+    @IBOutlet weak var postVideoKeyboardBT: UIButton!
+    
+    @IBOutlet weak var postLocationKeyboardBT: UIButton!
+    
+    @IBOutlet weak var firstPostImage: UIImageView!
+    
+    @IBOutlet weak var secondImage: UIImageView!
+    
+    @IBOutlet weak var thirstImage: UIImageView!
+    
+    @IBOutlet weak var fouthImage: UIImageView!
+    
+    @IBOutlet weak var stackPostImage: UIStackView!
+    
+    @IBOutlet weak var stackFirst: UIStackView!
+    
+    @IBOutlet weak var stackSecond: UIStackView!
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var stackFirstWidth: NSLayoutConstraint!
+    
+    @IBOutlet weak var stackPostImageConstants: NSLayoutConstraint!
+    
+    @IBOutlet weak var gestureTapView: UIView!
+    
+    
+    @IBOutlet weak var firstPostVideoDuration: UILabel!
+    
+    @IBOutlet weak var secondPostVideoDuration: UILabel!
+    
+    @IBOutlet weak var thistPostVideoDuration: UILabel!
+    
+    @IBOutlet weak var fouthPostVideoDuration: UILabel!
+    
+    @IBOutlet weak var postLoctionIcon: UIImageView!
+    
+    @IBOutlet weak var postLocationLable: UILabel!
+    
+    
+    
+    
+    
+    var textViewHeightChange: CGFloat? {
+        didSet {
+            if textViewHeightChange != oldValue {
+                scrollView.scrollToBottom(animated: false)
+            }
+        }
+    }
+    
+   
+    
     private var imagePlaneColor: UIColor = Constants.Colors.paperPlane.color {
         didSet {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: Constants.Images.paperPlane)?.imageWithColor(color: imagePlaneColor), style: .plain, target: self, action: #selector(didTapPaperPlane))
         }
     }
-    
     
     private var languague:String? {
         return  UserDefaults.standard.value(forKey: "language") as? String
@@ -78,77 +140,50 @@ class PostViewController: UIViewController, GaleryViewControllerDelegate {
     }
     
     
-    @IBOutlet weak var articleTitleTextField: UITextField!
+    var chooseImagePost: [String: AssetItem?] = [:]
     
-    @IBOutlet weak var contentArticleTextView: UITextView!
+    weak var delegate: PostViewControllerDelegate?
     
-    @IBOutlet weak var keyboardGruopView: UIView!
-    
-    
-    
-    @IBOutlet weak var postImageKeyboardBT: UIButton!
-    
-    @IBOutlet weak var postVideoKeyboardBT: UIButton!
-    
-    @IBOutlet weak var postLocationKeyboardBT: UIButton!
-    
-    
-    
-    @IBOutlet weak var firstPostImage: UIImageView!
-    
-    @IBOutlet weak var secondImage: UIImageView!
-    
-    @IBOutlet weak var thirstImage: UIImageView!
-    
-    @IBOutlet weak var fouthImage: UIImageView!
-    
-    @IBOutlet weak var stackPostImage: UIStackView!
-    
-    @IBOutlet weak var stackFirst: UIStackView!
-    @IBOutlet weak var stackSecond: UIStackView!
-    
-    
-    @IBOutlet weak var scrollView: UIScrollView!
+    private var containerChildView: UIView?
+
+    var galeryVC: GaleryItemViewController?
     
     var photoPostHidden:Bool = true
-    
     var textviewExpand:CGFloat = 0
     
+    @IBOutlet weak var containerPostImage01: UIView!
     
-    @IBOutlet weak var stackFirstWidth: NSLayoutConstraint!
+    @IBOutlet weak var containerPostImage02: UIView!
     
-    @IBOutlet weak var stackPostImageConstants: NSLayoutConstraint!
+    @IBOutlet weak var containerPostImage03: UIView!
     
-    @IBOutlet weak var gestureTapView: UIView!
+    @IBOutlet weak var containerPostImage04: UIView!
     
-    var textViewHeightChange: CGFloat? {
-        didSet {
-            if textViewHeightChange != oldValue {
-                scrollView.scrollToBottom(animated: false)
-            }
-        }
+    
+    enum PostButton {
+        case image, video, locaton, keyboard
     }
-    
-    let bt1 = UIButton()
-    let bt2 = UIButton()
-    let bt3 = UIButton()
-    let bt4 = UIButton()
-    
-    var chooseImagePost: [GaleryItem] = []
-    weak var delegate: PostViewControllerDelegate?
-    private var showChoosePostImage:Bool = false
-    private var containerChildView: UIView?
-    var galeryVC: GaleryViewController?
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        keyboardGruopView.isHidden = true
-        self.setupAutolocalization(withKey: Constants.Strings.postArticle, keyPath: "title")
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Constants.Fonts.SFBold17]
         setupSubview()
+        setupKeyboardWithComponent()
+        setupTextViewTextField()
+        setPostImagePostVideoShowInView()
+        
+        containerChildView?.frame = CGRect(x: 0, y: keyboardGruopView.frame.maxY, width: view.bounds.width, height: view.bounds.height - keyboardGruopView.frame.maxY)
+        galeryVC?.view.frame = containerChildView!.bounds
+        containerChildView?.addSubview(galeryVC!.view)
+    containerChildView?.isHidden = true
+       
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisplay), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHiddens), name: UIResponder.keyboardWillHideNotification, object: nil)
+     
+    }
+    
+    private func setupTextViewTextField() {
         contentArticleTextView.delegate = self
         articleTitleTextField.delegate = self
         postImageReport.setupAutolocalization(withKey: "", keyPath: "text")
@@ -159,39 +194,70 @@ class PostViewController: UIViewController, GaleryViewControllerDelegate {
         articleTitleTextField.autocorrectionType = .no
         articleTitleTextField.spellCheckingType = .no
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisplay), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHiddens), name: UIResponder.keyboardWillHideNotification, object: nil)
+        contentArticleTextView.layer.borderWidth = 1
+        contentArticleTextView.layer.borderColor = Constants.Colors.textColorType8.color.cgColor
+        contentArticleTextView.layer.cornerRadius = 6
+        contentArticleTextView.translatesAutoresizingMaskIntoConstraints = true
+        contentArticleTextView.isScrollEnabled = false
+        contentArticleTextView.textContainerInset = UIEdgeInsets(top: 10, left: 3, bottom: 15, right: 0)
+        contentArticleTextView.backgroundColor = .white
+        contentArticleTextView.font = Constants.Fonts.SFReguler17
         
-        keyboardWillHidden()
-       
-       
+        articleTitleTextField.font = Constants.Fonts.SFReguler17
+        articleTitleTextField.textColor = Constants.Colors.textColorType6.color
+        articleTitleTextField.autocapitalizationType = .sentences
+    }
+    
+    private func setPostImagePostVideoShowInView() {
         stackFirstWidth.constant = (containerView.bounds.width - 10)/2
-       
+        
         stackPostImageConstants.constant = 0
         stackFirst.backgroundColor = .clear
         stackSecond.backgroundColor = .clear
         stackPostImage.backgroundColor = .clear
         
-        bt1.addTarget(self, action: #selector(didTapCloseImageTextView1), for: .touchUpInside)
-        bt2.addTarget(self, action: #selector(didTapCloseImageTextView2), for: .touchUpInside)
-        bt3.addTarget(self, action: #selector(didTapCloseImageTextView3), for: .touchUpInside)
-        bt4.addTarget(self, action: #selector(didTapCloseImageTextView4), for: .touchUpInside)
+        firstPostVideoDuration.layer.cornerRadius = 6.5
+        firstPostVideoDuration.layer.masksToBounds = true
+        firstPostVideoDuration.isHidden = true
+        
+        secondPostVideoDuration.layer.cornerRadius = 6.5
+        secondPostVideoDuration.layer.masksToBounds = true
+        secondPostVideoDuration.isHidden = true
+        
+        thistPostVideoDuration.layer.cornerRadius = 6.5
+        thistPostVideoDuration.layer.masksToBounds = true
+        thistPostVideoDuration.isHidden = true
+        
+        fouthPostVideoDuration.layer.cornerRadius = 6.5
+        fouthPostVideoDuration.layer.masksToBounds = true
+        fouthPostVideoDuration.isHidden = true
+        
+        
+        postLoctionIcon.image = UIImage(named: Constants.Images.locationKeyboard)
+        postLocationLable.text = "775 Rolling Green Rd."
+        
+        
+    }
+    
+    private func setupKeyboardWithComponent() {
+        keyboardGruopView.backgroundColor = Constants.Colors.textColorType8.color
+        keyboardGruopView.isHidden = true
+        
+        keyboardWillHidden()
+        
+        postImageKeyboardBT.setImage(UIImage(named: Constants.Images.imageKeyboard), for: .normal)
+        postVideoKeyboardBT.setImage(UIImage(named: Constants.Images.videoKeyboard), for: .normal)
+        postLocationKeyboardBT.setImage(UIImage(named: Constants.Images.locationKeyboard), for: .normal)
+        postImageKeyboardBT.backgroundColor = .clear
+        postVideoKeyboardBT.backgroundColor = .clear
+        postLocationKeyboardBT.backgroundColor = .clear
+        
         
         containerChildView = UIView()
         view.addSubview(containerChildView!)
-        
-        
-        galeryVC = storyboard?.instantiateViewController(withIdentifier: "GaleryViewController") as? GaleryViewController
-        galeryVC?.delegate = self
        
-        self.delegate = galeryVC
-        addChild(galeryVC!)
-        galeryVC?.didMove(toParent: self)
         
-        
-        
-        
-        
+      
         
         
     }
@@ -233,6 +299,18 @@ class PostViewController: UIViewController, GaleryViewControllerDelegate {
     
 
     private func setupSubview() {
+        
+        galeryVC = storyboard?.instantiateViewController(withIdentifier: "GaleryItemViewController") as? GaleryItemViewController
+        galeryVC?.delegate = self
+       
+        self.delegate = galeryVC
+        addChild(galeryVC!)
+        galeryVC?.didMove(toParent: self)
+        
+        
+        self.setupAutolocalization(withKey: Constants.Strings.postArticle, keyPath: "title")
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Constants.Fonts.SFBold17]
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: Constants.Images.paperPlane), style: .plain, target: self, action: #selector(didTapPaperPlane))
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: Constants.Images.xIcon), style: .done, target: self, action: #selector(didTapXIcon))
         
@@ -257,20 +335,7 @@ class PostViewController: UIViewController, GaleryViewControllerDelegate {
         uploadPhoto.backgroundColor = Constants.Colors.buttonBackgroundColor.color
         uploadPhoto.setImage(UIImage(named: Constants.Images.uploadButton), for: .normal)
         
-        contentArticleTextView.layer.borderWidth = 1
-        contentArticleTextView.layer.borderColor = Constants.Colors.textColorType8.color.cgColor
-        contentArticleTextView.layer.cornerRadius = 6
-        contentArticleTextView.translatesAutoresizingMaskIntoConstraints = true
-        contentArticleTextView.isScrollEnabled = false
-        contentArticleTextView.textContainerInset = UIEdgeInsets(top: 10, left: 3, bottom: 15, right: 0)
-        contentArticleTextView.backgroundColor = .white
-        contentArticleTextView.font = Constants.Fonts.SFReguler17
-        
-        
-        articleTitleTextField.font = Constants.Fonts.SFReguler17
-        articleTitleTextField.textColor = Constants.Colors.textColorType6.color
-        articleTitleTextField.autocapitalizationType = .sentences
-        
+    
         postImageReport.font = Constants.Fonts.SFLight13
         postImageReport.textColor = Constants.Colors.buttonBackgroundColor.color
         postLableReport.font = Constants.Fonts.SFLight13
@@ -294,56 +359,64 @@ class PostViewController: UIViewController, GaleryViewControllerDelegate {
         
         closeUplaodedPhotoBT.setImage(UIImage(named: Constants.Images.closeUploadedPhoto), for: .normal)
         setupTextView()
-        keyboardGruopView.backgroundColor = Constants.Colors.textColorType8.color
-       
-        postImageKeyboardBT.setImage(UIImage(named: Constants.Images.imageKeyboard), for: .normal)
-        postVideoKeyboardBT.setImage(UIImage(named: Constants.Images.videoKeyboard), for: .normal)
-        postLocationKeyboardBT.setImage(UIImage(named: Constants.Images.locationKeyboard), for: .normal)
-        postImageKeyboardBT.backgroundColor = .clear
-        postVideoKeyboardBT.backgroundColor = .clear
-        postLocationKeyboardBT.backgroundColor = .clear
     }
     
-    func setupStackImagePost() {
-        var bt : [UIButton] = []
+   
+    
+    
+    
+    @IBAction func closeBT01Action(_ sender: Any) {
+        guard let item = chooseImagePost["image01"] as? AssetItem else {return}
+        delegate?.selectedAsset(item: item)
+        containerPostImage01.isHidden = true
         
-        bt = [bt1 , bt2, bt3, bt4]
-        bt.forEach({$0.setImage(UIImage(named: Constants.Images.closeUploadedPhoto), for: .normal)})
-        bt.forEach({$0.frame.size = CGSize(width: 24, height: 24)})
-        bt.forEach({$0.backgroundColor = .clear})
-      
-        bt1.frame.origin = CGPoint(x: firstPostImage.frame.width - bt1.frame.width, y: 0)
-        stackFirst.addSubview(bt1)
+        updateStackView()
+    }
+    
+    
+    @IBAction func closeBT02Action(_ sender: Any) {
+        guard let item = chooseImagePost["image02"] as? AssetItem else {return}
+        delegate?.selectedAsset(item: item)
+        containerPostImage02.isHidden = true
+        updateStackView()
+    }
+    
+    @IBAction func closeBT03Action(_ sender: Any) {
+        guard let item = chooseImagePost["image03"] as? AssetItem else {return}
+        delegate?.selectedAsset(item: item)
+        containerPostImage03.isHidden = true
+        updateStackView()
+    }
+    
+    @IBAction func closeBT04Action(_ sender: Any) {
+        guard let item = chooseImagePost["image04"] as? AssetItem else {return}
+        delegate?.selectedAsset(item: item)
+        containerPostImage04.isHidden = true
+        updateStackView()
+    }
+    
+    
+   
+    private func updateStackView() {
+        if containerPostImage01.isHidden == true && containerPostImage02.isHidden == true {
+            stackSecond.axis = .horizontal
+            stackFirst.isHidden = true
+        }
+        if containerPostImage03.isHidden == true && containerPostImage04.isHidden == true {
+            stackFirst.axis = .horizontal
+            stackSecond.isHidden = true
+        }
         
-        bt2.frame.origin = CGPoint(x: secondImage.frame.width - bt2.frame.width, y: 0)
-        stackSecond.addSubview(bt2)
-        
-        bt3.frame.origin = CGPoint(x: thirstImage.frame.width - bt3.frame.width, y: thirstImage.frame.origin.y)
-        stackSecond.addSubview(bt3)
-        
-        bt4.frame.origin = CGPoint(x: fouthImage.frame.width - bt4.frame.width, y: fouthImage.frame.origin.y)
-        stackFirst.addSubview(bt4)
+        if containerPostImage01.isHidden == true && containerPostImage02.isHidden == true && containerPostImage03.isHidden == true && containerPostImage04.isHidden == true {
+            stackPostImageConstants.constant = 0
+        }
+        DispatchQueue.main.async {
+            self.scrollView.scrollToBottom(animated: true)
+        }
         
     }
     
-    @objc private func didTapCloseImageTextView1() {
-        
-        
-        delegate?.selectedImage(index: 0)
-        
-    }
-    @objc private func didTapCloseImageTextView2() {
-        
-        delegate?.selectedImage(index: 1)
-    }
-    @objc private func didTapCloseImageTextView3() {
-       
-        delegate?.selectedImage(index: 2)
-    }
-    @objc private func didTapCloseImageTextView4() {
-        
-        delegate?.selectedImage(index: 3)
-    }
+    
     
     private func setupTextView() {
         switch typeOfPost {
@@ -387,14 +460,15 @@ class PostViewController: UIViewController, GaleryViewControllerDelegate {
     }
     
     private func gotoGaleryPhotoVC() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else {return}
-            let vc = storyboard?.instantiateViewController(withIdentifier: "GaleryViewController") as? GaleryViewController
-            vc?.selectMode = .one
+       
+            let vc = storyboard?.instantiateViewController(withIdentifier: "GaleryItemViewController") as? GaleryItemViewController
+            
+            vc?.assetType = .photo
+        vc?.selectAssetMode = .one
             vc?.delegate = self
             vc?.heightConstantFNBT = 650
             self.navigationController?.pushViewController(vc!, animated: true)
-        }
+        
     }
     
     
@@ -464,6 +538,8 @@ class PostViewController: UIViewController, GaleryViewControllerDelegate {
             let keyboardReactangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardReactangle.height
             self.keyboardGruopView.isHidden = false
+            updatePostButtonState(.keyboard)
+            containerChildView?.isHidden = true
         }
     }
     
@@ -488,48 +564,118 @@ class PostViewController: UIViewController, GaleryViewControllerDelegate {
     }
     
     @IBAction func postImageKBAction(_ sender: Any) {
+        updatePostButtonState(.image)
+        let photoAuthorization = PHPhotoLibrary.authorizationStatus()
+        if photoAuthorization == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({status in
+                if status == .authorized{
+                    self.gotoGaleryImageVC()
+                } else {
+                    let alert = UIAlertController(title: "Photos Access Denied", message: "App needs access to videos library.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            })
+        } else if photoAuthorization == .authorized {
+            gotoGaleryImageVC()
+        }
+        
+    }
+    private func gotoGaleryImageVC() {
+       
+        galeryVC?.assetType = .photo
+        galeryVC?.selectAssetMode = .four
+    
+        containerChildView?.isHidden = false
         
         keyboardWillHiddens()
-      
-        galeryVC?.selectMode = .four
-        if showChoosePostImage == false {
-            postImageKeyboardBT.setImage(UIImage(named: Constants.Images.imageKeyboard)?.imageWithColor(color: Constants.Colors.buttonBackgroundColor.color), for: .normal)
-            containerChildView?.frame = CGRect(x: 0, y: keyboardGruopView.frame.maxY, width: view.bounds.width, height: view.bounds.height - keyboardGruopView.frame.maxY)
-            galeryVC?.view.frame = containerChildView!.bounds
-            containerChildView?.addSubview(galeryVC!.view)
-            containerChildView?.isHidden = false
-            showChoosePostImage = true
-        }else if showChoosePostImage == true {
-            
-            print("ewrwrwrw")
-            postImageKeyboardBT.setImage(UIImage(named: Constants.Images.imageKeyboard), for: .normal)
-            containerChildView?.isHidden = true
-            showChoosePostImage = false
-            contentArticleTextView.becomeFirstResponder()
-            
-        }
-       
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
     
   
     @IBAction func postVideoKBAction(_ sender: Any) {
+        updatePostButtonState(.video)
+        let photoAuthorization = PHPhotoLibrary.authorizationStatus()
+         if photoAuthorization == .notDetermined {
+             PHPhotoLibrary.requestAuthorization({status in
+                 if status == .authorized{
+                     self.gotoGaleryVideoVC()
+                 } else {
+                     let alert = UIAlertController(title: "Photos Access Denied", message: "App needs access to videos library.", preferredStyle: .alert)
+                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                     self.present(alert, animated: true, completion: nil)
+                 }
+             })
+         } else if photoAuthorization == .authorized {
+             gotoGaleryVideoVC()
+         }
         
     }
+    
+    private func gotoGaleryVideoVC() {
+        
+        updatePostButtonState(.video)
+        galeryVC?.assetType = .video
+        galeryVC?.selectAssetMode = .four
+        
+        
+        containerChildView?.isHidden = false
+        keyboardWillHiddens()
+        
+    }
+    
+    
+    
     @IBAction func postLocationKBAction(_ sender: Any) {
+        updatePostButtonState(.locaton)
+        containerChildView?.isHidden = true
         
+        keyboardWillHiddens()
     }
     
     
-    func updateCollectedImage(collect: [GaleryItem]) {
+    
+    @IBAction func downForPostKeyboardAction(_ sender: Any) {
+        
+        keyboardGruopView.isHidden = true
+        containerChildView?.isHidden = true
+        keyboardWillHiddens()
+    }
+    
+    
+   
+    private func updatePostButtonState(_ buttonSelect: PostButton) {
+        if buttonSelect == .image {
+            postImageKeyboardBT.setImage(UIImage(named: Constants.Images.imageKeyboard)?.imageWithColor(color: Constants.Colors.buttonBackgroundColor.color), for: .normal)
+            
+            
+            postVideoKeyboardBT.setImage(UIImage(named: Constants.Images.videoKeyboard), for: .normal)
+            
+            
+            postLocationKeyboardBT.setImage(UIImage(named: Constants.Images.locationKeyboard), for: .normal)
+        }
+        if buttonSelect == .video {
+            postImageKeyboardBT.setImage(UIImage(named: Constants.Images.imageKeyboard), for: .normal)
+           
+            
+            postVideoKeyboardBT.setImage(UIImage(named: Constants.Images.videoKeyboard)?.imageWithColor(color: Constants.Colors.buttonBackgroundColor.color), for: .normal)
+            
+            
+            postLocationKeyboardBT.setImage(UIImage(named: Constants.Images.locationKeyboard), for: .normal)
+        }
+        if buttonSelect == .locaton {
+            postImageKeyboardBT.setImage(UIImage(named: Constants.Images.imageKeyboard), for: .normal)
+            postVideoKeyboardBT.setImage(UIImage(named: Constants.Images.videoKeyboard), for: .normal)
+            postLocationKeyboardBT.setImage(UIImage(named: Constants.Images.locationKeyboard)?.imageWithColor(color: Constants.Colors.buttonBackgroundColor.color), for: .normal)
+        }
+        if buttonSelect == .keyboard {
+            postImageKeyboardBT.setImage(UIImage(named: Constants.Images.imageKeyboard), for: .normal)
+            postVideoKeyboardBT.setImage(UIImage(named: Constants.Images.videoKeyboard), for: .normal)
+            postLocationKeyboardBT.setImage(UIImage(named: Constants.Images.locationKeyboard), for: .normal)
+        }
+        
+    }
+    
+    func updateCollectedImage(collect: [AssetItem]) {
         if collect.count != 0 {
             imageUpload = collect.first?.image
             
@@ -537,126 +683,19 @@ class PostViewController: UIViewController, GaleryViewControllerDelegate {
             imageUpload = nil
         }
     }
-    func updateCollectedFourImage(collect: [GaleryItem]) {
-        
-        print("rrwrwrwerwrwrwrwrwrwrw")
-        print(collect.count)
-    
-        guard collect.count <= 4 else {return}
-        if collect.count == 0 {
-            stackPostImageConstants.constant = 0
-            firstPostImage.isHidden = true
-            secondImage.isHidden = true
-            thirstImage.isHidden = true
-            fouthImage.isHidden = true
-            stackFirst.isHidden = true
-            stackSecond.isHidden = true
-            bt1.isHidden = true
-            bt2.isHidden = true
-            bt3.isHidden = true
-            bt4.isHidden = true
-          
-            
-            
-        }
-        
-        if collect.count == 1 {
-            stackPostImageConstants.constant = 225
-            firstPostImage.isHidden = false
-            firstPostImage.image = collect.first?.image
-            secondImage.isHidden = true
-            thirstImage.isHidden = true
-            fouthImage.isHidden = true
-            stackFirst.isHidden = false
-            stackFirstWidth.constant = containerView.bounds.width
-            stackSecond.isHidden = true
-            bt1.isHidden = false
-            bt2.isHidden = true
-            bt3.isHidden = true
-            bt4.isHidden = true
-        
-        }
-        
-        if collect.count == 2 {
-            stackPostImageConstants.constant = 225
-            firstPostImage.isHidden = false
-            firstPostImage.image = collect.first?.image
-            secondImage.isHidden = false
-            secondImage.image = collect[1].image
-            thirstImage.isHidden = true
-            fouthImage.isHidden = true
-            stackFirst.isHidden = false
-            stackFirstWidth.constant = (containerView.bounds.width - 10)/2
-            stackSecond.isHidden = false
-            bt1.isHidden = false
-            bt2.isHidden = false
-            bt3.isHidden = true
-            bt4.isHidden = true
-           
-            
-        }
-        if collect.count == 3 {
-            stackPostImageConstants.constant = 225
-            firstPostImage.isHidden = false
-            firstPostImage.image = collect.first?.image
-            secondImage.isHidden = false
-            secondImage.image = collect[1].image
-            thirstImage.isHidden = false
-            thirstImage.image = collect[2].image
-            fouthImage.isHidden = true
-            stackFirst.isHidden = false
-            stackFirstWidth.constant = containerView.bounds.width - 10 - 150
-            stackSecond.isHidden = false
-            bt1.isHidden = false
-            bt2.isHidden = false
-            bt3.isHidden = false
-            bt4.isHidden = true
-           
-        }
-        if collect.count == 4 {
-            stackPostImageConstants.constant = 225
-            firstPostImage.isHidden = false
-            firstPostImage.image = collect.first?.image
-            secondImage.isHidden = false
-            secondImage.image = collect[1].image
-            thirstImage.isHidden = false
-            thirstImage.image = collect[2].image
-            fouthImage.isHidden = false
-            fouthImage.image = collect[3].image
-            stackFirst.isHidden = false
-            stackFirstWidth.constant = (containerView.bounds.width - 10)/2
-            stackSecond.isHidden = false
-            bt1.isHidden = false
-            bt2.isHidden = false
-            bt3.isHidden = false
-            bt4.isHidden = false
-            
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-            self.scrollView.scrollToBottom(animated: true)
-            self.setupStackImagePost()
-        })
-        
-        
-        
-      
-       
-        
-        
-    }
     
 }
 
 
 extension PostViewController: UITextViewDelegate {
-    
-    
-    
     func textViewDidBeginEditing(_ textView: UITextView) {
         
         postImageKeyboardBT.isEnabled = true
         postVideoKeyboardBT.isEnabled = true
         postLocationKeyboardBT.isEnabled = true
+        
+        
+        
         switch typeOfPost {
         case .articlePost:
             let placeholder = Constants.Strings.content.addLocalization(str: languague ?? "vi")
@@ -736,6 +775,189 @@ extension PostViewController: UITextFieldDelegate {
     
     
 }
+
+
+
+extension PostViewController {
+    
+    
+    
+    
+    func updateChooseItemForPost(collect: AssetItem) {
+        
+        DispatchQueue.main.async {
+            self.imageUpload = collect.image
+        }
+       
+    }
+    
+    
+    func updateCollectedItem(collect: [AssetItem]) {
+        
+        
+       
+         guard collect.count <= 4 else {return}
+         if collect.count == 0 {
+             stackPostImageConstants.constant = 0
+             
+             chooseImagePost["image01"] = nil
+             chooseImagePost["image02"] = nil
+             chooseImagePost["image03"] = nil
+             chooseImagePost["image04"] = nil
+             
+             
+         }
+         
+         if collect.count == 1 {
+             stackPostImageConstants.constant = 225
+            
+             
+             chooseImagePost["image01"] = collect.first
+             chooseImagePost["image02"] = nil
+             chooseImagePost["image03"] = nil
+             chooseImagePost["image04"] = nil
+         
+         }
+         
+         if collect.count == 2 {
+             stackPostImageConstants.constant = 225
+          
+             
+             chooseImagePost["image01"] = collect.first
+             chooseImagePost["image02"] = collect.last
+             chooseImagePost["image03"] = nil
+             chooseImagePost["image04"] = nil
+            
+             
+         }
+         if collect.count == 3 {
+             stackPostImageConstants.constant = 225
+         
+             
+             chooseImagePost["image01"] = collect.first
+             chooseImagePost["image02"] = collect[1]
+             chooseImagePost["image03"] = collect.last
+             chooseImagePost["image04"] = nil
+            
+         }
+         if collect.count == 4 {
+             stackPostImageConstants.constant = 225
+         
+             
+             chooseImagePost["image01"] = collect.first
+             chooseImagePost["image02"] = collect[1]
+             chooseImagePost["image03"] = collect[2]
+             chooseImagePost["image04"] = collect.last
+             
+         }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+            self.updateImagePost()
+            self.updateVideoDeration()
+            self.scrollView.scrollToBottom(animated: true)
+           
+            
+        })
+
+
+         
+     }
+    
+    
+    private func updateImagePost() {
+        if let item01 = chooseImagePost["image01"] as? AssetItem {
+            firstPostImage.image = item01.image
+            containerPostImage01.isHidden = false
+            stackFirst.isHidden = false
+            
+            
+        }else {
+            containerPostImage01.isHidden = true
+            
+        }
+        
+        if let item02 = chooseImagePost["image02"] as? AssetItem {
+            secondImage.image = item02.image
+            containerPostImage02.isHidden = false
+            stackFirst.isHidden = false
+        }else {
+            containerPostImage02.isHidden = true
+            
+        }
+        if let item03 = chooseImagePost["image03"] as? AssetItem {
+            thirstImage.image = item03.image
+            containerPostImage03.isHidden = false
+            stackSecond.isHidden = false
+        }else {
+            containerPostImage03.isHidden = true
+           
+        }
+       if let item04 = chooseImagePost["image04"] as? AssetItem {
+           fouthImage.image = item04.image
+           containerPostImage04.isHidden = false
+           stackSecond.isHidden = false
+       }else {
+           containerPostImage04.isHidden = true
+           
+       }
+        
+        if stackFirst.isHidden == false && stackSecond.isHidden == false {
+            stackFirst.axis = .vertical
+            stackSecond.axis = .vertical
+        }
+        
+        
+        
+    }
+    
+    private func updateVideoDeration() {
+        if let item01 = chooseImagePost["image01"] as? AssetItem {
+            if item01.assetType == .video {
+                let duration = String.duration(from: item01.asset!.duration)
+                firstPostVideoDuration.text = duration
+                firstPostVideoDuration.isHidden = false
+            }else if item01.assetType == .photo {
+                firstPostVideoDuration.isHidden = true
+            }
+        }
+        if let item02 = chooseImagePost["image02"] as? AssetItem {
+            if item02.assetType == .video {
+                let duration = String.duration(from: item02.asset!.duration)
+                secondPostVideoDuration.text = duration
+                secondPostVideoDuration.isHidden = false
+            }else if item02.assetType == .photo {
+                secondPostVideoDuration.isHidden = true
+            }
+        }
+        if let item03 = chooseImagePost["image03"] as? AssetItem {
+            if item03.assetType == .video {
+                let duration = String.duration(from: item03.asset!.duration)
+                thistPostVideoDuration.text = duration
+                thistPostVideoDuration.isHidden = false
+            }else if item03.assetType == .photo {
+                thistPostVideoDuration.isHidden = true
+            }
+        }
+        if let item04 = chooseImagePost["image04"] as? AssetItem {
+            if item04.assetType == .video {
+                let duration = String.duration(from: item04.asset!.duration)
+                fouthPostVideoDuration.text = duration
+                fouthPostVideoDuration.isHidden = false
+            }else if item04.assetType == .photo {
+                fouthPostVideoDuration.isHidden = true
+            }
+        }
+        
+        
+        
+    }
+    
+    
+}
+
+
+
+
+
 
 extension UIViewController {
     func add(_ child: UIViewController) {

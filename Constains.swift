@@ -44,6 +44,12 @@ enum Constants {
         static let videoKeyboard = "youtube"
         static let locationKeyboard = "map-pin"
         static let takeNewPhotoCollectCell = "camera 1"
+        
+        static let takeNewVideo = "video"
+        static let cicleButton = "Ellipse 25"
+        static let selectButton = "Ellipse 28"
+        
+        static let downKeyboard = "ic_arrow_down_gray"
     }
    
     enum Strings {
@@ -139,6 +145,8 @@ enum Constants {
         static let takeNewPhotoLAbleCLVC = "Chụp ảnh"
         static let finishBTTitle = "Xong"
         
+        static let takeNewVideo = "Quay video"
+        
     }
     enum Fonts {
         
@@ -169,6 +177,10 @@ enum Constants {
         
         static let SFReguler13 = UIFont(name: "SanFranciscoText-Regular", size: 13)
         static let SFLight13 = UIFont(name: "SanFranciscoText-Light", size: 13)
+        
+        
+        static let SFReguler11 = UIFont(name: "SanFranciscoText-Regular", size: 11)
+        static let SFLight11 = UIFont(name: "SanFranciscoText-Light", size: 11)
         
     }
     enum Colors {

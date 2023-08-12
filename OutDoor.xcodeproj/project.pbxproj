@@ -20,11 +20,8 @@
 		5A45267D2A6FDAF8001E2028 /* NotificViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45267C2A6FDAF8001E2028 /* NotificViewController.swift */; };
 		5A45267F2A6FDB09001E2028 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45267E2A6FDB09001E2028 /* UserInfoViewController.swift */; };
 		5A4526E12A70FECE001E2028 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4526E02A70FECE001E2028 /* StorageManager.swift */; };
-		5AAB156F2A7BAB40007FD20A /* GaleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB156D2A7BAB40007FD20A /* GaleryCollectionViewCell.swift */; };
-		5AAB15702A7BAB40007FD20A /* GaleryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AAB156E2A7BAB40007FD20A /* GaleryCollectionViewCell.xib */; };
 		5AAB15722A7D3A55007FD20A /* scroll+ EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB15712A7D3A55007FD20A /* scroll+ EX.swift */; };
 		5AAB15742A7D5F14007FD20A /* UIViewControllerEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB15732A7D5F14007FD20A /* UIViewControllerEX.swift */; };
-		5AAB15982A7D8FA0007FD20A /* GaleryViewController01.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB15972A7D8FA0007FD20A /* GaleryViewController01.swift */; };
 		5AAE1FF52A72A970000EA78D /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE1FF42A72A970000EA78D /* SettingViewController.swift */; };
 		5AAE1FF72A72B529000EA78D /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE1FF62A72B529000EA78D /* Setting.swift */; };
 		5AAE1FFA2A72B8A1000EA78D /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AAE1FF82A72B8A1000EA78D /* SettingCell.xib */; };
@@ -41,6 +38,11 @@
 		5AAE20372A76D684000EA78D /* PreviewAvatarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE20362A76D684000EA78D /* PreviewAvatarViewController.swift */; };
 		5AAE203A2A77A1CA000EA78D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5AAE203C2A77A1CA000EA78D /* Localizable.strings */; };
 		5AAE20462A79E8DD000EA78D /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE20452A79E8DD000EA78D /* PostViewController.swift */; };
+		5AC082D22A84757400FF8B84 /* VideoLibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC082D02A84757400FF8B84 /* VideoLibraryCollectionViewCell.swift */; };
+		5AC082D32A84757400FF8B84 /* VideoLibraryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AC082D12A84757400FF8B84 /* VideoLibraryCollectionViewCell.xib */; };
+		5AC082D72A853D9A00FF8B84 /* GaleryItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC082D62A853D9A00FF8B84 /* GaleryItemViewController.swift */; };
+		5AC082DA2A86BE2F00FF8B84 /* PhotoLibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC082D82A86BE2F00FF8B84 /* PhotoLibraryCollectionViewCell.swift */; };
+		5AC082DB2A86BE2F00FF8B84 /* PhotoLibraryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AC082D92A86BE2F00FF8B84 /* PhotoLibraryCollectionViewCell.xib */; };
 		5AD42AA72A68DE7400D51C6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD42AA62A68DE7400D51C6F /* AppDelegate.swift */; };
 		5AD42AA92A68DE7400D51C6F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD42AA82A68DE7400D51C6F /* SceneDelegate.swift */; };
 		5AD42AAB2A68DE7400D51C6F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD42AAA2A68DE7400D51C6F /* ViewController.swift */; };
@@ -118,11 +120,8 @@
 		5A45267C2A6FDAF8001E2028 /* NotificViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificViewController.swift; sourceTree = "<group>"; };
 		5A45267E2A6FDB09001E2028 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		5A4526E02A70FECE001E2028 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
-		5AAB156D2A7BAB40007FD20A /* GaleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryCollectionViewCell.swift; sourceTree = "<group>"; };
-		5AAB156E2A7BAB40007FD20A /* GaleryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GaleryCollectionViewCell.xib; sourceTree = "<group>"; };
 		5AAB15712A7D3A55007FD20A /* scroll+ EX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "scroll+ EX.swift"; sourceTree = "<group>"; };
 		5AAB15732A7D5F14007FD20A /* UIViewControllerEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerEX.swift; sourceTree = "<group>"; };
-		5AAB15972A7D8FA0007FD20A /* GaleryViewController01.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryViewController01.swift; sourceTree = "<group>"; };
 		5AAE1FF42A72A970000EA78D /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		5AAE1FF62A72B529000EA78D /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		5AAE1FF82A72B8A1000EA78D /* SettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
@@ -142,6 +141,11 @@
 		5AAE203E2A77A250000EA78D /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		5AAE203F2A77A250000EA78D /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5AAE20452A79E8DD000EA78D /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		5AC082D02A84757400FF8B84 /* VideoLibraryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLibraryCollectionViewCell.swift; sourceTree = "<group>"; };
+		5AC082D12A84757400FF8B84 /* VideoLibraryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoLibraryCollectionViewCell.xib; sourceTree = "<group>"; };
+		5AC082D62A853D9A00FF8B84 /* GaleryItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryItemViewController.swift; sourceTree = "<group>"; };
+		5AC082D82A86BE2F00FF8B84 /* PhotoLibraryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryCollectionViewCell.swift; sourceTree = "<group>"; };
+		5AC082D92A86BE2F00FF8B84 /* PhotoLibraryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoLibraryCollectionViewCell.xib; sourceTree = "<group>"; };
 		5AD42AA32A68DE7400D51C6F /* OutDoor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OutDoor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD42AA62A68DE7400D51C6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5AD42AA82A68DE7400D51C6F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -286,8 +290,10 @@
 				5AAE20062A72CAC3000EA78D /* EditUserInfoCell.xib */,
 				5AAE20042A72CAC2000EA78D /* UpDateUserInfoCell.swift */,
 				5AAE20052A72CAC2000EA78D /* UpDateUserInfoCell.xib */,
-				5AAB156D2A7BAB40007FD20A /* GaleryCollectionViewCell.swift */,
-				5AAB156E2A7BAB40007FD20A /* GaleryCollectionViewCell.xib */,
+				5AC082D82A86BE2F00FF8B84 /* PhotoLibraryCollectionViewCell.swift */,
+				5AC082D92A86BE2F00FF8B84 /* PhotoLibraryCollectionViewCell.xib */,
+				5AC082D02A84757400FF8B84 /* VideoLibraryCollectionViewCell.swift */,
+				5AC082D12A84757400FF8B84 /* VideoLibraryCollectionViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -296,7 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				5AAE20452A79E8DD000EA78D /* PostViewController.swift */,
-				5AAB15972A7D8FA0007FD20A /* GaleryViewController01.swift */,
+				5AC082D62A853D9A00FF8B84 /* GaleryItemViewController.swift */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -526,13 +532,13 @@
 				5AD42B012A69565D00D51C6F /* SanFranciscoText-ItalicG2.otf in Resources */,
 				5AD42AF72A69565D00D51C6F /* SanFranciscoText-LightItalic.otf in Resources */,
 				5AD42AB32A68DE7600D51C6F /* LaunchScreen.storyboard in Resources */,
+				5AC082D32A84757400FF8B84 /* VideoLibraryCollectionViewCell.xib in Resources */,
 				5AD42B082A69565D00D51C6F /* SanFranciscoText-Italic.otf in Resources */,
 				5AAE1FFA2A72B8A1000EA78D /* SettingCell.xib in Resources */,
 				5AAE203A2A77A1CA000EA78D /* Localizable.strings in Resources */,
 				5AD42B002A69565D00D51C6F /* SanFranciscoText-Thin.otf in Resources */,
 				5AD42B042A69565D00D51C6F /* SanFranciscoDisplay-Regular.otf in Resources */,
 				5AD42B0C2A69565D00D51C6F /* SanFranciscoText-BoldItalic.otf in Resources */,
-				5AAB15702A7BAB40007FD20A /* GaleryCollectionViewCell.xib in Resources */,
 				5AD42AFB2A69565D00D51C6F /* SanFranciscoText-RegularG1.otf in Resources */,
 				5AD42B0D2A69565D00D51C6F /* SanFranciscoText-Light.otf in Resources */,
 				5AD42AFF2A69565D00D51C6F /* SanFranciscoText-Semibold.otf in Resources */,
@@ -549,6 +555,7 @@
 				5AAE20092A72CAC3000EA78D /* UpDateUserInfoCell.xib in Resources */,
 				5AD42AFD2A69565D00D51C6F /* SanFranciscoText-BoldItalicG1.otf in Resources */,
 				5AD42AF92A69565D00D51C6F /* SanFranciscoDisplay-Bold.otf in Resources */,
+				5AC082DB2A86BE2F00FF8B84 /* PhotoLibraryCollectionViewCell.xib in Resources */,
 				5AD42AF52A69565D00D51C6F /* SanFranciscoDisplay-Black.otf in Resources */,
 				5AD42B0A2A69565D00D51C6F /* SanFranciscoText-BoldItalicG3.otf in Resources */,
 				5AD42AFA2A69565D00D51C6F /* SanFranciscoText-BoldG3.otf in Resources */,
@@ -628,12 +635,10 @@
 				5AD42AC82A69314A00D51C6F /* Observable.swift in Sources */,
 				5AAE20462A79E8DD000EA78D /* PostViewController.swift in Sources */,
 				5AD42ACC2A693F6500D51C6F /* CustomSlider.swift in Sources */,
-				5AAB15982A7D8FA0007FD20A /* GaleryViewController01.swift in Sources */,
 				5AD42ABF2A6929BB00D51C6F /* Constains.swift in Sources */,
 				5AD42B202A6989E700D51C6F /* Onboard2.swift in Sources */,
 				5AD42ACA2A69316900D51C6F /* ScaleImage.swift in Sources */,
 				5A4526742A6F5CBF001E2028 /* BreakingNewsViewController.swift in Sources */,
-				5AAB156F2A7BAB40007FD20A /* GaleryCollectionViewCell.swift in Sources */,
 				5AD42AAB2A68DE7400D51C6F /* ViewController.swift in Sources */,
 				5AD42B242A698A0200D51C6F /* Onboard4.swift in Sources */,
 				5AD42AC22A6930BE00D51C6F /* UIColor+EX.swift in Sources */,
@@ -648,10 +653,12 @@
 				5AD42B282A6A1A6600D51C6F /* UIView+EX.swift in Sources */,
 				5AAE200B2A72CAC3000EA78D /* EditUserInfoCell.swift in Sources */,
 				5A4526782A6F5D8C001E2028 /* HomeViewController.swift in Sources */,
+				5AC082D22A84757400FF8B84 /* VideoLibraryCollectionViewCell.swift in Sources */,
 				5AD42B1B2A69859B00D51C6F /* OnboardViewController.swift in Sources */,
 				5AAE1FF72A72B529000EA78D /* Setting.swift in Sources */,
 				5AAE20012A72C973000EA78D /* ChangeUserDescriptionViewController.swift in Sources */,
 				5AAE1FFB2A72B8A1000EA78D /* SettingCell.swift in Sources */,
+				5AC082DA2A86BE2F00FF8B84 /* PhotoLibraryCollectionViewCell.swift in Sources */,
 				5A4526E12A70FECE001E2028 /* StorageManager.swift in Sources */,
 				5AD42AC62A69312E00D51C6F /* Objc+AssociatedValue.swift in Sources */,
 				5AD42AA72A68DE7400D51C6F /* AppDelegate.swift in Sources */,
@@ -665,6 +672,7 @@
 				5AAE1FFD2A72B98E000EA78D /* UIAlertEX.swift in Sources */,
 				5AD42B1E2A6989D300D51C6F /* Onboard1.swift in Sources */,
 				5AAE20082A72CAC3000EA78D /* UpDateUserInfoCell.swift in Sources */,
+				5AC082D72A853D9A00FF8B84 /* GaleryItemViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
